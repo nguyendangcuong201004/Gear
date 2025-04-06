@@ -1,0 +1,299 @@
+Layout
+#app {
+    min-height: 100vh;
+    display: flex;
+}
+
+/* Sidebar */
+#sidebar {
+    width: 260px;
+    background-color: #fff;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,.05);
+    transition: all .3s;
+    z-index: 999;
+}
+
+#sidebar.active {
+    margin-left: -260px;
+}
+
+.sidebar-wrapper {
+    height: 100%;
+    padding: 1rem;
+}
+
+.sidebar-header {
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #5a8dee;
+    font-weight: 600;
+}
+
+.logo img {
+    width: 40px;
+    height: 40px;
+}
+
+.theme-toggle {
+    cursor: pointer;
+}
+
+.theme-toggle i {
+    color: #6c757d;
+}
+
+.sidebar-menu {
+    padding: 0.5rem;
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-title {
+    color: #6c757d;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0.5rem 1rem;
+}
+
+.sidebar-item {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: #6c757d;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: all .3s;
+}
+
+.sidebar-link:hover,
+.sidebar-item.active .sidebar-link {
+    background-color: #f8f9fa;
+    color: #5a8dee;
+}
+
+.sidebar-link i {
+    font-size: 1.25rem;
+}
+
+/* Main Content */
+#main {
+    flex: 1;
+    background-color: #f8f9fa;
+}
+
+.layout-navbar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 260px;
+    z-index: 998;
+    background-color: #fff;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,.05);
+    transition: all .3s;
+}
+
+.layout-navbar.active {
+    left: 0;
+}
+
+.navbar {
+    padding: 1rem;
+}
+
+.burger-btn {
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,.05);
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+.dropdown-item i {
+    font-size: 1.25rem;
+}
+
+/* Main Content Area */
+#main-content {
+    padding: 5rem 2rem 2rem;
+}
+
+.page-heading {
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    margin-bottom: 1rem;
+}
+
+.breadcrumb {
+    margin-bottom: 0;
+}
+
+.breadcrumb-item a {
+    color: #5a8dee;
+    text-decoration: none;
+}
+
+/* Card */
+.card {
+    border: none;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,.05);
+    border-radius: 0.5rem;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #f8f9fa;
+    padding: 1rem;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Form */
+.form-control,
+.form-select {
+    border: 1px solid #e9ecef;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #5a8dee;
+    box-shadow: 0 0 0 0.2rem rgba(90,141,238,.25);
+}
+
+.form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Table */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    font-weight: 600;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+/* Badge */
+.badge {
+    padding: 0.5em 0.75em;
+    font-weight: 500;
+}
+
+/* Pagination */
+.pagination {
+    margin-bottom: 0;
+}
+
+.page-link {
+    color: #5a8dee;
+    border: none;
+    padding: 0.5rem 1rem;
+}
+
+.page-item.active .page-link {
+    background-color: #5a8dee;
+    border-color: #5a8dee;
+}
+
+/* Modal */
+.modal-content {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 15px 0 rgba(0,0,0,.05);
+}
+
+.modal-header {
+    border-bottom: 1px solid #f8f9fa;
+    padding: 1rem 1.5rem;
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.modal-footer {
+    border-top: 1px solid #f8f9fa;
+    padding: 1rem 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 991.98px) {
+    #sidebar {
+        margin-left: -260px;
+    }
+
+    #sidebar.active {
+        margin-left: 0;
+    }
+
+    .layout-navbar {
+        left: 0;
+    }
+
+    .layout-navbar.active {
+        left: 260px;
+    }
+}
+
+@media (max-width: 767.98px) {
+    #main-content {
+        padding: 5rem 1rem 1rem;
+    }
+
+    .card-header .row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .card-header .col-md-4 {
+        width: 100%;
+    }
+} 
