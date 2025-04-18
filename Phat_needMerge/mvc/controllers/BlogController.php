@@ -1,29 +1,60 @@
 <?php
 require_once "./mvc/models/BlogModel.php";
+require_once "./mvc/core/Controller.php"; // dòng này nếu chưa có
 
-class BlogController extends Database {
-    public function list() {
-        $posts_per_page = 9;
+
+class BlogController extends Controller {
+    
+    public function list(...$params) {
+        $search = $params[0] ?? ''; // lấy từ khóa nếu có
+        $search = str_replace('-', ' ', $search); // convert 'hello-world' -> 'hello world'
+    
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        if ($page < 1) $page = 1;
-
-        // Khởi tạo model
-        $blogModel = new BlogModel();
-
-        // Lấy dữ liệu bài viết và tổng số bài viết
-        $posts = $blogModel->getBlogPosts($page, $posts_per_page);
-        $total_posts = $blogModel->getTotalPosts();
-        $total_pages = ceil($total_posts / $posts_per_page);
-
-        // Gói dữ liệu gửi sang view
-        $data = [
-            "posts"       => $posts,
+        $limit = 5;
+        $start = ($page - 1) * $limit;
+    
+        $blogModel = $this->model("BlogModel");
+    
+        if (!empty($search)) {
+            $stmt = $blogModel->searchPosts($search, $start, $limit);
+            $total = $blogModel->countSearchPosts($search);
+        } else {
+            $stmt = $blogModel->getBlogPosts($page, $limit);
+            $total = $blogModel->countTotalPosts();
+        }
+    
+        $total_pages = ceil($total / $limit);
+    
+        $this->render("BlogViews", [
+            "posts" => $stmt,
+            "page" => $page,
             "total_pages" => $total_pages,
-            "page"        => $page
-        ];
-
-        $this->render("BlogViews", $data);
+            "search" => $search // gán lại cho View nếu cần hiển thị
+        ]);
     }
+    public function search($keyword = '') {
+        $keyword = str_replace('-', ' ', $keyword); // hello-world → hello world
+        $page    = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit   = 5;
+        $start   = ($page - 1) * $limit;
+    
+        $blogModel = $this->model("BlogModel");
+    
+        $stmt  = $blogModel->searchPosts($keyword, $start, $limit);
+        $total = $blogModel->countSearchPosts($keyword);
+    
+        $total_pages = ceil($total / $limit);
+    
+        $this->render("BlogViews", [
+            "posts" => $stmt,
+            "page" => $page,
+            "total_pages" => $total_pages,
+            "search" => $keyword
+        ]);
+    }
+    
+    
+    
     public function create() {
         // Nếu là submit form (method POST)
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -49,7 +80,7 @@ class BlogController extends Database {
             // Khởi tạo model và gọi phương thức thêm bài viết mới
             $blogModel = new BlogModel();
             if ($blogModel->createPost($title, $category, $image, $content)) {
-                echo "<script>alert('Post created successfully!'); window.location='../BlogController/list';</script>";
+                echo "<script>alert('Post created successfully!'); window.location='/Gear/BlogController/list';</script>";
             } else {
                 echo "Error creating post!";
             }
@@ -75,7 +106,7 @@ class BlogController extends Database {
         // Xử lý thao tác xóa bài viết nếu có tham số GET action=delete
         if (isset($_GET['action']) && $_GET['action'] == 'delete') {
             if ($blogModel->deletePostById($post_id)) {
-                header("Location: ../../list"); // hoặc route phù hợp
+                header("Location: /Gear/BlogController/list"); // hoặc route phù hợp
                 exit;
             } else {
                 echo "Error deleting post!";
@@ -88,7 +119,7 @@ class BlogController extends Database {
             $email   = $_POST['email'];
             $comment = $_POST['comment'];
             if ($blogModel->createComment($post_id, $name, $email, $comment)) {
-                header("Location: BlogController/detail/" . $post_id);
+                header("Location: /Gear/BlogController/detail/" . $post_id);
                 exit;
             } else {
                 echo "Error adding comment!";
@@ -166,7 +197,7 @@ class BlogController extends Database {
             // Gọi model để update bài viết
             if ($blogModel->updatePost($post_id, $title, $category, $content, $image)) {
                 // Chuyển hướng về trang chi tiết bài viết
-                header("Location: BlogController/detail/" . $post_id);
+                header("Location: /Gear/BlogController/detail/" . $post_id);
                 exit;
             } else {
                 echo "Error updating post!";

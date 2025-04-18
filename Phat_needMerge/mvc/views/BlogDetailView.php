@@ -1,5 +1,7 @@
 <?php
-// Nếu muốn sử dụng các key trong $data, bạn có thể extract() chúng
+// mvc/views/BlogDetailView.php
+
+// Lấy dữ liệu từ controller
 $post     = $data['post'];
 $comments = $data['comments'];
 $post_id  = $data['post_id'];
@@ -15,7 +17,7 @@ $post_id  = $data['post_id'];
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" 
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <link rel="stylesheet" href="../../public/css/blog-detail.css">
+  <link rel="stylesheet" href="../../public/css/blog-detail.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
@@ -40,7 +42,7 @@ $post_id  = $data['post_id'];
           <i class="fa-solid fa-bag-shopping"></i>
         </div>
         <div class="header-user">
-          <i class="fa-solid fa-user"></i>
+          <a href="../../AuthController/login"><i class="fa-solid fa-user"></i></a>
         </div>
       </div>
     </div>
@@ -50,14 +52,15 @@ $post_id  = $data['post_id'];
   <main>
     <article class="blog-detail">
       <div class="image-container">
-        <!-- Cách hiển thị ảnh: thêm "../" trước đường dẫn (nếu CSDL lưu "public/uploads/xxx") -->
         <img class="blog-detail-image" src="<?= '../../' . htmlspecialchars($post['image']); ?>" alt="Blog Image" />
-        <!-- Admin icons -->
+        <?php if (isset($_COOKIE['user_name']) && $_COOKIE['user_name'] === 'admin'): ?>
         <div class="admin-icons">
           <a href="../edit/<?= $post['id']; ?>" title="Edit Post"><i class="bx bx-edit"></i></a>
-          <a href=".//<?= $post['id']; ?>&action=delete" title="Delete Post" onclick="return confirm('Are you sure you want to delete this post?');"><i class="bx bx-trash"></i></a>
+          <a href="../delete/<?= $post['id']; ?>" title="Delete Post" onclick="return confirm('Are you sure you want to delete this post?');"><i class="bx bx-trash"></i></a>
         </div>
+        <?php endif; ?>
       </div>
+
       <div class="blog-detail-content">
         <h1 class="blog-title"><?= htmlspecialchars($post['title']); ?></h1>
         <div class="blog-meta">
@@ -70,7 +73,7 @@ $post_id  = $data['post_id'];
       </div>
     </article>
 
-    <!-- Nút BACK -->
+    <!-- Back Button -->
     <div class="fixed-back-btn" id="back-btn">
       <a href="../list" class="btn btn-purple">Back</a>
     </div>
@@ -85,6 +88,18 @@ $post_id  = $data['post_id'];
               <p class="comment-author"><?= htmlspecialchars($comment['name']); ?></p>
               <p class="comment-date"><?= date('F j, Y, H:i', strtotime($comment['created_at'])); ?></p>
               <p class="comment-text"><?= htmlspecialchars($comment['comment']); ?></p>
+              <?php
+              $currentUser = $_COOKIE['user_name'] ?? '';
+              $isOwnerOrAdmin = ($currentUser === 'admin' || $currentUser === $comment['name']);
+            ?>
+
+            <?php if ($isOwnerOrAdmin): ?>
+              <div class="comment-actions">
+                <a href="http://localhost/Gear/CommentController/edit/<?= $comment['id']; ?>/<?= $post_id; ?>">Edit</a> |
+                <a href="http://localhost/Gear/CommentController/delete/<?= $comment['id']; ?>/<?= $post_id; ?>" 
+                  onclick="return confirm('Bạn có chắc muốn xóa comment này?');">Delete</a>
+              </div>
+            <?php endif; ?>
             </div>
           <?php endwhile; ?>
         <?php else: ?>
@@ -95,13 +110,17 @@ $post_id  = $data['post_id'];
       <!-- Comment Form -->
       <div class="comment-form">
         <h3>Leave a Comment</h3>
-        <!-- Lưu ý: action có thể thay đổi tùy vào routing của bạn -->
-        <form action="detail?id=<?= $post_id; ?>" method="post">
-          <input type="text" name="name" placeholder="Your Name" required />
-          <input type="email" name="email" placeholder="Your Email" required />
-          <textarea name="comment" placeholder="Your Comment" required></textarea>
-          <button type="submit">Submit Comment</button>
-        </form>
+        <?php if (isset($_COOKIE['user_name'])): ?>
+          <form action="http://localhost/Gear/CommentController/add" method="post">
+            <input type="hidden" name="post_id" value="<?= $post_id; ?>">
+            <input type="hidden" name="name"    value="<?= htmlspecialchars($_COOKIE['user_name']); ?>">
+            <input type="hidden" name="email"   value="<?= htmlspecialchars($_COOKIE['user_email'] ?? ''); ?>">
+            <textarea name="comment" placeholder="Your Comment" required></textarea>
+            <button type="submit">Submit Comment</button>
+          </form>
+        <?php else: ?>
+          <p>Bạn cần <a href="http://localhost/Gear/AuthController/login">đăng nhập</a> để bình luận.</p>
+        <?php endif; ?>
       </div>
     </section>
   </main>
@@ -119,7 +138,6 @@ $post_id  = $data['post_id'];
       z-index: 1000;
       transition: all 0.3s ease;
     }
-
     .fixed-back-btn:hover {
       transform: translateY(-5px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -133,10 +151,13 @@ $post_id  = $data['post_id'];
     }
     .btn-purple:hover {
       background-color: #6a1b9a;
-      color: #fff;
     }
-    .scroll-effect {
-      transform: scale(1.05);
+    .comment {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+    .comment-actions {
+      margin-top: 5px;
     }
   </style>
 </body>

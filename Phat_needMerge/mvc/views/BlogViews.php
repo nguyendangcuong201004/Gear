@@ -1,11 +1,17 @@
+<?php
+// Tạo search path đúng định dạng routing
+$searchPath = isset($data['search']) && $data['search'] !== ''
+    ? "BlogController/search/" . urlencode(str_replace(' ', '-', $data['search']))
+    : "BlogController/list";
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - GearBK Store</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/css/blog2.css">
-    <link rel="stylesheet" href="../public/css/blog.css">
+    <link rel="stylesheet" href="/Gear/public/css/blog2.css">
+    <link rel="stylesheet" href="/Gear/public/css/blog.css">
     <style>
         .fixed-add-posts-btn {
             position: fixed;
@@ -32,10 +38,28 @@
         .scroll-effect {
             transform: scale(1.05);
         }
+        .search-bar-container {
+            margin-top: 80px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .search-bar-container form {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 150px;
+        }
+        .search-input {
+            width: 400px;
+            height: 40px;
+            font-size: 14px;
+            border-radius: 6px;
+            padding: 0 15px;
+            border: 1px solid #ccc;
+        }
     </style>
 </head>
 <body>
-    <!-- Header của trang -->
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="row">
@@ -53,7 +77,6 @@
                                 <li><a href="">CONTACT</a></li>
                                 <li><a href="">NEWS</a></li>
                                 <li><a href="../AuthController/logout">ĐĂNG XUẤT</a></li>
-                                
                             </ul>
                         </div>
                         <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
@@ -64,20 +87,28 @@
         </div>
     </header>
 
-    <!-- Nút Add Posts cố định -->
+    <!-- Add Post (admin only) -->
     <?php if (isset($_COOKIE['user_name']) && $_COOKIE['user_name'] === 'admin'): ?>
         <div class="fixed-add-posts-btn" id="add-posts-btn">
-            <a href="../index.php?url=BlogController/create" class="btn btn-purple">Add Posts</a>
+            <a href="/Gear/BlogController/create" class="btn btn-purple">Add Posts</a>
         </div>
     <?php endif; ?>
+
+    <!-- Search Bar -->
+    <div class="search-bar-container">
+        <form class="form-inline justify-content-center" onsubmit="return handleSearch(event)">
+            <input type="text" id="search-input" class="form-control search-input" placeholder="Tìm kiếm bài viết..." value="<?= isset($data['search']) ? htmlspecialchars($data['search']) : '' ?>">
+            <button type="submit" class="btn btn-purple ml-2">Tìm kiếm</button>
+        </form>
+    </div>
 
     <!-- Danh sách bài viết -->
     <section class="blog-posts">
         <?php if ($data["posts"] && mysqli_num_rows($data["posts"]) > 0): ?>
             <?php while ($row = mysqli_fetch_assoc($data["posts"])): ?>
-                <a href="detail/<?= $row['id']; ?>" class="blog-post">
+                <a href="/Gear/BlogController/detail/<?= $row['id']; ?>" class="blog-post">
                     <div class="blog-post">
-                    <img src="<?= $row['image'] ? '../' . $row['image'] : 'https://via.placeholder.com/300x200'; ?>" alt="<?= htmlspecialchars($row['title']); ?>">
+                        <img src="<?= $row['image'] ? '../' . $row['image'] : 'https://via.placeholder.com/300x200'; ?>" alt="<?= htmlspecialchars($row['title']); ?>">
                         <div class="post-info">
                             <span class="category"><?= htmlspecialchars($row['category']); ?></span>
                             <h2 class="post-title"><?= htmlspecialchars($row['title']); ?></h2>
@@ -91,27 +122,27 @@
         <?php endif; ?>
     </section>
 
-    <!-- Phân trang -->
+    <!-- PHÂN TRANG -->
     <div class="container my-4">
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                <!-- Nút Previous -->
+                <!-- Previous -->
                 <li class="page-item <?= $data["page"] <= 1 ? 'disabled' : ''; ?>">
-                    <a class="page-link" href="?page=<?= $data["page"] - 1; ?>" aria-label="Previous">
+                    <a class="page-link" href="../<?= $searchPath ?>&page=<?= $data["page"] - 1; ?>" aria-label="Previous">
                         <span aria-hidden="true">«</span>
                     </a>
                 </li>
 
-                <!-- Các số trang -->
+                <!-- Số trang -->
                 <?php for ($i = 1; $i <= $data["total_pages"]; $i++): ?>
                     <li class="page-item <?= $i == $data["page"] ? 'active' : ''; ?>">
-                        <a class="page-link" href="?page=<?= $i; ?>"><?= $i; ?></a>
+                        <a class="page-link" href="../<?= $searchPath ?>&page=<?= $i; ?>"><?= $i; ?></a>
                     </li>
                 <?php endfor; ?>
 
-                <!-- Nút Next -->
+                <!-- Next -->
                 <li class="page-item <?= $data["page"] >= $data["total_pages"] ? 'disabled' : ''; ?>">
-                    <a class="page-link" href="?page=<?= $data["page"] + 1; ?>" aria-label="Next">
+                    <a class="page-link" href="../<?= $searchPath ?>&page=<?= $data["page"] + 1; ?>" aria-label="Next">
                         <span aria-hidden="true">»</span>
                     </a>
                 </li>
@@ -120,10 +151,18 @@
         <p class="text-center text-white">Copyright © 2025</p>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        window.addEventListener('scroll', function() {
+        function handleSearch(event) {
+            event.preventDefault();
+            const keyword = document.getElementById('search-input').value.trim().replace(/\s+/g, '-');
+            if (keyword) {
+                window.location.href = "/Gear/BlogController/search/" + keyword;
+            } else {
+                window.location.href = "/Gear/BlogController/list";
+            }
+        }
+
+        window.addEventListener('scroll', function () {
             const btn = document.getElementById('add-posts-btn');
             if (window.scrollY > 50) {
                 btn.classList.add('scroll-effect');

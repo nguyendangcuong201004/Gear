@@ -1,13 +1,16 @@
 <?php
 class BlogModel extends Database {
     // Lấy danh sách bài viết cho trang hiện tại
-    public function getBlogPosts($page, $posts_per_page) {
-        $offset = ($page - 1) * $posts_per_page;
-        $stmt = $this->con->prepare("SELECT * FROM posts ORDER BY created_at DESC LIMIT ? OFFSET ?");
-        $stmt->bind_param("ii", $posts_per_page, $offset);
+    public function getBlogPosts($page, $limit) {
+        $start = ($page - 1) * $limit;
+    
+        $stmt = $this->con->prepare("SELECT * FROM posts ORDER BY created_at DESC LIMIT ?, ?");
+        $stmt->bind_param("ii", $start, $limit);
         $stmt->execute();
+    
         return $stmt->get_result();
     }
+    
 
     // Lấy tổng số bài viết
     public function getTotalPosts() {
@@ -70,6 +73,44 @@ class BlogModel extends Database {
         $stmt->close();
         return $result;
     }
+    public function searchPosts($keyword, $start, $limit) {
+        $like = "%$keyword%";
+        $stmt = $this->con->prepare("
+            SELECT * FROM posts
+            ORDER BY 
+                CASE 
+                    WHEN title LIKE ? THEN 0
+                    WHEN content LIKE ? THEN 1
+                    ELSE 2
+                END,
+                created_at DESC
+            LIMIT ?, ?
+        ");
+    
+        if (!$stmt) {
+            die("Lỗi SQL: " . $this->con->error);
+        }
+    
+        $stmt->bind_param("ssii", $like, $like, $start, $limit);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+    
+    public function countSearchPosts($keyword) {
+        $keyword = "%$keyword%";
+        $stmt = $this->con->prepare("SELECT COUNT(*) as total FROM posts WHERE title LIKE ? OR content LIKE ?");
+        $stmt->bind_param("ss", $keyword, $keyword);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        return $result['total'];
+    }
+    
+    public function countTotalPosts() {
+        $stmt = $this->con->query("SELECT COUNT(*) as total FROM posts");
+        $result = $stmt->fetch_assoc();
+        return $result['total'];
+    }
+    
     
 }
 ?>
