@@ -52,6 +52,8 @@
                                 <li><a href="">SHOP</a></li>
                                 <li><a href="">CONTACT</a></li>
                                 <li><a href="">NEWS</a></li>
+                                <li><a href="../AuthController/logout">ĐĂNG XUẤT</a></li>
+                                
                             </ul>
                         </div>
                         <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
@@ -63,9 +65,11 @@
     </header>
 
     <!-- Nút Add Posts cố định -->
-    <div class="fixed-add-posts-btn" id="add-posts-btn">
-        <a href="create" class="btn btn-purple">Add Posts</a>
-    </div>
+    <?php if (isset($_COOKIE['user_name']) && $_COOKIE['user_name'] === 'admin'): ?>
+        <div class="fixed-add-posts-btn" id="add-posts-btn">
+            <a href="../index.php?url=BlogController/create" class="btn btn-purple">Add Posts</a>
+        </div>
+    <?php endif; ?>
 
     <!-- Danh sách bài viết -->
     <section class="blog-posts">

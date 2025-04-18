@@ -6,11 +6,14 @@
     <title>Shop - GearBK Store</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="../public/css/product.css">
     <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
@@ -40,10 +43,12 @@
                                 <li>
                                     <a href="">NEWS</a>
                                 </li>
+                                <li><a href="<?= base_url('AuthController/logout') ?>">ĐĂNG XUẤT</a></li>
+
                             </ul>
                         </div>
-                        <div class="inner-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <div class="inner-user"><i class="fa-solid fa-user"></i></div>
+                        <div class="inner-shop"><i class="fa-solid fa-shopping-bag"></i></div>
+<div class="inner-user"><i class="fa-solid fa-user"></i></div>
                     </div>
                 </div>
             </div>
