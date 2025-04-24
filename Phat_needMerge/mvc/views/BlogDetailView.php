@@ -53,7 +53,7 @@ $post_id  = $data['post_id'];
     <article class="blog-detail">
       <div class="image-container">
         <img class="blog-detail-image" src="<?= '../../' . htmlspecialchars($post['image']); ?>" alt="Blog Image" />
-        <?php if (isset($_COOKIE['user_name']) && $_COOKIE['user_name'] === 'admin'): ?>
+        <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
         <div class="admin-icons">
           <a href="../edit/<?= $post['id']; ?>" title="Edit Post"><i class="bx bx-edit"></i></a>
           <a href="../delete/<?= $post['id']; ?>" title="Delete Post" onclick="return confirm('Are you sure you want to delete this post?');"><i class="bx bx-trash"></i></a>
