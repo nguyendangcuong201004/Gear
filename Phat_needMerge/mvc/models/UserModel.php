@@ -14,17 +14,17 @@ class UserModel extends Database {
     }
 
     // Tạo user mới (đăng ký)
-    public function createUser($username, $passwordHash, $email) {
+    public function createUser($username, $passwordHash, $email, $role = 'user') {
         $stmt = $this->con->prepare("
-            INSERT INTO users (username, password, email, created_at)
-            VALUES (?, ?, ?, NOW())
+            INSERT INTO users (username, password, email, user_role, created_at)
+            VALUES (?, ?, ?, ?, NOW())
         ");
-        $stmt->bind_param("sss", $username, $passwordHash, $email);
+        $stmt->bind_param("ssss", $username, $passwordHash, $email, $role);
         $ok = $stmt->execute();
         $stmt->close();
         return $ok;
     }
-
+    
     // (Tùy chọn) Lưu access token
     public function storeAccessToken($user_id, $token) {
         $stmt = $this->con->prepare("

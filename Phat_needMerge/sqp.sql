@@ -103,6 +103,11 @@ CREATE TABLE `comments` (
 
 
 
+ALTER TABLE users
+ADD COLUMN id INT AUTO_INCREMENT PRIMARY KEY FIRST,
+ADD COLUMN username VARCHAR(50) NOT NULL UNIQUE AFTER id,
+ADD COLUMN password VARCHAR(255) NOT NULL AFTER username;
+
 -- categories
 INSERT INTO categories (title, image, description, status, slug) VALUES ('PC Gaming', 'pc-gaming.jpg', 'Máy tính chơi game hiệu năng cao', 'active', 'pc-gaming');
 INSERT INTO categories (title, image, description, status, slug) VALUES ('Laptop Văn Phòng', 'laptop-vanphong.jpg', 'Laptop mỏng nhẹ cho công việc', 'active', 'laptop-van-phong');
