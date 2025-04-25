@@ -8,6 +8,10 @@ class Database {
 
     public function __construct() {
         $this->con = mysqli_connect($this->servername, $this->username, $this->password, $this->dbname);
-        mysqli_query($this->con, "utf8");
+        if (!$this->con) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+        // Set charset to utf8mb4 which supports all unicode characters including Vietnamese
+        mysqli_set_charset($this->con, "utf8mb4");
     }
 }

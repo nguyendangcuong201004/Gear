@@ -1,6 +1,3 @@
-<!-- Create for Extends -->
-
-
 <?php
 
 class Controller {
