@@ -1,3 +1,124 @@
+<?php
+// Kết nối database với MySQLi
+$host = 'localhost';
+$dbname = 'gear';
+$username = 'root';
+$password = '';
+
+$conn = new mysqli($host, $username, $password, $dbname);
+
+// Kiểm tra kết nối
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Hàm lấy nội dung đơn lẻ từ page_content
+function getContent($conn, $section_name, $key) {
+    $section_name = $conn->real_escape_string($section_name);
+    $key = $conn->real_escape_string($key);
+    
+    $query = "
+        SELECT pc.content 
+        FROM page_content pc
+        JOIN page_sections ps ON pc.section_id = ps.id
+        WHERE ps.name = '$section_name' AND pc.`key` = '$key'
+    ";
+    
+    $result = $conn->query($query);
+    if ($result && $result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        return $row['content'];
+    }
+    return '';
+}
+
+// Lấy dữ liệu cho Our Story
+$our_story_paragraph_1 = getContent($conn, 'our_story', 'paragraph_1');
+$our_story_paragraph_2 = getContent($conn, 'our_story', 'paragraph_2');
+$banner_image = getContent($conn, 'our_story', 'banner_image');
+
+// Lấy dữ liệu cho Mission & Values
+$mission_quality_title = getContent($conn, 'mission_values', 'quality_title');
+$mission_quality_item_1 = getContent($conn, 'mission_values', 'quality_item_1');
+$mission_quality_item_2 = getContent($conn, 'mission_values', 'quality_item_2');
+$mission_quality_item_3 = getContent($conn, 'mission_values', 'quality_item_3');
+$mission_satisfaction_title = getContent($conn, 'mission_values', 'satisfaction_title');
+$mission_satisfaction_item_1 = getContent($conn, 'mission_values', 'satisfaction_item_1');
+$mission_satisfaction_item_2 = getContent($conn, 'mission_values', 'satisfaction_item_2');
+$mission_satisfaction_item_3 = getContent($conn, 'mission_values', 'satisfaction_item_3');
+$mission_innovation_title = getContent($conn, 'mission_values', 'innovation_title');
+$mission_innovation_item_1 = getContent($conn, 'mission_values', 'innovation_item_1');
+$mission_innovation_item_2 = getContent($conn, 'mission_values', 'innovation_item_2');
+$mission_innovation_item_3 = getContent($conn, 'mission_values', 'innovation_item_3');
+
+// Lấy dữ liệu cho Our Product Categories
+$query = "
+    SELECT pc.* 
+    FROM product_categories pc
+    JOIN page_sections ps ON pc.section_id = ps.id
+    WHERE ps.name = 'product_categories'
+    ORDER BY pc.display_order ASC
+";
+$result = $conn->query($query);
+$product_categories = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $product_categories[] = $row;
+    }
+}
+
+// Lấy dữ liệu cho Stats Section
+$query = "
+    SELECT s.* 
+    FROM stats s
+    JOIN page_sections ps ON s.section_id = ps.id
+    WHERE ps.name = 'stats'
+    ORDER BY s.display_order ASC
+";
+$result = $conn->query($query);
+$stats = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $stats[] = $row;
+    }
+}
+
+// Lấy dữ liệu cho Our Journey
+$query = "
+    SELECT ji.* 
+    FROM journey_items ji
+    JOIN page_sections ps ON ji.section_id = ps.id
+    WHERE ps.name = 'journey'
+    ORDER BY ji.display_order ASC
+";
+$result = $conn->query($query);
+$journey_items = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $journey_items[] = $row;
+    }
+}
+
+// Lấy dữ liệu cho Our Team
+$query = "
+    SELECT tm.* 
+    FROM team_members tm
+    JOIN page_sections ps ON tm.section_id = ps.id
+    WHERE ps.name = 'team'
+    ORDER BY tm.display_order ASC
+";
+$result = $conn->query($query);
+$team_members = [];
+if ($result && $result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $team_members[] = $row;
+    }
+}
+
+// Đóng kết nối
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,6 +207,13 @@
             <div class="d-flex">
               <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
               <div class="header-user"><i class="fa-solid fa-user"></i></div>
+              <?php if(isset($_COOKIE['access_token'])): ?>
+                <div class="header-logout ml-3">
+                  <a href="/ltw/AuthController/logout" title="Đăng xuất" style="color: white; text-decoration: none;">
+                    <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+                  </a>
+                </div>
+              <?php endif; ?>
             </div>
           </div>
         </div>
@@ -96,9 +224,9 @@
   <!-- Main Container -->
   <div class="about-container">
     <!-- Hero Section -->
-
-
-    <section class="hero-section">
+    <section class="hero-section" style="background-image: url('/ltw/public/images/bgr_about.png') !important; background-position: center !important; background-size: cover !important; background-repeat: no-repeat !important; position: relative;">
+      <!-- Direct image as backup -->
+      <img src="/ltw/public/images/bgr_about.png" alt="Background" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; opacity: 0.8;">
       <div class="hero-content animate__animated animate__fadeInDown">
         <h1 class="hero-title">GearBK</h1>
         <p class="hero-subtitle">Đối tác tin cậy cho mọi phụ kiện và linh kiện công nghệ cao cấp</p>
@@ -112,11 +240,11 @@
       <h2 class="section-title fade-in">Câu chuyện của chúng tôi</h2>
       <div class="row">
         <div class="col-lg-6 fade-in-left delay-1">
-          <p>GearBK được thành lập vào năm 2025 với sứ mệnh đơn giản: cung cấp cho những người đam mê công nghệ các linh kiện và phụ kiện máy tính chất lượng cao với giá cả cạnh tranh. Bắt đầu từ một cửa hàng trực tuyến nhỏ, GearBK đã phát triển thành một thương hiệu đáng tin cậy trên thị trường công nghệ Việt Nam.</p>
-          <p>Đội ngũ của chúng tôi bao gồm những người yêu công nghệ nhiệt thành, tận tụy mang đến những sản phẩm mới nhất và tuyệt vời nhất cho khách hàng. Chúng tôi tin vào sức mạnh của công nghệ trong việc thay đổi cuộc sống và doanh nghiệp, và chúng tôi cam kết trở thành một phần của sự thay đổi đó.</p>
+          <p><?= htmlspecialchars($our_story_paragraph_1); ?></p>
+          <p><?= htmlspecialchars($our_story_paragraph_2); ?></p>
         </div>
         <div class="col-lg-6 fade-in-right delay-2">
-          <img src="/ltw/public/images/Banner.jpg" alt="GearBK Store" class="img-fluid rounded">
+          <img src="<?= htmlspecialchars($banner_image); ?>" alt="GearBK Store" class="img-fluid rounded">
         </div>
       </div>
     </div>
@@ -130,11 +258,11 @@
             <div class="icon-circle">
               <i class="fas fa-thumbs-up"></i>
             </div>
-            <h4>Chất lượng là ưu tiên hàng đầu</h4>
+            <h4><?= htmlspecialchars($mission_quality_title); ?></h4>
             <ul class="info-list">
-              <li><i class="fas fa-angle-right"></i>Kiểm định chất lượng nghiêm ngặt cho từng sản phẩm</li>
-              <li><i class="fas fa-angle-right"></i>Tuân thủ tiêu chuẩn quốc tế và chứng nhận an toàn</li>
-              <li><i class="fas fa-angle-right"></i>Bảo hành 12 tháng và hỗ trợ kỹ thuật tận tâm</li>
+              <li><i class="fas fa-angle-right"></i><?= htmlspecialchars($mission_quality_item_1); ?></li>
+              <li><i class="fas fa-angle-right"></i><?= htmlspecialchars($mission_quality_item_2); ?></li>
+              <li><i class="fas fa-angle-right"></i><?= htmlspecialchars($mission_quality_item_3); ?></li>
             </ul>
           </div>
         </div>
@@ -143,11 +271,11 @@
             <div class="icon-circle">
               <i class="fas fa-users"></i>
             </div>
-            <h4>Sự hài lòng của khách hàng</h4>
+            <h4><?= htmlspecialchars($mission_satisfaction_title); ?></h4>
             <ul class="info-list">
-              <li><i class="fas fa-angle-right"></i>Hỗ trợ tư vấn 24/7 qua nhiều kênh</li>
-              <li><i class="fas fa-angle-right"></i>Chính sách đổi trả linh hoạt trong 30 ngày</li>
-              <li><i class="fas fa-angle-right"></i>Khảo sát & cải tiến dựa trên phản hồi khách hàng</li>
+              <li><i class="fas fa-angle-right"></i><?= htmlspecialchars($mission_satisfaction_item_1); ?></li>
+              <li><i class="fas fa-angle-right"></i><?= htmlspecialchars($mission_satisfaction_item_2); ?></li>
+              <li><i class="fas fa-angle-right"></i><?= htmlspecialchars($mission_satisfaction_item_3); ?></li>
             </ul>
           </div>
         </div>
@@ -156,11 +284,11 @@
             <div class="icon-circle">
               <i class="fas fa-lightbulb"></i>
             </div>
-            <h4>Đổi mới sáng tạo</h4>
+            <h4><?= htmlspecialchars($mission_innovation_title); ?></h4>
             <ul class="info-list">
-              <li><i class="fas fa-angle-right"></i>Nghiên cứu & phát triển sản phẩm mới liên tục</li>
-              <li><i class="fas fa-angle-right"></i>Hợp tác cùng startup công nghệ hàng đầu</li>
-              <li><i class="fas fa-angle-right"></i>Cập nhật xu hướng công nghệ mới nhất</li>
+              <li><i class="fas fa-angle-right"></i><?= htmlspecialchars($mission_innovation_item_1); ?></li>
+              <li><i class="fas fa-angle-right"></i><?= htmlspecialchars($mission_innovation_item_2); ?></li>
+              <li><i class="fas fa-angle-right"></i><?= htmlspecialchars($mission_innovation_item_3); ?></li>
             </ul>
           </div>
         </div>
@@ -175,41 +303,15 @@
           <!-- Slider đơn giản hơn -->
           <div class="swiper productSwiper">
             <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <img src="/ltw/public/images/RTX.jpg" alt="Graphics Cards">
-                <div class="product-info">
-                  <h4>Graphics Cards</h4>
-                  <p>Latest NVIDIA and AMD GPU options</p>
+              <?php foreach ($product_categories as $category): ?>
+                <div class="swiper-slide">
+                  <img src="<?= htmlspecialchars($category['image_url']); ?>" alt="<?= htmlspecialchars($category['title']); ?>">
+                  <div class="product-info">
+                    <h4><?= htmlspecialchars($category['title']); ?></h4>
+                    <p><?= htmlspecialchars($category['description']); ?></p>
+                  </div>
                 </div>
-              </div>
-              <div class="swiper-slide">
-                <img src="/ltw/public/images/RAM.jpg" alt="Memory">
-                <div class="product-info">
-                  <h4>Memory</h4>
-                  <p>High-performance RAM for gaming and productivity</p>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <img src="/ltw/public/images/SSD.jpg" alt="Storage">
-                <div class="product-info">
-                  <h4>Storage</h4>
-                  <p>Fast SSDs and reliable HDDs</p>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <img src="/ltw/public/images/AMD.jpg" alt="Processors">
-                <div class="product-info">
-                  <h4>Processors</h4>
-                  <p>Intel and AMD CPUs for every need</p>
-                </div>
-              </div>
-              <div class="swiper-slide">
-                <img src="/ltw/public/images/demo-product.webp" alt="Peripherals">
-                <div class="product-info">
-                  <h4>Peripherals</h4>
-                  <p>Keyboards, mice, and other accessories</p>
-                </div>
-              </div>
+              <?php endforeach; ?>
             </div>
           </div>
           <!-- Navigation buttons below the slider -->
@@ -224,30 +326,14 @@
     <!-- Stats Section -->
     <div class="stats-section">
       <div class="row">
-        <div class="col-md-3 col-6">
-          <div class="stat-item fade-in delay-1">
-            <div class="stat-number" id="customers-count">0</div>
-            <div>Khách hàng hài lòng</div>
+        <?php foreach ($stats as $index => $stat): ?>
+          <div class="col-md-3 col-6">
+            <div class="stat-item fade-in delay-<?= $index + 1; ?>">
+              <div class="stat-number" id="stat-<?= $index; ?>-count">0</div>
+              <div><?= htmlspecialchars($stat['label']); ?></div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-3 col-6">
-          <div class="stat-item fade-in delay-2">
-            <div class="stat-number" id="products-count">0</div>
-            <div>Sản phẩm</div>
-          </div>
-        </div>
-        <div class="col-md-3 col-6">
-          <div class="stat-item fade-in delay-3">
-            <div class="stat-number" id="years-count">0</div>
-            <div>Năm kinh nghiệm</div>
-          </div>
-        </div>
-        <div class="col-md-3 col-6">
-          <div class="stat-item fade-in delay-4">
-            <div class="stat-number" id="awards-count">0</div>
-            <div>Giải thưởng</div>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
     </div>
 
@@ -255,36 +341,14 @@
     <div class="about-section">
       <h2 class="section-title fade-in">Our Journey</h2>
       <div class="timeline">
-        <div class="timeline-item left fade-in-left delay-1">
-          <div class="timeline-content">
-            <h3>2021</h3>
-            <p>GearBK was founded as a small online store selling computer parts to local enthusiasts.</p>
+        <?php foreach ($journey_items as $index => $item): ?>
+          <div class="timeline-item <?= ($index % 2 == 0) ? 'left' : 'right'; ?> fade-in-<?= ($index % 2 == 0) ? 'left' : 'right'; ?> delay-<?= $index + 1; ?>">
+            <div class="timeline-content">
+              <h3><?= htmlspecialchars($item['year']); ?></h3>
+              <p><?= htmlspecialchars($item['description']); ?></p>
+            </div>
           </div>
-        </div>
-        <div class="timeline-item right fade-in-right delay-2">
-          <div class="timeline-content">
-            <h3>2022</h3>
-            <p>Opened our first physical store in Ho Chi Minh City, expanding our reach to local customers.</p>
-          </div>
-        </div>
-        <div class="timeline-item left fade-in-left delay-3">
-          <div class="timeline-content">
-            <h3>2023</h3>
-            <p>Became an official partner with major brands like ASUS, MSI, and NVIDIA, offering premium products.</p>
-          </div>
-        </div>
-        <div class="timeline-item right fade-in-right delay-4">
-          <div class="timeline-content">
-            <h3>2024</h3>
-            <p>Expanded our operations nationwide with three new stores and an enhanced online platform.</p>
-          </div>
-        </div>
-        <div class="timeline-item left fade-in-left delay-5">
-          <div class="timeline-content">
-            <h3>2025</h3>
-            <p>Launched our custom PC building service and expanded into gaming peripherals and accessories.</p>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
     </div>
 
@@ -292,74 +356,25 @@
     <div class="about-section">
       <h2 class="section-title fade-in">Our Team</h2>
       <div class="row">
-        <div class="col-lg-3 col-md-6 mb-4 fade-in delay-1">
-          <div class="info-card">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Team Member">
-              </div>
-              <h4>Vo Nguyen Duc Phat</h4>
-              <p>Founder & CEO</p>
-              <p class="member-info">10+ years in tech, passionate about innovation.</p>
-              <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4 fade-in delay-2">
-          <div class="info-card">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Team Member">
-              </div>
-              <h4>Nguyen Trung Phu</h4>
-              <p>Marketing Director</p>
-              <p class="member-info">Expert in digital marketing, drives brand growth.</p>
-              <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <?php foreach ($team_members as $index => $member): ?>
+          <div class="col-lg-3 col-md-6 mb-4 fade-in delay-<?= $index + 1; ?>">
+            <div class="info-card">
+              <div class="team-member">
+                <div class="member-img">
+                  <img src="<?= htmlspecialchars($member['image_url']); ?>" alt="Team Member">
+                </div>
+                <h4><?= htmlspecialchars($member['name']); ?></h4>
+                <p><?= htmlspecialchars($member['role']); ?></p>
+                <p class="member-info"><?= htmlspecialchars($member['info']); ?></p>
+                <div class="social-links">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4 fade-in delay-3">
-          <div class="info-card">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Team Member">
-              </div>
-              <h4>Nguyen Dang Cuong</h4>
-              <p>Technical Director</p>
-              <p class="member-info">Leads tech innovation with 8+ years of experience.</p>
-              <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-4 fade-in delay-4">
-          <div class="info-card">
-            <div class="team-member">
-              <div class="member-img">
-                <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Team Member">
-              </div>
-              <h4>Hồ Tấn Phát</h4>
-              <p>Technical Director</p>
-              <p class="member-info">Focuses on user-centric product development.</p>
-              <div class="social-links">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <?php endforeach; ?>
       </div>
     </div>
 
@@ -480,10 +495,9 @@
       const observer = new IntersectionObserver(entries => {
         if (entries[0].isIntersecting) {
           // Bắt đầu đếm khi phần tử hiển thị trong viewport
-          animateCounter('customers-count', 5000);
-          animateCounter('products-count', 1200);
-          animateCounter('years-count', 8);
-          animateCounter('awards-count', 15);
+          <?php foreach ($stats as $index => $stat): ?>
+            animateCounter('stat-<?= $index; ?>-count', <?= $stat['number']; ?>);
+          <?php endforeach; ?>
           
           // Ngừng theo dõi sau khi đã kích hoạt
           observer.disconnect();
@@ -494,4 +508,4 @@
     });
   </script>
 </body>
-</html> 
+</html>

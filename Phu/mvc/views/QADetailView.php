@@ -340,37 +340,35 @@
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="header-inner-content">
-                        <div class="header-logo">
-                            <img src="../../public/images/LogoGearBK.webp" alt="">
-                            <span>GearBK</span>
-                        </div>
-                        <div class="header-menu">
-                            <ul>
-                                <li><a href="/ltw">HOME</a></li>
-                                <li><a href="/ltw/AboutController/index">ABOUT</a></li>
-                                <li><a href="/ltw">SHOP</a></li>
-                                <li><a href="/ltw">CONTACT</a></li>
-                                <li><a href="/ltw">NEWS</a></li>
-                                <li><a href="/ltw/QAController/list" class="active">Q&A</a></li>
-                                <?php if (isset($_COOKIE['access_token'])): ?>
-                                    <li><a href="../../AuthController/logout">ĐĂNG XUẤT</a></li>
-                                <?php else: ?>
-                                    <li><a href="../../AuthController/login">ĐĂNG NHẬP</a></li>
-                                <?php endif; ?>
-                            </ul>
-                        </div>
-                        <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <div class="header-user"><i class="fa-solid fa-user"></i></div>
-                    </div>
-                </div>
+      <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="header-inner-content">
+            <div class="header-logo">
+              <img src="/ltw/public/images/LogoGearBK.webp" alt="Logo">
+              <span>GearBK</span>
             </div>
+            <div class="header-menu">
+              <ul>
+                <li><a href="/ltw">HOME</a></li>
+                <li><a href="/ltw/AboutController/index">ABOUT</a></li>
+                <li><a href="/ltw/shop">SHOP</a></li>
+                <li><a href="/ltw/contact">CONTACT</a></li>
+                <li><a href="/ltw/news">NEWS</a></li>
+                <li><a href="/ltw/QAController/list">Q&A</a></li>
+              </ul>
+            </div>
+            <div class="d-flex">
+              <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
+              <div class="header-user"><i class="fa-solid fa-user"></i></div>
+            </div>
+          </div>
         </div>
-    </header>
+      </div>
+    </div>
+  </header>
 
     <!-- Main Content -->
     <div class="qa-detail-container">
