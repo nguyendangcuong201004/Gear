@@ -1,0 +1,338 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Montserrat", serif;
+    background: url('../images/background_login.webp') no-repeat center center fixed;
+    background-size: cover; /* Đảm bảo hình nền bao phủ toàn bộ màn hình */
+    background-attachment: fixed; /* Giữ cho hình nền cố định khi cuộn trang */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Đảm bảo body chiếm toàn bộ chiều cao màn hình */
+    overflow: hidden; /* Giữ cho phần background không bị tràn */
+}
+
+header {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.header-inner-content {
+    display: flex;
+    align-items: center;
+    padding: 30px 0;
+}
+
+.header-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ddd;
+}
+
+.header-logo img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 20%;
+    margin-right: 10px;
+    color: white;
+}
+
+.header-logo span {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.header-menu ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    margin-left: 450px;
+}
+
+.header-menu ul li a {
+    text-decoration: none;
+    color: white;
+    margin-right: 15px;
+}
+
+.header-shop {
+    margin: 0 15px;
+    font-size: 24px;
+    margin-top: -15px;
+    color: white;
+}
+
+.header-user {
+    font-size: 24px;
+    margin-top: -15px;
+    color: white;
+}
+
+/* Form login */
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px); /* Offset header height */
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.9); /* Nền sáng cho form */
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #4a0072; /* Màu tím */
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: #4a0072; /* Màu tím chủ đạo */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #6a1b9a; /* Màu tím sáng hơn khi hover */
+}
+
+p {
+    text-align: center;
+    margin-top: 10px;
+}
+
+p a {
+    color: #4a0072; /* Màu tím */
+    text-decoration: none;
+}
+
+footer {
+    position: absolute;
+    bottom: 10px;
+    text-align: center;
+    width: 100%;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header-logo span {
+        font-size: 1.5rem;
+    }
+
+    .header-menu ul {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .header-menu ul li {
+        margin: 10px 0;
+    }
+
+    .form-container {
+        padding: 20px;
+        width: 90%;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    input, button {
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-logo span {
+        font-size: 1.2rem;
+    }
+
+    .form-container {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 1rem;
+    }
+
+    label {
+        font-size: 0.85rem;
+    }
+
+    input, button {
+        font-size: 0.85rem;
+    }
+
+    button {
+        padding: 8px;
+    }
+}
+/* Thêm hiệu ứng cho nút Đăng nhập */
+/* Cấu trúc cho input */
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: transparent;
+    color: #6a1b9a;
+    transition: all 0.3s ease-in-out; /* Hiệu ứng mượt mà */
+}
+
+/* Cấu hình label */
+
+
+/* Khi focus vào input */
+input:focus {
+    border-color: #6a1b9a; /* Màu viền khi focus */
+    outline: none;
+}
+
+/* Khi đã focus và nhập nội dung, label di chuyển lên trên */
+input:focus + label,
+input:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.9rem;
+    color: #6a1b9a; /* Màu tím cho label */
+}
+
+/* Hiệu ứng cho label nếu input có giá trị (dù không focus) */
+input:valid + label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.9rem;
+    color: #6a1b9a;
+}
+
+/* Hiệu ứng hover cho nút */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #4a0072; /* Màu tím chủ đạo */
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.4s, background-color 0.4s;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: #6a1b9a; /* Màu tím sáng hơn */
+    transition: left 0.4s;
+    z-index: -1; /* Đảm bảo lớp phủ ở dưới chữ */
+}
+
+button:hover::before {
+    left: 0;
+}
+
+button:hover {
+    color: #fff;
+}
+label.float-up {
+    top: -10px;
+    left: 10px;
+    font-size: 0.9rem;
+    color: #6a1b9a; /* Màu tím khi focus vào input */
+}
+
+/* Hiệu ứng chuyển động cho form đăng ký */
+.register-form {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Thêm hiệu ứng cho nút Đăng nhập */
+button.clicked::before {
+    left: 0;
+}
+a {
+    color: #4a0072; /* Màu tím */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out; /* Mượt mà khi đổi màu chữ */
+}
+
+a:hover {
+    color: #6a1b9a; /* Màu sáng hơn khi hover */
+}
+
+/* Hiệu ứng khi nhấn vào Đăng ký */
+a.clicked {
+    color: #ff5722; /* Màu cam khi bấm */
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
