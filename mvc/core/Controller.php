@@ -10,6 +10,7 @@ class Controller {
     }
 
     public function view($view, $data=[]){
+        extract($data);
         require_once "./mvc/views/$view.php";
     }
 }

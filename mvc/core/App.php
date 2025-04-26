@@ -23,9 +23,7 @@ class App
             $this->action = $arr[1];
         }
         unset($arr[1]);
-        
         $this->params = $arr?array_values($arr): [];
-        
         call_user_func_array([new $this->controller(), $this->action], $this->params);
 
     }

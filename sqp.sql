@@ -104,4 +104,46 @@ INSERT INTO products_categories (product_id, category_id) VALUES (9, 4);
 INSERT INTO products_categories (product_id, category_id) VALUES (10, 5);
 
 
+-- orders
+INSERT INTO orders (id, code, full_name, phone, note, status, deleted, deleted_at, created_at, updated_at) VALUES 
+(1, 'ORD00001', 'Nguyễn Văn An', '0912345678', 'Giao hàng trong ngày', 'pending', FALSE, NULL, '2025-04-01 10:00:00', '2025-04-01 10:00:00'),
+(2, 'ORD00002', 'Trần Thị Bình', '0987654321', '', 'confirmed', FALSE, NULL, '2025-04-02 14:30:00', '2025-04-02 15:00:00'),
+(3, 'ORD00003', 'Lê Minh Châu', '0935123456', 'Gói cẩn thận', 'shipped', FALSE, NULL, '2025-04-03 09:15:00', '2025-04-03 10:00:00'),
+(4, 'ORD00004', 'Phạm Quốc Duy', '0909123456', 'Giao vào buổi sáng', 'delivered', FALSE, NULL, '2025-04-04 11:00:00', '2025-04-05 08:00:00'),
+(5, 'ORD00005', 'Hoàng Thị E', '0941234567', '', 'cancelled', FALSE, NULL, '2025-04-05 16:00:00', '2025-04-05 16:30:00'),
+(6, 'ORD00006', 'Đặng Văn Phúc', '0978123456', 'Giao hàng nhanh', 'pending', FALSE, NULL, '2025-04-06 13:20:00', '2025-04-06 13:20:00'),
+(7, 'ORD00007', 'Ngô Thị Giang', '0923456789', '', 'confirmed', FALSE, NULL, '2025-04-07 08:45:00', '2025-04-07 09:00:00'),
+(8, 'ORD00008', 'Vũ Minh Hiếu', '0967891234', 'Gọi trước khi giao', 'shipped', FALSE, NULL, '2025-04-08 12:00:00', '2025-04-08 12:30:00'),
+(9, 'ORD00009', 'Bùi Thị Kim', '0918765432', '', 'delivered', FALSE, NULL, '2025-04-09 15:00:00', '2025-04-10 09:00:00'),
+(10, 'ORD00010', 'Lý Văn Long', '0936789123', 'Giao vào cuối tuần', 'pending', FALSE, NULL, '2025-04-10 17:00:00', '2025-04-10 17:00:00');
 
+-- orders_products
+INSERT INTO orders_products (order_id, product_id, quantity, price, discount) VALUES 
+-- Order 1
+(1, 1, 1, 9361678, 5),    -- PC Gaming X305
+(1, 4, 2, 11188129, 10),  -- Chuột Logitech G102
+-- Order 2
+(2, 2, 1, 17389795, 0),   -- Laptop HP G3
+-- Order 3
+(3, 3, 1, 8348463, 10),   -- Màn Hình LG 24inch
+(3, 5, 1, 11389895, 5),   -- Router WiFi TP-Link
+(3, 9, 1, 7159294, 10),   -- Bàn phím cơ Razer
+-- Order 4
+(4, 6, 1, 11893045, 10),  -- PC Gaming AMD
+-- Order 5
+(5, 7, 1, 18833524, 10),  -- Laptop Asus Zenbook
+(5, 8, 1, 12032111, 10),  -- Màn hình Dell 27inch
+-- Order 6
+(6, 1, 2, 9361678, 5),    -- PC Gaming X305
+-- Order 7
+(7, 2, 1, 17389795, 0),   -- Laptop HP G3
+(7, 4, 1, 11188129, 10),  -- Chuột Logitech G102
+-- Order 8
+(8, 3, 1, 8348463, 10),   -- Màn Hình LG 24inch
+(8, 10, 1, 7780563, 5),   -- Switch 8 cổng
+-- Order 9
+(9, 6, 1, 11893045, 10),  -- PC Gaming AMD
+(9, 9, 1, 7159294, 10),   -- Bàn phím cơ Razer
+-- Order 10
+(10, 5, 1, 11389895, 5),  -- Router WiFi TP-Link
+(10, 8, 1, 12032111, 10); -- Màn hình Dell 27inch
