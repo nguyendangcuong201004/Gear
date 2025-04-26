@@ -12,312 +12,329 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/ltw/public/css/blog.css">
+    <link rel="stylesheet" href="/ltw/public/css/header.css">
+    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <link rel="stylesheet" href="/ltw/public/css/qa.css">
     <style>
-        /* Q&A specific styles */
-        .header-menu ul li a.active {
-            color: #6a1b9a !important;
-            font-weight: 700;
-        }
-        
         .qa-container {
-            max-width: 1000px;
-            margin: 150px auto 50px;
-            padding: 0 20px;
-        }
-        
-        .qa-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            margin-bottom: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
-            position: relative;
-            border-left: 5px solid #6a1b9a;
-        }
-        
-        .qa-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .qa-card-body {
-            padding: 25px;
-        }
-        
-        .qa-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #4a0072;
-            margin-bottom: 15px;
-            transition: color 0.3s ease;
-        }
-        
-        .qa-card:hover .qa-title {
-            color: #6a1b9a;
-        }
-        
-        .qa-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .qa-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 15px;
-        }
-        
-        .qa-tag {
-            background-color: #f0e6f5;
-            color: #6a1b9a;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-        
-        .qa-tag:hover {
-            background-color: #6a1b9a;
-            color: white;
-        }
-        
-        .qa-stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-            padding-top: 15px;
-            border-top: 1px solid #eee;
-            color: #666;
-        }
-        
-        .qa-stat {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        
-        .qa-search-container {
-            position: relative;
-            margin-bottom: 40px;
-        }
-        
-        .qa-search-input {
-            width: 100%;
-            height: 50px;
-            border-radius: 25px;
-            border: none;
-            padding: 0 60px 0 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            font-size: 1rem;
-            transition: box-shadow 0.3s ease;
-        }
-        
-        .qa-search-input:focus {
-            box-shadow: 0 4px 20px rgba(106, 27, 154, 0.2);
-            outline: none;
-        }
-        
-        .qa-search-btn {
-            position: absolute;
-            right: 5px;
-            top: 5px;
-            height: 40px;
-            width: 40px;
-            border-radius: 20px;
-            background-color: #6a1b9a;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .qa-search-btn:hover {
-            background-color: #4a0072;
-        }
-        
-        .qa-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        
-        .qa-title-main {
-            font-size: 2rem;
-            font-weight: 700;
-            color: white;
-            margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        
-        .qa-ask-btn {
-            background-color: #6a1b9a;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .qa-ask-btn:hover {
-            background-color: #4a0072;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .qa-ask-btn i {
-            font-size: 1.2rem;
-        }
-        
-        .qa-empty {
-            text-align: center;
-            padding: 50px 0;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            margin-top: 30px;
-        }
-        
-        .qa-empty h3 {
-            color: #4a0072;
-            margin-bottom: 15px;
-        }
-        
-        .qa-empty p {
-            color: #666;
-            margin-bottom: 25px;
-        }
-        
-        /* Buttons container */
-        .qa-buttons {
-            display: flex;
-            align-items: center;
-        }
-        
-        /* Secondary button style */
-        .qa-btn {
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-        }
-        
-        .qa-btn-secondary {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .qa-btn-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            transform: translateY(-2px);
-            text-decoration: none;
-        }
+    max-width: 1000px;
+    margin: 150px auto 50px;
+    padding: 0 20px;
+}
 
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .qa-card {
-            animation: fadeInUp 0.5s ease forwards;
-            opacity: 0;
-        }
-        
-        .qa-card:nth-child(1) { animation-delay: 0.1s; }
-        .qa-card:nth-child(2) { animation-delay: 0.2s; }
-        .qa-card:nth-child(3) { animation-delay: 0.3s; }
-        .qa-card:nth-child(4) { animation-delay: 0.4s; }
-        .qa-card:nth-child(5) { animation-delay: 0.5s; }
-        .qa-card:nth-child(6) { animation-delay: 0.6s; }
-        
-        .pulse-animation {
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .qa-answer-count {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background-color: #6a1b9a;
-            color: white;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .qa-card:hover .qa-answer-count {
-            transform: scale(1.1);
-        }
+.qa-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    border-left: 5px solid #6a1b9a;
+}
+
+.qa-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.qa-card-body {
+    padding: 25px;
+}
+
+.qa-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #4a0072;
+    margin-bottom: 15px;
+    transition: color 0.3s ease;
+}
+
+.qa-card:hover .qa-title {
+    color: #6a1b9a;
+}
+
+.qa-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.qa-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.qa-tag {
+    background-color: #f0e6f5;
+    color: #6a1b9a;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.qa-tag:hover {
+    background-color: #6a1b9a;
+    color: white;
+}
+
+.qa-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    color: #666;
+}
+
+.qa-stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.qa-search-container {
+    position: relative;
+    margin-bottom: 40px;
+}
+
+.qa-search-input {
+    width: 100%;
+    height: 50px;
+    border-radius: 25px;
+    border: none;
+    padding: 0 60px 0 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    transition: box-shadow 0.3s ease;
+}
+
+.qa-search-input:focus {
+    box-shadow: 0 4px 20px rgba(106, 27, 154, 0.2);
+    outline: none;
+}
+
+.qa-search-btn {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 40px;
+    width: 40px;
+    border-radius: 20px;
+    background-color: #6a1b9a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.qa-search-btn:hover {
+    background-color: #4a0072;
+}
+
+.qa-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.qa-title-main {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.qa-ask-btn {
+    background-color: #6a1b9a;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.qa-ask-btn:hover {
+    background-color: #4a0072;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.qa-ask-btn i {
+    font-size: 1.2rem;
+}
+
+.qa-empty {
+    text-align: center;
+    padding: 50px 0;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    margin-top: 30px;
+}
+
+.qa-empty h3 {
+    color: #4a0072;
+    margin-bottom: 15px;
+}
+
+.qa-empty p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* Buttons container */
+.qa-buttons {
+    display: flex;
+    align-items: center;
+}
+
+/* Secondary button style */
+.qa-btn {
+    padding: 12px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.qa-btn-secondary {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+}
+
+.qa-btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.qa-card {
+    animation: fadeInUp 0.5s ease forwards;
+    opacity: 0;
+}
+
+.qa-card:nth-child(1) { animation-delay: 0.1s; }
+.qa-card:nth-child(2) { animation-delay: 0.2s; }
+.qa-card:nth-child(3) { animation-delay: 0.3s; }
+.qa-card:nth-child(4) { animation-delay: 0.4s; }
+.qa-card:nth-child(5) { animation-delay: 0.5s; }
+.qa-card:nth-child(6) { animation-delay: 0.6s; }
+
+.pulse-animation {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.qa-answer-count {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #6a1b9a;
+    color: white;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.qa-card:hover .qa-answer-count {
+    transform: scale(1.1);
+}
     </style>
 </head>
 <body>
     <!-- Header -->
     <header>
         <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="header-inner-content">
-                        <div class="header-logo">
-                            <img src="../public/images/LogoGearBK.webp" alt="">
-                            <span>GearBK</span>
-                        </div>
-                        <div class="header-menu">
-                            <ul>
-                                <li><a href="/ltw">HOME</a></li>
-                                <li><a href="/ltw/AboutController/index">ABOUT</a></li>
-                                <li><a href="/ltw">SHOP</a></li>
-                                <li><a href="/ltw">CONTACT</a></li>
-                                <li><a href="/ltw">NEWS</a></li>
-                                <li><a href="/ltw/QAController/list">Q&A</a></li>
-                                <li><a href="../AuthController/logout">ĐĂNG XUẤT</a></li>
-                            </ul>
-                        </div>
-                        <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <div class="header-user"><i class="fa-solid fa-user"></i></div>
-                    </div>
+        <div class="row">
+            <div class="col-12">
+            <div class="header-inner-content">
+                <div class="header-logo">
+                <img src="/ltw/public/images/LogoGearBK.webp" alt="Logo">
+                <span>GearBK</span>
+                </div>
+                <div class="header-menu">
+                <ul>
+                    <li><a href="/ltw">HOME</a></li>
+                    <li><a href="/ltw/AboutController/index">ABOUT</a></li>
+                    <li><a href="/ltw/shop">SHOP</a></li>
+                    <li><a href="/ltw/contact">CONTACT</a></li>
+                    <li><a href="/ltw/news">NEWS</a></li>
+                    <li><a href="/ltw/QAController/list">Q&A</a></li>
+                </ul>
+                </div>
+                <div class="d-flex">
+                <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
+                <?php if(isset($_COOKIE['access_token'])): ?>
+                  <div class="header-user">
+                    <a href="/ltw/AuthController/profile" title="Thông tin cá nhân" style="color: white; text-decoration: none;">
+                      <i class="fa-solid fa-user"></i>
+                    </a>
+                  </div>
+                  <div class="header-logout ml-3">
+                    <a href="/ltw/AuthController/logout" title="Đăng xuất" style="color: white; text-decoration: none;">
+                      <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+                    </a>
+                  </div>
+                <?php else: ?>
+                  <div class="header-user">
+                    <a href="/ltw/AuthController/login" title="Đăng nhập" style="color: white; text-decoration: none;">
+                      <i class="fa-solid fa-user"></i>
+                    </a>
+                  </div>
+                <?php endif; ?>
                 </div>
             </div>
+            </div>
+        </div>
         </div>
     </header>
+
 
     <!-- Main Content -->
     <div class="qa-container">
@@ -337,6 +354,14 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                             <i class="fas fa-globe"></i> All Questions
                         </a>
                     <?php endif; ?>
+                    
+                    <!-- Admin Control Panel -->
+                    <?php if (isset($_COOKIE['user_name']) && $_COOKIE['user_name'] === 'admin'): ?>
+                        <a href="/ltw/QAAdminController/dashboard" class="qa-btn qa-btn-admin mr-2">
+                            <i class="fas fa-cog"></i> Admin Panel
+                        </a>
+                    <?php endif; ?>
+                    
                     <a href="/ltw/QAController/create" class="qa-ask-btn">
                         <i class="fas fa-plus-circle"></i> Ask a Question
                     </a>
@@ -347,6 +372,9 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                 <?php endif; ?>
             </div>
         </div>
+        
+        <!-- Admin Alert if admin user -->
+        
         
         <!-- Search bar (don't show on my questions page) -->
         <?php if (!isset($data['is_my_questions'])): ?>

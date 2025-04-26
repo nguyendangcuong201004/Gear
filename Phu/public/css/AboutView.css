@@ -75,10 +75,52 @@ body {
   }
 
   html { scroll-behavior: smooth; }
-  .hero-section { position: relative; background: url('/assets/images/hero-bg.jpg') center/cover no-repeat; height: 600px; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; overflow: hidden; border-radius: 15px;
-    padding: 40px;
-    margin-bottom: 40px; }
-  .hero-section::before { content: ''; position: absolute; top: 0; left: 0; right:0; bottom:0; background: rgba(0,0,0,0.4); }
+
+  /* Hero Section - complete rewrite with highest specificity */
+  body .hero-section, 
+  .about-container .hero-section { 
+    position: relative !important; 
+    background: none !important; /* Reset any existing background */
+    height: 600px !important; 
+    display: flex !important; 
+    align-items: center !important; 
+    justify-content: center !important; 
+    text-align: center !important; 
+    color: #fff !important; 
+    overflow: hidden !important; 
+    border-radius: 15px !important;
+    padding: 40px !important;
+    margin-bottom: 40px !important; 
+  }
+
+  /* Add the background image with a higher z-index pseudo-element */
+  body .hero-section::after,
+  .about-container .hero-section::after {
+    content: "" !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background-image: url('/ltw/public/images/bgr_about.png') !important;
+    background-position: center !important;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    z-index: -2 !important;
+  }
+
+  /* The overlay with lower z-index */
+  .hero-section::before { 
+    content: '' !important; 
+    position: absolute !important; 
+    top: 0 !important; 
+    left: 0 !important; 
+    right: 0 !important; 
+    bottom: 0 !important; 
+    background: rgba(0,0,0,0.4) !important;
+    z-index: -1 !important;
+  }
+
   .hero-content { position: relative; z-index:1; max-width:800px; padding:0 1rem; }
   .hero-title { font-size:3.5rem; font-weight:800; color:#fff; margin-bottom:1rem; }
   .hero-subtitle { font-size:1.25rem; color:#eee; margin-bottom:2rem; opacity:.9; }
