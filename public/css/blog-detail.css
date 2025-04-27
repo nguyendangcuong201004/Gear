@@ -1,0 +1,318 @@
+/* Reset và font chữ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: url('../../public/images/background_login.webp') no-repeat center center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+  }
+  
+  /* Header (dùng chung với blog.css) */
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+  
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .header-logo {
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  
+  .header-logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 20%;
+    margin-right: 10px;
+  }
+  
+  .header-logo span {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  
+  .header-menu ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+  }
+  
+  .header-menu ul li {
+    margin-right: 20px;
+  }
+  
+  .header-menu ul li a {
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .header-menu ul li a:hover {
+    color: #6a1b9a;
+  }
+  .header-menu {
+    margin-left: auto; /* Đẩy toàn bộ menu sang bên phải */
+    display: flex;
+    align-items: center;
+}
+
+/* Đảm bảo ul hiển thị dạng ngang và sát nhau */
+.header-menu ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    gap: 15px; /* Khoảng cách giữa các mục menu, bạn có thể giảm hoặc tăng giá trị này */
+    margin: 20px; /* Xóa margin mặc định */
+    padding: 0; /* Xóa padding mặc định */
+}
+
+/* Liên kết menu */
+.header-menu ul li a {
+    color: white;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Tạo khoảng cách giữa các icon */
+}
+
+.header-shop i,
+.header-user i {
+    font-size: 20px;
+    color: white;
+    transition: transform 0.3s ease;
+}
+
+.header-shop:hover i,
+.header-user:hover i {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* Giảm khoảng cách trên/dưới, nếu có */
+.header-menu ul li {
+    margin: 0; /* Hoặc margin: 0 10px; nếu muốn canh chỉnh khác */
+}
+.image-container {
+    position: relative;
+  }
+  
+  /* Admin icons - đặt ở góc trên bên phải của hình */
+  .admin-icons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .admin-icons a {
+    color: white; /* Màu icon ban đầu, bạn có thể tùy chỉnh */
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 6px;
+    border-radius: 4px;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .admin-icons a:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: scale(1.1);
+  }
+  
+  
+  .admin-icons i {
+    font-size: 1.2rem;
+  }
+  .header-shop,
+  .header-user {
+    font-size: 20px;
+    color: white;
+    transition: transform 0.3s ease;
+  }
+  
+  .header-shop:hover,
+  .header-user:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Main content - đảm bảo không bị header che khuất */
+  main {
+    margin-top: 80px;
+    padding: 20px;
+  }
+  
+  /* Blog Detail Article */
+  .blog-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .blog-detail-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  .blog-detail-content {
+    padding: 20px;
+  }
+  
+  .blog-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #4a0072;
+  }
+  
+  .blog-meta {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 20px;
+  }
+  
+  .blog-text p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+  }
+  
+  /* Comments Section */
+  .comments-section {
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .comments-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #4a0072;
+  }
+  
+  .comments-list .comment {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+  }
+  
+  .comments-list .comment:last-child {
+    border-bottom: none;
+  }
+  
+  .comment-author {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .comment-date {
+    font-size: 0.8rem;
+    color: #888;
+    margin-bottom: 10px;
+  }
+  
+  .comment-text {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  /* Comment Form */
+  .comment-form {
+    margin-top: 20px;
+  }
+  
+  .comment-form h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .comment-form form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .comment-form input[type="text"],
+  .comment-form input[type="email"],
+  .comment-form textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .comment-form textarea {
+    resize: vertical;
+  }
+  
+  .comment-form button {
+    padding: 12px;
+    background-color: #4a0072;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  .comment-form button:hover {
+    background-color: #6a1b9a;
+  }
+  
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    color: #888;
+    margin-top: 40px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .blog-title {
+      font-size: 1.8rem;
+    }
+    .blog-detail {
+      margin: 20px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .blog-title {
+      font-size: 1.5rem;
+    }
+  }
+  

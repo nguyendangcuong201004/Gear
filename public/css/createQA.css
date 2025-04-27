@@ -1,0 +1,462 @@
+/* Create QA specific styles */
+.header-menu ul li a.active {
+    color: #6a1b9a !important;
+    font-weight: 700;
+}
+
+.create-qa-container {
+    max-width: 800px;
+    margin: 150px auto 50px;
+    padding: 0 20px;
+}
+
+.create-qa-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.create-qa-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.create-qa-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background-color: #6a1b9a;
+}
+
+.qa-form-group {
+    margin-bottom: 25px;
+}
+
+.qa-form-label {
+    font-weight: 600;
+    color: #4a0072;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.qa-form-input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.qa-form-input:focus {
+    outline: none;
+    border-color: #6a1b9a;
+    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+    transform: scale(1.01);
+}
+
+.qa-form-textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    resize: vertical;
+}
+
+.qa-form-textarea:focus {
+    outline: none;
+    border-color: #6a1b9a;
+    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+    transform: scale(1.01);
+}
+
+.qa-tags-input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.qa-tags-input:focus {
+    outline: none;
+    border-color: #6a1b9a;
+    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+}
+
+.qa-tags-help {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 8px;
+}
+
+/* Styles cho phần chọn tags */
+.qa-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.qa-tag-select {
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.qa-tag-select input[type="checkbox"] {
+    display: none;
+}
+
+.qa-tag-select label {
+    display: inline-block;
+    background-color: #f0e6f5;
+    color: #6a1b9a;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    user-select: none;
+}
+
+.qa-tag-select input[type="checkbox"]:checked + label {
+    background-color: #6a1b9a;
+    color: white;
+    box-shadow: 0 3px 10px rgba(106, 27, 154, 0.3);
+    transform: translateY(-2px);
+}
+
+.qa-tag-select label:hover {
+    background-color: #e0d0e9;
+    transform: translateY(-2px);
+}
+
+.qa-tag-select input[type="checkbox"]:checked + label:hover {
+    background-color: #5c1985;
+}
+
+/* Hiển thị thông báo giới hạn số lượng tag */
+.tags-limit-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    margin-top: 8px;
+    display: none;
+}
+
+.tags-limit-message.show {
+    display: block;
+    animation: shake 0.5s ease-in-out;
+}
+
+.qa-submit-btn {
+    background-color: #6a1b9a;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.qa-submit-btn:hover {
+    background-color: #4a0072;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.qa-submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.qa-form-btn-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.qa-back-btn {
+    color: #6a1b9a;
+    background-color: transparent;
+    border: 2px solid #6a1b9a;
+    padding: 12px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qa-back-btn:hover {
+    background-color: rgba(106, 27, 154, 0.1);
+    transform: translateX(-5px);
+    text-decoration: none;
+    color: #4a0072;
+}
+
+.qa-error {
+    background-color: #fff0f0;
+    color: #e74c3c;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border-left: 4px solid #e74c3c;
+    font-weight: 500;
+}
+
+.qa-error-shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-5px); }
+    40%, 80% { transform: translateX(5px); }
+}
+
+.qa-form-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #4a0072;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0e6f5;
+}
+
+.qa-floating-tips {
+    position: fixed;
+    top: 150px;
+    right: -300px;
+    width: 280px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: right 0.5s ease;
+    z-index: 100;
+    border-left: 4px solid #6a1b9a;
+}
+
+.qa-floating-tips.active {
+    right: 20px;
+}
+
+.qa-tips-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #4a0072;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.qa-tips-content {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.6;
+}
+
+.qa-tips-list {
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+.qa-tips-list li {
+    margin-bottom: 8px;
+}
+
+.qa-close-tips {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.qa-close-tips:hover {
+    color: #4a0072;
+    transform: scale(1.1);
+}
+
+/* Animation for the form elements */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* Styles cho phần nhập và hiển thị tags */
+.qa-tags-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+    position: relative;
+}
+
+.qa-tags-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.qa-tags-input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.qa-tags-input:focus {
+    outline: none;
+    border-color: #6a1b9a;
+    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+}
+
+.show-tags-btn {
+    align-self: flex-start;
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    padding: 8px 15px;
+    color: #6a1b9a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.show-tags-btn:hover {
+    background-color: #f0e6f5;
+    border-color: #6a1b9a;
+}
+
+.tags-dropdown {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+}
+
+.tag-item {
+    background-color: #f0e6f5;
+    color: #6a1b9a;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    user-select: none;
+}
+
+.tag-item:hover {
+    background-color: #e0d0e9;
+    transform: translateY(-2px);
+}
+
+.tag-item.selected {
+    background-color: #6a1b9a;
+    color: white;
+    box-shadow: 0 3px 10px rgba(106, 27, 154, 0.3);
+}
+
+.selected-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.selected-tag {
+    background-color: #6a1b9a;
+    color: white;
+    padding: 8px 32px 8px 15px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.remove-tag {
+    position: absolute;
+    right: 10px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+}
+
+.remove-tag:hover {
+    transform: scale(1.2);
+}
+
+.tags-limit-message {
+    color: #e74c3c;
+    font-size: 0.9rem;
+    display: none;
+}
+
+.tags-limit-message.show {
+    display: block;
+    animation: shake 0.5s ease-in-out;
+}
+
+.no-tags {
+    padding: 15px;
+    color: #888;
+    font-style: italic;
+    text-align: center;
+}
+
+
+.delay-1 { animation-delay: 0.1s; }
+.delay-2 { animation-delay: 0.2s; }
+.delay-3 { animation-delay: 0.3s; }
+.delay-4 { animation-delay: 0.4s; }

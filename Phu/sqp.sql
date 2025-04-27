@@ -81,6 +81,7 @@ CREATE TABLE users (
     password VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    user_role VARCHAR(10) DEFAULT 'user'
 );
 
 CREATE TABLE posts (
@@ -90,6 +91,7 @@ CREATE TABLE posts (
     image VARCHAR(255),
     content TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    author VARCHAR(20) default 'Admin'
 );
 CREATE TABLE `comments` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
