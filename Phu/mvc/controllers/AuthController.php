@@ -196,7 +196,7 @@ class AuthController {
             // Set cookie
             setcookie('access_token', $token, time()+7*24*60*60, '/');
             setcookie('user_name', $user['username'], time()+7*24*60*60, '/');
-            setcookie('user_role', $user['role'], time()+7*24*60*60, '/');
+            setcookie('user_role', $user['user_role'], time()+7*24*60*60, '/');
 
             // Redirect
             header("Location: http://localhost/ltw/QAController/list");
