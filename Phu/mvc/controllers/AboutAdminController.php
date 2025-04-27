@@ -17,7 +17,7 @@ class AboutAdminController {
         
         // Check if user is admin
         session_start();
-        if (!isset($_SESSION['user_name']) || $_SESSION['user_name'] !== 'admin') {
+        if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'admin') {
             header("Location: /ltw/login");
             exit;
         }

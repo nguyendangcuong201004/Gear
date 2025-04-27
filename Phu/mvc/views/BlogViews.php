@@ -89,7 +89,7 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
     </header>
 
     <!-- Add Post (admin only) -->
-    <?php if (isset($_COOKIE['user_name']) && $_COOKIE['user_name'] === 'admin'): ?>
+    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
         <div class="fixed-add-posts-btn" id="add-posts-btn">
             <a href="/ltw/BlogController/create" class="btn btn-purple">Add Posts</a>
         </div>

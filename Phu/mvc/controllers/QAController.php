@@ -32,7 +32,7 @@ class QAController {
     // Admin panel - Quản lý Q&A
     public function admin() {
         // Kiểm tra quyền admin
-        if (!isset($_COOKIE['user_name']) || $_COOKIE['user_name'] !== 'admin') {
+        if (!isset($_COOKIE['user_role']) || $_COOKIE['user_role'] !== 'admin') {
             header('Location: /ltw/QAController/list');
             exit;
         }
@@ -75,7 +75,7 @@ class QAController {
     // Chỉnh sửa câu hỏi (Admin)
     public function edit($id) {
         // Kiểm tra quyền admin
-        if (!isset($_COOKIE['user_name']) || $_COOKIE['user_name'] !== 'admin') {
+        if (!isset($_COOKIE['user_role']) || $_COOKIE['user_role'] !== 'admin') {
             header('Location: /ltw/QAController/list');
             exit;
         }
@@ -123,7 +123,7 @@ class QAController {
     // Chỉnh sửa câu trả lời (Admin)
     public function editAnswer($id) {
         // Kiểm tra quyền admin
-        if (!isset($_COOKIE['user_name']) || $_COOKIE['user_name'] !== 'admin') {
+        if (!isset($_COOKIE['user_role']) || $_COOKIE['user_role'] !== 'admin') {
             header('Location: /ltw/QAController/list');
             exit;
         }
@@ -162,7 +162,7 @@ class QAController {
     // Xóa câu hỏi (Admin)
     public function deleteQuestion() {
         // Kiểm tra quyền admin
-        if (!isset($_COOKIE['user_name']) || $_COOKIE['user_name'] !== 'admin') {
+        if (!isset($_COOKIE['user_role']) || $_COOKIE['user_role'] !== 'admin') {
             header('Location: /ltw/QAController/list');
             exit;
         }
@@ -189,7 +189,7 @@ class QAController {
     // Xóa câu trả lời (Admin)
     public function deleteAnswer() {
         // Kiểm tra quyền admin
-        if (!isset($_COOKIE['user_name']) || $_COOKIE['user_name'] !== 'admin') {
+        if (!isset($_COOKIE['user_role']) || $_COOKIE['user_role'] !== 'admin') {
             header('Location: /ltw/QAController/list');
             exit;
         }
@@ -216,7 +216,7 @@ class QAController {
     // Quản lý tags (thêm, sửa, xóa)
     public function manageTag() {
         // Kiểm tra quyền admin
-        if (!isset($_COOKIE['user_name']) || $_COOKIE['user_name'] !== 'admin') {
+        if (!isset($_COOKIE['user_role']) || $_COOKIE['user_role'] !== 'admin') {
             header('Location: /ltw/QAController/list');
             exit;
         }

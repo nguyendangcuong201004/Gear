@@ -2,7 +2,7 @@
 class AboutController extends Controller {
     public function index() {
         // Kiểm tra người dùng dựa trên cookie thay vì session
-        if (isset($_COOKIE['user_name']) && $_COOKIE['user_name'] === 'admin') {
+        if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin') {
             // If admin, render the admin view
             $this->view("AboutViewAdmin");
         } else {

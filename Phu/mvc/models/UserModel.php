@@ -25,12 +25,12 @@ class UserModel extends Database {
     }
 
     // Tạo user mới (đăng ký)
-    public function createUser($username, $passwordHash, $email, $fullname = null, $dob = null, $address = null) {
+    public function createUser($username, $passwordHash, $email, $fullname = null, $dob = null, $address = null, $role = 'user') {
         $stmt = $this->con->prepare("
-            INSERT INTO users (username, password, email, fullname, date_of_birth, address, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, NOW())
+            INSERT INTO users (username, password, email, fullname, date_of_birth, address, created_at, role)
+            VALUES (?, ?, ?, ?, ?, ?, NOW(), ?)
         ");
-        $stmt->bind_param("ssssss", $username, $passwordHash, $email, $fullname, $dob, $address);
+        $stmt->bind_param("ssssss", $username, $passwordHash, $email, $fullname, $dob, $address, $role);
         $ok = $stmt->execute();
         $stmt->close();
         return $ok;

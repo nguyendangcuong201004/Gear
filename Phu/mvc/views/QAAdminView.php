@@ -1,6 +1,6 @@
 <?php
 // Kiểm tra quyền admin
-if (!isset($_COOKIE['user_name']) || $_COOKIE['user_name'] !== 'admin') {
+if (!isset($_COOKIE['user_role']) || $_COOKIE['user_role'] !== 'admin') {
     header("Location: /ltw/QAController/list");
     exit;
 }

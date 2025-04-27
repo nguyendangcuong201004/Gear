@@ -356,7 +356,7 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                     <?php endif; ?>
                     
                     <!-- Admin Control Panel -->
-                    <?php if (isset($_COOKIE['user_name']) && $_COOKIE['user_name'] === 'admin'): ?>
+                    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
                         <a href="/ltw/QAAdminController/dashboard" class="qa-btn qa-btn-admin mr-2">
                             <i class="fas fa-cog"></i> Admin Panel
                         </a>

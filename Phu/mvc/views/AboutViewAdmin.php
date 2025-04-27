@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Check if user is admin - Basic authentication
-if (!isset($_COOKIE['user_name']) || $_COOKIE['user_name'] !== 'admin') {
+if (!isset($_COOKIE['user_role']) || $_COOKIE['user_role'] !== 'admin') {
     // Redirect to login page if not admin
     header("Location: /ltw/login");
     exit;
