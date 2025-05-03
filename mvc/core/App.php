@@ -3,8 +3,8 @@
 class App
 {
 
-    protected $controller = "ProductController";
-    protected $action = "list";
+    protected $controller = "HomeController";
+    protected $action = "index";
     protected $params = [];
 
     function __construct()
