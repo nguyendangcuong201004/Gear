@@ -19,13 +19,12 @@
   <div class="main-container">
     <div class="sidebar">
       <ul>
-        <li><a href="/AdminProductController/dashboard">Tổng quan</a></li>
+        <li><a href="/AdminController/dashboard">Tổng quan</a></li>
         <li><a href="/AdminProductController/list">Sản phẩm</a></li>
         <li><a href="/AdminOrderController/list">Đơn hàng</a></li>
         <li><a href="#">Nhóm quyền</a></li>
         <li><a href="#">Phân quyền</a></li>
-        <li><a href="#">Tài khoản</a></li>
-        <li><a href="#">Cài đặt chung</a></li>
+        <li><a href="/AdminUserController/list">Tài khoản</a></li>
       </ul>
     </div>
     <div class="content">

@@ -5,12 +5,14 @@ $items = $items ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết đơn hàng <?= htmlspecialchars($order['code'] ?? '') ?></title>
     <link rel="stylesheet" href="/public/css/adminOrderDetail.css">
 </head>
+
 <body>
     <div class="header">
         <h1>ADMIN</h1>
@@ -23,14 +25,12 @@ $items = $items ?? [];
     <div class="main-container">
         <div class="sidebar">
             <ul>
-                <li><a href="#">Tổng quan</a></li>
-                <li><a href="#">Sản phẩm</a></li>
-                <li><a href="#">Đơn hàng</a></li>
-                <li><a href="#">Danh mục</a></li>
-                <li><a href="#">Nhóm quyền</a></li>
+                <li><a href="/AdminController/dashboard">Tổng quan</a></li>
+                <li><a href="/AdminProductController/list">Sản phẩm</a></li>
+                <li><a href="/AdminOrderController/list">Đơn hàng</a></li>
+                <li><a href="">Nhóm quyền</a></li>
                 <li><a href="#">Phân quyền</a></li>
-                <li><a href="#">Tài khoản</a></li>
-                <li><a href="#">Cài đặt chung</a></li>
+                <li><a href="/AdminUserController/list">Tài khoản</a></li>
             </ul>
         </div>
         <div class="content">
@@ -53,35 +53,36 @@ $items = $items ?? [];
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($items as $item): 
+                        <?php foreach ($items as $item):
                             $price = (int)$item['price'];
                             $discount = (int)$item['discount'];
                             $qty = (int)$item['quantity'];
                             $priceAfter = $price * (100 - $discount) / 100;
                             $subtotal = $priceAfter * $qty;
                         ?>
-                        <tr>
-                            <td><?= htmlspecialchars($item['name']) ?></td>
-                            <td><?= $qty ?></td>
-                            <td><?= number_format($price,0,',','.') ?>₫</td>
-                            <td><?= $discount ?>%</td>
-                            <td><?= number_format($subtotal,0,',','.') ?>₫</td>
-                        </tr>
+                            <tr>
+                                <td><?= htmlspecialchars($item['name']) ?></td>
+                                <td><?= $qty ?></td>
+                                <td><?= number_format($price, 0, ',', '.') ?>₫</td>
+                                <td><?= $discount ?>%</td>
+                                <td><?= number_format($subtotal, 0, ',', '.') ?>₫</td>
+                            </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <?php 
-                    $total = array_reduce($items, function($sum, $it) {
-                        $p = (int)$it['price'];
-                        $d = (int)$it['discount'];
-                        $q = (int)$it['quantity'];
-                        return $sum + ($p * (100 - $d) / 100) * $q;
-                    }, 0);
+                <?php
+                $total = array_reduce($items, function ($sum, $it) {
+                    $p = (int)$it['price'];
+                    $d = (int)$it['discount'];
+                    $q = (int)$it['quantity'];
+                    return $sum + ($p * (100 - $d) / 100) * $q;
+                }, 0);
                 ?>
-                <p class="total">Tổng tiền: <?= number_format($total,0,',','.') ?>₫</p>
+                <p class="total">Tổng tiền: <?= number_format($total, 0, ',', '.') ?>₫</p>
             </div>
             <button class="back-btn" onclick="window.history.back()">Quay lại</button>
         </div>
     </div>
 </body>
+
 </html>
