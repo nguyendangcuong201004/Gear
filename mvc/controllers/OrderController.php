@@ -65,7 +65,7 @@ class OrderController extends Controller
         // 3. Nếu cart trống hoặc thiếu thông tin bắt buộc
         if (empty($cart) || $fullName === '' || $phone === '') {
             // Bạn có thể redirect về giỏ hàng kèm thông báo lỗi
-            header("Location: /OrderController/home");
+            header("Location: /Gear/OrderController/home");
             exit;
         }
 
@@ -77,7 +77,7 @@ class OrderController extends Controller
         unset($_SESSION['cart']);
 
         // 6. Chuyển sang trang cảm ơn, truyền mã đơn
-        header('Location: /OrderController/thanks/order_id=' . $orderId);
+        header('Location: /Gear/OrderController/thanks/order_id=' . $orderId);
         exit;
     }
 

@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- <link rel="stylesheet" href="/public/css/cart.css"> -->
-    <link rel="stylesheet" href="/public/css/style.css">
-    <link rel="stylesheet" href="/public/css/thank.css">
+    <!-- <link rel="stylesheet" href="/Gear/public/css/cart.css"> -->
+    <link rel="stylesheet" href="/Gear/public/css/style.css">
+    <link rel="stylesheet" href="/Gear/public/css/thank.css">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
                 <div class="col-12">
                     <div class="inner-content">
                         <div class="inner-logo">
-                            <img src="../../public/images/LogoGearBK.webp" alt="">
+                            <img src="/Gear/public/images/LogoGearBK.webp" alt="">
                             <span>GearBK</span>
                         </div>
                         <div class="inner-menu">
@@ -55,7 +55,7 @@
     <main class="container my-5">
         <?php if (empty($order) || empty($order['code'])): ?>
             <div class="alert alert-warning text-center">
-                Đơn hàng không tồn tại hoặc đã hết hạn. <a href="/ProductController/list" class="alert-link">Quay lại mua hàng</a>
+                Đơn hàng không tồn tại hoặc đã hết hạn. <a href="/Gear/ProductController/list" class="alert-link">Quay lại mua hàng</a>
             </div>
         <?php else: ?>
             <!-- Thank You Section -->
@@ -63,7 +63,7 @@
                     <h2 class="mb-3">🎉 Cảm ơn bạn đã đặt hàng!</h2>
                     <p class="mb-2">Mã đơn hàng của bạn là <strong><?= htmlspecialchars($order['code']) ?></strong></p>
                     <p class="mb-4">Chúng tôi sẽ liên hệ với bạn sớm nhất để xác nhận và giao hàng.</p>
-                    <a href="/ProductController/list" class="btn btn-primary">Tiếp tục mua sắm</a>
+                    <a href="/Gear/ProductController/list" class="btn btn-primary">Tiếp tục mua sắm</a>
                 </div>
 
             <!-- Order Information Section -->

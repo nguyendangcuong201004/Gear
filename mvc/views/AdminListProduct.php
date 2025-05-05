@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Quản lý sản phẩm</title>
-  <link rel="stylesheet" href="/public/css/admitlistproduct.css">
+  <link rel="stylesheet" href="/Gear/public/css/admitlistproduct.css">
 </head>
 
 <body>
@@ -20,11 +20,11 @@
     <div class="sidebar">
       <ul>
         <li><a href="/AdminController/dashboard">Tổng quan</a></li>
-        <li><a href="/AdminProductController/list">Sản phẩm</a></li>
-        <li><a href="/AdminOrderController/list">Đơn hàng</a></li>
+        <li><a href="/Gear/AdminProductController/list">Sản phẩm</a></li>
+        <li><a href="/Gear/AdminOrderController/list">Đơn hàng</a></li>
         <li><a href="#">Nhóm quyền</a></li>
         <li><a href="#">Phân quyền</a></li>
-        <li><a href="/AdminUserController/list">Tài khoản</a></li>
+        <li><a href="/Gear/AdminUserController/list">Tài khoản</a></li>
       </ul>
     </div>
     <div class="content">
@@ -37,7 +37,7 @@
           placeholder="Tìm kiếm sản phẩm..."
           class="form-control me-2">
         <button type="button" id="searchBtn" class="btn btn-primary me-2" style="margin-left: -800px;">Tìm kiếm</button>
-        <a href="/AdminProductController/create" class="btn btn-success"><button>Thêm sản phẩm</button></a>
+        <a href="/Gear/AdminProductController/create" class="btn btn-success"><button>Thêm sản phẩm</button></a>
       </div>
       <script>
         function slugify(str) {
@@ -95,10 +95,10 @@
                   <?= htmlspecialchars($p['status']) === 'active' ? 'Hoạt động' : 'Dừng hoạt động' ?>
                 </td>
                 <td class="action-buttons">
-                  <a href="/AdminProductController/edit/<?= $p['id'] ?>" style="text-decoration: none;">
+                  <a href="/Gear/AdminProductController/edit/<?= $p['id'] ?>" style="text-decoration: none;">
                     <button class="edit-btn">Sửa</button>
                   </a>
-                  <a href="/AdminProductController/delete/<?= $p['id'] ?>" onclick="return confirm('Xác nhận xóa sản phẩm này?')"><button class="delete-btn">Xóa</button></a>
+                  <a href="/Gear/AdminProductController/delete/<?= $p['id'] ?>" onclick="return confirm('Xác nhận xóa sản phẩm này?')"><button class="delete-btn">Xóa</button></a>
                 </td>
               </tr>
             <?php endforeach; ?>

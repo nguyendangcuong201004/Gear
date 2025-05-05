@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/public/css/product.css">
-    <link rel="stylesheet" href="/public/css/style.css">
-    <link rel="stylesheet" href="/public/css/product_detail.css">
+    <link rel="stylesheet" href="/Gear/public/css/product.css">
+    <link rel="stylesheet" href="/Gear/public/css/style.css">
+    <link rel="stylesheet" href="/Gear/public/css/product_detail.css">
 </head>
 
 
@@ -22,7 +22,7 @@
                 <div class="col-12">
                     <div class="inner-content">
                         <div class="inner-logo">
-                            <img src="/public/images/LogoGearBK.webp" alt="">
+                            <img src="/Gear/public/images/LogoGearBK.webp" alt="">
                             <span>GearBK</span>
                         </div>
                         <div class="inner-menu">
@@ -44,7 +44,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="/OrderController/home" style="color: #000;">
+                        <a href="/Gear/OrderController/home" style="color: #000;">
                             <div class="inner-shop"><i class="fa-solid fa-bag-shopping"></i></div>
                         </a>
                         <div class="inner-user"><i class="fa-solid fa-user"></i></div>
@@ -90,7 +90,7 @@
             </div>
 
             <form id="add-to-cart-form"
-                action="/ProductController/addToCart"
+                action="/Gear/ProductController/addToCart"
                 method="POST"
                 class="d-flex flex-column">
 

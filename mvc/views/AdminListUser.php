@@ -9,7 +9,7 @@ $searchTerm = $search ?? '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách tài khoản</title>
-    <link rel="stylesheet" href="/public/css/adminListUser.css">
+    <link rel="stylesheet" href="/Gear/public/css/adminListUser.css">
 </head>
 <body>
     <div class="header">
@@ -23,11 +23,11 @@ $searchTerm = $search ?? '';
         <div class="sidebar">
             <ul>
                 <li><a href="/AdminController/dashboard">Tổng quan</a></li>
-                <li><a href="/AdminProductController/list">Sản phẩm</a></li>
-                <li><a href="/AdminOrderController/list">Đơn hàng</a></li>
+                <li><a href="/Gear/AdminProductController/list">Sản phẩm</a></li>
+                <li><a href="/Gear/AdminOrderController/list">Đơn hàng</a></li>
                 <li><a href="#">Nhóm quyền</a></li>
                 <li><a href="#">Phân quyền</a></li>
-                <li><a href="/AdminUserController/list">Tài khoản</a></li>
+                <li><a href="/Gear/AdminUserController/list">Tài khoản</a></li>
             </ul>
         </div>
         <div class="content">
@@ -70,8 +70,8 @@ $searchTerm = $search ?? '';
                                 <td><?= htmlspecialchars($user['user_role']) ?></td>
                                 <td><?= htmlspecialchars($user['created_at']) ?></td>
                                 <td class="action-buttons">
-                                    <a href="/AdminUserController/edit/<?= $user['id'] ?>" class="btn btn-sm btn-info"><button class="details-btn">Sửa</button></a>
-                                    <form method="POST" action="/AdminUserController/delete/<?= $user['id'] ?>" class="d-inline" onsubmit="return confirm('Xác nhận xóa tài khoản này?')">
+                                    <a href="/Gear/AdminUserController/edit/<?= $user['id'] ?>" class="btn btn-sm btn-info"><button class="details-btn">Sửa</button></a>
+                                    <form method="POST" action="/Gear/AdminUserController/delete/<?= $user['id'] ?>" class="d-inline" onsubmit="return confirm('Xác nhận xóa tài khoản này?')">
                                         <button type="submit" class="btn btn-sm btn-danger delete-btn">Xóa</button>
                                     </form>
                                 </td>
@@ -87,7 +87,7 @@ $searchTerm = $search ?? '';
         function goSearch() {
             var term = document.getElementById('searchInput').value.trim();
             var slug = term.toLowerCase().replace(/\s+/g, '-');
-            var url = '/AdminUserController/list';
+            var url = '/Gear/AdminUserController/list';
             if (slug) url += '/search=' + encodeURIComponent(slug);
             window.location.href = url;
         }

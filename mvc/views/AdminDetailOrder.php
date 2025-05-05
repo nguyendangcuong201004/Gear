@@ -10,7 +10,7 @@ $items = $items ?? [];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chi tiết đơn hàng <?= htmlspecialchars($order['code'] ?? '') ?></title>
-    <link rel="stylesheet" href="/public/css/adminOrderDetail.css">
+    <link rel="stylesheet" href="/Gear/public/css/adminOrderDetail.css">
 </head>
 
 <body>
@@ -26,11 +26,11 @@ $items = $items ?? [];
         <div class="sidebar">
             <ul>
                 <li><a href="/AdminController/dashboard">Tổng quan</a></li>
-                <li><a href="/AdminProductController/list">Sản phẩm</a></li>
-                <li><a href="/AdminOrderController/list">Đơn hàng</a></li>
+                <li><a href="/Gear/AdminProductController/list">Sản phẩm</a></li>
+                <li><a href="/Gear/AdminOrderController/list">Đơn hàng</a></li>
                 <li><a href="">Nhóm quyền</a></li>
                 <li><a href="#">Phân quyền</a></li>
-                <li><a href="/AdminUserController/list">Tài khoản</a></li>
+                <li><a href="/Gear/AdminUserController/list">Tài khoản</a></li>
             </ul>
         </div>
         <div class="content">

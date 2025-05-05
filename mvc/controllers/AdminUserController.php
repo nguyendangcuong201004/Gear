@@ -46,7 +46,7 @@ class AdminUserController extends Controller {
         ];
         $model = $this->model("AdminUserModel");
         $model->updateUser($id, $data);
-        header("Location: /AdminUserController/list");
+        header("Location: /Gear/AdminUserController/list");
         exit;
     }
 
@@ -54,7 +54,7 @@ class AdminUserController extends Controller {
     public function delete($id) {
         $model = $this->model("AdminUserModel");
         $model->softDeleteUser($id);
-        header("Location: /AdminUserController/list");
+        header("Location: /Gear/AdminUserController/list");
         exit;
     }
 }

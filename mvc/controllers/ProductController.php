@@ -54,7 +54,7 @@ class ProductController extends Controller{
         }
 
         // 5. Chuyển hướng về trang giỏ hàng
-        header("Location: /OrderController/home");
+        header("Location: /Gear/OrderController/home");
         exit;
     }
 }

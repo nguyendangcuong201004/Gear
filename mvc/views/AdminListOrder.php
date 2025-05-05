@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý đơn hàng</title>
-    <link rel="stylesheet" href="/public/css/adminOrder.css">
+    <link rel="stylesheet" href="/Gear/public/css/adminOrder.css">
 </head>
 
 <body>
@@ -21,11 +21,11 @@
         <div class="sidebar">
             <ul>
                 <li><a href="/AdminController/dashboard">Tổng quan</a></li>
-                <li><a href="/AdminProductController/list">Sản phẩm</a></li>
-                <li><a href="/AdminOrderController/list">Đơn hàng</a></li>
+                <li><a href="/Gear/AdminProductController/list">Sản phẩm</a></li>
+                <li><a href="/Gear/AdminOrderController/list">Đơn hàng</a></li>
                 <li><a href="#">Nhóm quyền</a></li>
                 <li><a href="#">Phân quyền</a></li>
-                <li><a href="/AdminUserController/list">Tài khoản</a></li>
+                <li><a href="/Gear/AdminUserController/list">Tài khoản</a></li>
             </ul>
         </div>
 
@@ -46,7 +46,7 @@
                     e.preventDefault();
                     var term = document.getElementById('searchInput').value.trim();
                     var slug = term.replace(/\s+/g, '-');
-                    var url = '/AdminOrderController/list';
+                    var url = '/Gear/AdminOrderController/list';
                     if (slug) url += '/search=' + encodeURIComponent(slug);
                     window.location.href = url;
                 }
@@ -78,7 +78,7 @@
                                 <td><?= htmlspecialchars($o['phone']) ?></td>
                                 <td><?= number_format($o['total'], 0, ',', '.') ?>₫</td>
                                 <td>
-                                    <form method="POST" action="/AdminOrderController/updateStatus/<?= $o['id'] ?>" class="d-inline">
+                                    <form method="POST" action="/Gear/AdminOrderController/updateStatus/<?= $o['id'] ?>" class="d-inline">
                                         <select name="status" onchange="this.form.submit()">
                                             <?php foreach (['pending' => 'Chờ xử lý', 'confirmed' => 'Đã xác nhận', 'shipped' => 'Đang giao', 'delivered' => 'Đã giao', 'cancelled' => 'Đã hủy'] as $key => $label): ?>
                                                 <option value="<?= $key ?>" <?= $o['status'] === $key ? 'selected' : '' ?>><?= $label ?></option>
@@ -88,11 +88,11 @@
                                 </td>
                                 <td class="action-buttons">
                                     <a
-                                        href="/AdminOrderController/detail/<?= $o['id'] ?>"
+                                        href="/Gear/AdminOrderController/detail/<?= $o['id'] ?>"
                                         class="btn btn-sm btn-info"><button class="details-btn">Chi tiết</button></a>
                                     <form
                                         method="POST"
-                                        action="/AdminOrderController/delete/<?= $o['id'] ?>"
+                                        action="/Gear/AdminOrderController/delete/<?= $o['id'] ?>"
                                         class="d-inline"
                                         onsubmit="return confirm('Xác nhận xóa đơn hàng này?')">
                                         <button type="submit" class="delete-btn">Xóa</button>

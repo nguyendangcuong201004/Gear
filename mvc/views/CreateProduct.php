@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thêm mới sản phẩm</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="/public/css/updateProduct.css">
+    <link rel="stylesheet" href="/Gear/public/css/updateProduct.css">
 </head>
 
 <body>
@@ -21,11 +21,11 @@
         <div class="sidebar">
             <ul>
                 <li><a href="/AdminController/dashboard">Tổng quan</a></li>
-                <li><a href="/AdminProductController/list">Sản phẩm</a></li>
-                <li><a href="/AdminOrderController/list">Đơn hàng</a></li>
+                <li><a href="/Gear/AdminProductController/list">Sản phẩm</a></li>
+                <li><a href="/Gear/AdminOrderController/list">Đơn hàng</a></li>
                 <li><a href="#">Nhóm quyền</a></li>
                 <li><a href="#">Phân quyền</a></li>
-                <li><a href="/AdminUserController/list">Tài khoản</a></li>
+                <li><a href="/Gear/AdminUserController/list">Tài khoản</a></li>
             </ul>
         </div>
         <div class="content">
@@ -34,7 +34,7 @@
                 <?php if (!empty($error)): ?>
                     <h2 class="alert alert-danger"><?= htmlspecialchars($error) ?></h2>
                 <?php endif; ?>
-                <form action="/AdminProductController/store" method="POST" id="createProductForm">
+                <form action="/Gear/AdminProductController/store" method="POST" id="createProductForm">
                     <label for="name">Tên sản phẩm</label>
                     <input type="text" id="name" name="name" value="<?= htmlspecialchars($product['name'] ?? '') ?>" required>
 

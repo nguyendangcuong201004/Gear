@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="../../public/css/cart.css">
-    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="/Gear/public/css/cart.css">
+    <link rel="stylesheet" href="/Gear/public/css/style.css">
 </head>
 
 <body>
@@ -20,7 +20,7 @@
                 <div class="col-12">
                     <div class="inner-content">
                         <div class="inner-logo">
-                            <img src="../../public/images/LogoGearBK.webp" alt="">
+                            <img src="/Gear/public/images/LogoGearBK.webp" alt="">
                             <span>GearBK</span>
                         </div>
                         <div class="inner-menu">
@@ -54,7 +54,7 @@
     <div class="container my-5">
         <?php if (empty($order)) { ?>
             <div class="alert alert-info text-center">
-                Giỏ hàng trống. <a href="/ProductController/list" class="alert-link">Quay lại trang mua sắm</a>
+                Giỏ hàng trống. <a href="/Gear/ProductController/list" class="alert-link">Quay lại trang mua sắm</a>
             </div>
         <?php } else { ?>
             <!-- Cart Section -->
@@ -115,7 +115,7 @@
                             </div>
 
                             <!-- Nút Cập nhật -->
-                            <form action="/OrderController/update" method="POST" class="d-inline">
+                            <form action="/Gear/OrderController/update" method="POST" class="d-inline">
                                 <input type="hidden" name="slug" value="<?= $slug ?>">
                                 <input
                                     type="hidden"
@@ -128,7 +128,7 @@
                             </form>
 
                             <!-- Nút Xóa -->
-                            <form action="/OrderController/remove" method="POST" class="d-inline ms-2">
+                            <form action="/Gear/OrderController/remove" method="POST" class="d-inline ms-2">
                                 <input type="hidden" name="slug" value="<?= htmlspecialchars($slug) ?>">
                                 <button type="submit" class="btn btn-sm btn-danger">Xóa</button>
                             </form>
@@ -182,7 +182,7 @@
             <!-- Order Summary Section -->
             <div class="order-summary border rounded p-4">
                 <h2>Thông tin đơn hàng</h2>
-                <form id="checkoutForm" action="/OrderController/checkout" method="POST">
+                <form id="checkoutForm" action="/Gear/OrderController/checkout" method="POST">
                     <!-- Customer Information -->
                     <div class="customer-info mb-4">
                         <div class="form-group">
@@ -212,7 +212,7 @@
                     <!-- Actions -->
                     <div class="cart-actions d-flex justify-content-between align-items-center">
                         <div class="action-buttons">
-                            <a href="/ProductController/list" class="btn btn-outline-secondary me-2">Tiếp tục mua hàng</a>
+                            <a href="/Gear/ProductController/list" class="btn btn-outline-secondary me-2">Tiếp tục mua hàng</a>
                             <button type="submit" class="btn btn-success" id="checkoutBtn">Thanh toán ngay</button>
                         </div>
                     </div>

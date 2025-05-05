@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="/public/css/product.css">
-    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/Gear/public/css/product.css">
+    <link rel="stylesheet" href="/Gear/public/css/style.css">
 </head>
 
 <body>
@@ -19,9 +19,9 @@
             <div class="row">
                 <div class="col-12">
                     <div class="inner-content">
-                        <a href="/ProductController/list">
+                        <a href="/Gear/ProductController/list">
                             <div class="inner-logo" style="color: #000;">
-                                <img src="/public/images/LogoGearBK.webp" alt="">
+                                <img src="/Gear/public/images/LogoGearBK.webp" alt="">
                                 <span>GearBK</span>
                             </div>
                         </a>
@@ -47,7 +47,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="/OrderController/home" style="color: #000;"><div class="inner-shop"><i class="fa-solid fa-bag-shopping"></i></div></a>
+                        <a href="/Gear/OrderController/home" style="color: #000;"><div class="inner-shop"><i class="fa-solid fa-bag-shopping"></i></div></a>
                         <div class="inner-user"><i class="fa-solid fa-user"></i></div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@
     </header>
 
     <div class="banner">
-        <img src="/public/images/Banner-demo.jpg" alt="">
+        <img src="/Gear/public/images/Banner-demo.jpg" alt="">
     </div>
 
     <div class="main">
@@ -228,7 +228,7 @@
                             <?php if (mysqli_num_rows($data["listProducts"]) > 0): ?>
                                 <?php while ($row = mysqli_fetch_assoc($data["listProducts"])): ?>
                                     <div class="col-4">
-                                        <a href="/ProductController/detail/slug=<?= $row['slug'] ?>">
+                                        <a href="/Gear/ProductController/detail/slug=<?= $row['slug'] ?>">
                                             <div class="inner-item">
                                                 <img src="<?= $row['images'] ?>" alt="">
                                                 <div class="inner-title"><?= $row['name'] ?></div>
@@ -244,7 +244,7 @@
                                                         <div class="inner-text">Intel Core i3-12100F</div>
                                                     </div>
                                                     <div class="inner-preview">
-                                                        <img src="images/RTX.webp" alt="">
+                                                        <img src="/Gear/public/images/RTX.webp" alt="">
                                                         <div class="inner-text">RTX 3050</div>
                                                     </div>
                                                 </div>
@@ -303,7 +303,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
-    <script src="../../public/js/script.js"></script>
+    <script src="/Gear/public/js/script.js"></script>
 </body>
 
 </html>

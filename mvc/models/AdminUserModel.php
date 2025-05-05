@@ -43,7 +43,9 @@ class AdminUserModel extends Database {
                 WHERE id = {$id}
                   AND deleted = 0
         ";
+
         return mysqli_query($this->con, $sql);
+
     }
 
     public function softDeleteUser($id) {

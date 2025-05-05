@@ -41,7 +41,7 @@ class AdminOrderController extends Controller {
         $model->softDeleteOrder($id);
 
         // 3) Quay về danh sách
-        header("Location: /AdminOrderController/list");
+        header("Location: /Gear/AdminOrderController/list");
         exit;
     }
     
@@ -55,7 +55,7 @@ class AdminOrderController extends Controller {
             $model->updateStatus($id, $newStatus);
         }
         // Quay về trang danh sách (hoặc detail tuỳ bạn)
-        header("Location: /AdminOrderController/list");
+        header("Location: /Gear/AdminOrderController/list");
         exit;
     }
  
