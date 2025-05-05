@@ -546,7 +546,11 @@ if ($result && $result->num_rows > 0) {
                 <li><a href="/Gear">CONTACT</a></li>
                 <li><a href="/Gear">NEWS</a></li>
                 <li><a href="/Gear/QAController/list">Q&A</a></li>
+                <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
+            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
+        <?php endif; ?>
                 <li><a href="/Gear/AuthController/logout">ĐĂNG XUẤT</a></li>
+                
               </ul>
             </div>
             <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>

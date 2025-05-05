@@ -202,6 +202,9 @@ $conn->close();
                     <li><a href="/Gear/contact">CONTACT</a></li>
                     <li><a href="/Gear/BlogController/list">BLOG</a></li>
                     <li><a href="/Gear/QAController/list">Q&A</a></li>
+                    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
+            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
+        <?php endif; ?>
                 </ul>
                 </div>
                 <div class="d-flex">

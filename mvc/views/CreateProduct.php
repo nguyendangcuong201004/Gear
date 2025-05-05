@@ -26,6 +26,8 @@
                 <li><a href="#">Nhóm quyền</a></li>
                 <li><a href="#">Phân quyền</a></li>
                 <li><a href="/Gear/AdminUserController/list">Tài khoản</a></li>
+                <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
+    <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
             </ul>
         </div>
         <div class="content">

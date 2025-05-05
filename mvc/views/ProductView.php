@@ -26,24 +26,18 @@
                             <span>GearBK</span>
                         </div>
                         <div class="inner-menu">
-                            <ul>
-                                <li>
-                                    <a href="">HOME</a>
-                                </li>
-                                <li>
-                                    <a href="">ABOUT</a>
-                                </li>
-                                <li>
-                                    <a href="">SHOP</a>
-                                </li>
-                                <li>
-                                    <a href="">CONTACT</a>
-                                </li>
-                                <li>
-                                    <a href="">NEWS</a>
-                                </li>
-                            </ul>
-                        </div>
+    <ul>
+        <li><a href="/Gear">HOME</a></li>
+        <li><a href="/Gear/AboutController/index">ABOUT</a></li>
+        <li><a href="/Gear/ProductController/list">SHOP</a></li>
+        <li><a href="/Gear/contact">CONTACT</a></li>
+        <li><a href="/Gear/BlogController/list">NEWS</a></li>
+        <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
+            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
+        <?php endif; ?>
+    </ul>
+</div>
+
                         <a href="/Gear/OrderController/home" style="color: #000;">
                             <div class="inner-shop"><i class="fa-solid fa-bag-shopping"></i></div>
                         </a>
