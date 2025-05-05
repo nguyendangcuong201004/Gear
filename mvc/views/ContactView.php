@@ -205,6 +205,48 @@
                 width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
+
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <div class="inner-menu">
+                        <ul>
+                            <li>
+                                <a href="/Gear">Home</a>
+                            </li>
+                            <li>
+                                <a href="/Gear/AboutController/index">About</a>
+                            </li>
+                            <li>
+                                <a href="/Gear/ProductController/list">Shop</a>
+                            </li>
+                            <li>
+                                <a href="/Gear/ContactController">Contact</a>
+                            </li>
+                            <li>
+                                <a href="/Gear/BlogController/list">Blog</a>
+                            </li>
+                            <li>
+                                <a href="/Gear/QAController/list">Q&A</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="inner-name">
+                        GEARBK STORE
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="inner-conpyright">
+                        Copyright © 2025 GearBK Store
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>

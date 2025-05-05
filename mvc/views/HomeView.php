@@ -604,12 +604,54 @@
                                 <p class="fw-bold mb-0 small small-md-normal">Bảo hành tốt</p>
                             </div>
                         </div>
-                        <a href="./contact" class="btn btn-danger rounded-pill px-4 py-2 fw-bold">Liên Hệ Ngay</a>
+                        <a href="/Gear/ContactController" class="btn btn-danger rounded-pill px-4 py-2 fw-bold">Liên Hệ Ngay</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+        
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-4">
+                    <div class="inner-menu">
+                        <ul>
+                            <li>
+                                <a href="/Gear">Home</a>
+                            </li>
+                            <li>
+                                <a href="/Gear/AboutController/index">About</a>
+                            </li>
+                            <li>
+                                <a href="/Gear/ProductController/list">Shop</a>
+                            </li>
+                            <li>
+                                <a href="/Gear/ContactController">Contact</a>
+                            </li>
+                            <li>
+                                <a href="/Gear/BlogController/list">Blog</a>
+                            </li>
+                            <li>
+                                <a href="/Gear/QAController/list">Q&A</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="inner-name">
+                        GEARBK STORE
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="inner-conpyright">
+                        Copyright © 2025 GearBK Store
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     </body>
 
