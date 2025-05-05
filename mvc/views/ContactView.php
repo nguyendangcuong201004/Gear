@@ -31,19 +31,22 @@
                         <div class="inner-menu">
                             <ul>
                                 <li>
-                                    <a href="/HomeController">HOME</a>
+                                    <a href="/Gear">HOME</a>
                                 </li>
                                 <li>
-                                    <a href="">ABOUT</a>
+                                    <a href="/Gear/AboutController/index">ABOUT</a>
                                 </li>
                                 <li>
-                                    <a href="">SHOP</a>
+                                    <a href="/Gear/shop">SHOP</a>
                                 </li>
                                 <li>
-                                    <a href="/ContactController" class="active">CONTACT</a>
+                                    <a href="/Gear/ContactController" class="active">CONTACT</a>
                                 </li>
                                 <li>
-                                    <a href="">NEWS</a>
+                                    <a href="/Gear/BlogController/list">BLOG</a>
+                                </li>
+                                <li>
+                                    <a href="/Gear/QAController/list">Q&A</a>
                                 </li>
                             </ul>
                         </div>

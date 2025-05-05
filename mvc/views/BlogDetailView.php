@@ -19,35 +19,55 @@ $post_id  = $data['post_id'];
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../../public/css/blog-detail.css">
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/Gear/public/css/header.css">
 </head>
 <body>
   <!-- Header -->
   <header>
-    <div class="header-container">
-      <div class="header-logo">
-        <img src="../../public/images/LogoGearBK.webp" alt="GearBK Logo" />
-        <span>GearBK</span>
-      </div>
-      <div class="header-menu">
-        <ul>
-          <li><a href="">HOME</a></li>
-          <li><a href="">ABOUT</a></li>
-          <li><a href="">SHOP</a></li>
-          <li><a href="">CONTACT</a></li>
-          <li><a href="">NEWS</a></li>
-        </ul>
-      </div>
-      <div class="header-icons">
-        <div class="header-shop">
-          <i class="fa-solid fa-bag-shopping"></i>
+        <div class="container">
+        <div class="row">
+            <div class="col-12">
+            <div class="header-inner-content">
+                <div class="header-logo">
+                <img src="/Gear/public/images/LogoGearBK.webp" alt="Logo">
+                <span>GearBK</span>
+                </div>
+                <div class="header-menu">
+                <ul>
+                    <li><a href="/Gear">HOME</a></li>
+                    <li><a href="/Gear/AboutController/index">ABOUT</a></li>
+                    <li><a href="/Gear/shop">SHOP</a></li>
+                    <li><a href="/Gear/contact">CONTACT</a></li>
+                    <li><a href="/Gear/BlogController/list">BLOG</a></li>
+                    <li><a href="/Gear/QAController/list">Q&A</a></li>
+                </ul>
+                </div>
+                <div class="d-flex">
+                <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
+                <?php if(isset($_COOKIE['access_token'])): ?>
+                  <div class="header-user">
+                    <a href="/Gear/AuthController/profile" title="Thông tin cá nhân" style="color: white; text-decoration: none;">
+                      <i class="fa-solid fa-user"></i>
+                    </a>
+                  </div>
+                  <div class="header-logout ml-3">
+                    <a href="/Gear/AuthController/logout" title="Đăng xuất" style="color: white; text-decoration: none;">
+                      <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+                    </a>
+                  </div>
+                <?php else: ?>
+                  <div class="header-user">
+                    <a href="/Gear/AuthController/login" title="Đăng nhập" style="color: white; text-decoration: none;">
+                      <i class="fa-solid fa-user"></i>
+                    </a>
+                  </div>
+                <?php endif; ?>
+                </div>
+            </div>
+            </div>
         </div>
-        <div class="header-user">
-          <a href="../../AuthController/login"><i class="fa-solid fa-user"></i></a>
         </div>
-      </div>
-    </div>
-  </header>
-
+    </header>
   <!-- Main Content -->
   <main>
     <article class="blog-detail">

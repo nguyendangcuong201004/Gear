@@ -10,8 +10,11 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog - GearBK Store</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    
     <link rel="stylesheet" href="/Gear/public/css/blog2.css">
     <link rel="stylesheet" href="/Gear/public/css/blog.css">
+    <link rel="stylesheet" href="/Gear/public/css/header.css">
+    
     <style>
         .fixed-add-posts-btn {
             position: fixed;
@@ -64,25 +67,43 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <div class="header-inner-content">
-                        <div class="header-logo">
-                            <img src="../public/images/LogoGearBK.webp" alt="">
-                            <span>GearBK</span>
-                        </div>
-                        <div class="header-menu">
-                            <ul>
-                                <li><a href="/Gear">HOME</a></li>
-                                <li><a href="/Gear">ABOUT</a></li>
-                                <li><a href="/Gear">SHOP</a></li>
-                                <li><a href="/Gear">CONTACT</a></li>
-                                <li><a href="/Gear">NEWS</a></li>
-                                <li><a href="/Gear/QAController/list">Q&A</a></li>
-                                <li><a href="../AuthController/logout">ĐĂNG XUẤT</a></li>
-                            </ul>
-                        </div>
-                        <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <div class="header-user"><i class="fa-solid fa-user"></i></div>
+                <div class="header-inner-content">
+                    <div class="header-logo">
+                    <img src="/Gear/public/images/LogoGearBK.webp" alt="Logo">
+                    <span>GearBK</span>
                     </div>
+                    <div class="header-menu">
+                    <ul>
+                        <li><a href="/Gear">HOME</a></li>
+                        <li><a href="/Gear/AboutController/index">ABOUT</a></li>
+                        <li><a href="/Gear/shop">SHOP</a></li>
+                        <li><a href="/Gear/contact">CONTACT</a></li>
+                        <li><a href="/Gear/BlogController/list">BLOG</a></li>
+                        <li><a href="/Gear/QAController/list">Q&A</a></li>
+                    </ul>
+                    </div>
+                    <div class="d-flex">
+                    <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
+                    <?php if(isset($_COOKIE['access_token'])): ?>
+                    <div class="header-user">
+                        <a href="/Gear/AuthController/profile" title="Thông tin cá nhân" style="color: white; text-decoration: none;">
+                        <i class="fa-solid fa-user"></i>
+                        </a>
+                    </div>
+                    <div class="header-logout ml-3">
+                        <a href="/Gear/AuthController/logout" title="Đăng xuất" style="color: white; text-decoration: none;">
+                        <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+                        </a>
+                    </div>
+                    <?php else: ?>
+                    <div class="header-user">
+                        <a href="/Gear/AuthController/login" title="Đăng nhập" style="color: white; text-decoration: none;">
+                        <i class="fa-solid fa-user"></i>
+                        </a>
+                    </div>
+                    <?php endif; ?>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>

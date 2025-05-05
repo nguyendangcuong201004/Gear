@@ -276,7 +276,7 @@
                 <li class="nav-item"><a class="nav-link" href="/Gear/AboutController/index">ABOUT</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Gear/shop">SHOP</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Gear/contact">CONTACT</a></li>
-                <li class="nav-item"><a class="nav-link" href="/Gear/news">NEWS</a></li>
+                <li class="nav-item"><a class="nav-link" href="/Gear/BlogController/list">BLOG</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Gear/QAController/list">Q&A</a></li>
               </ul>
             </nav>

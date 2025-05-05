@@ -8,6 +8,6 @@ class Database {
 
     public function __construct() {
         $this->con = mysqli_connect($this->servername, $this->username, $this->password, $this->dbname);
-        mysqli_set_charset($this->con, 'utf8');
+        mysqli_query($this->con, 'utf8');
     }
 }
