@@ -26,12 +26,20 @@
       to { opacity: 1; transform: translateY(0); }
     }
     
+    html, body {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
     body {
       font-family: 'Montserrat', sans-serif;
       background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
       background-size: cover;
       min-height: 100vh;
       display: flex;
+      overflow-y: auto;
       flex-direction: column;
     }
     
@@ -240,6 +248,7 @@
       font-size: 0.9em;
       text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
     }
+    
   </style>
   <script src="/Gear/public/js/login.js" defer></script>
 </head>

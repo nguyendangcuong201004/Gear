@@ -151,13 +151,14 @@ $post_id  = $data['post_id'];
   </footer>
 
   <style>
-    .fixed-back-btn {
-      position: fixed;
-      top: 100px;
-      right: 1150px;
-      z-index: 1000;
-      transition: all 0.3s ease;
-    }
+.fixed-back-btn {
+  position: fixed;
+  top: 100px;
+  right: 90vw; /* 2% chiều ngang của viewport */
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
     .fixed-back-btn:hover {
       transform: translateY(-5px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

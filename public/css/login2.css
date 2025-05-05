@@ -1,14 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-
 body {
     font-family: "Montserrat", serif;
     background: url('../images/background_login.webp') no-repeat center center fixed;
-    background-size: cover; /* Đảm bảo hình nền bao phủ toàn bộ màn hình */
-    background-attachment: fixed; /* Giữ cho hình nền cố định khi cuộn trang */
+    background-size: cover;
+    background-attachment: fixed;
     margin: 0;
     padding: 0;
-    height: 100vh; /* Đảm bảo body chiếm toàn bộ chiều cao màn hình */
-    overflow: hidden; /* Giữ cho phần background không bị tràn */
+    min-height: 100vh;         /* ✅ đảm bảo nội dung dài không bị cắt */
+    overflow-y: auto;          /* ✅ cho phép cuộn dọc */
 }
 
 header {
@@ -260,7 +259,7 @@ button {
     font-size: 1rem;
     cursor: pointer;
     position: relative;
-    overflow: hidden;
+    overflow: unset;
     transition: color 0.4s, background-color 0.4s;
 }
 

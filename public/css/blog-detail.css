@@ -165,11 +165,13 @@
   /* Main content - đảm bảo không bị header che khuất */
   main {
     margin-top: 80px;
-    padding: 20px;
+    padding: 0 5vw;
   }
   
   /* Blog Detail Article */
   .blog-detail {
+    max-width: 100%;
+    width: 100%;
     max-width: 800px;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.9);
@@ -177,7 +179,6 @@
     overflow: hidden;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
-  
   .blog-detail-image {
     width: 100%;
     height: auto;
