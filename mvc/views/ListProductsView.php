@@ -34,7 +34,7 @@
                                     <a href="/Gear/AboutController/index">ABOUT</a>
                                 </li>
                                 <li>
-                                    <a href="/Gear/shop">SHOP</a>
+                                    <a href="/Gear/ProductController/list">SHOP</a>
                                 </li>
                                 <li>
                                     <a href="/Gear/contact">CONTACT</a>

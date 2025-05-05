@@ -117,7 +117,7 @@
               <ul class="nav">
                 <li class="nav-item"><a class="nav-link" href="/Gear">HOME</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Gear/about">ABOUT</a></li>
-                <li class="nav-item"><a class="nav-link" href="/Gear/shop">SHOP</a></li>
+                <li class="nav-item"><a class="nav-link" href="/Gear/ProductController/list">SHOP</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Gear/contact">CONTACT</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Gear/news">NEWS</a></li>
               </ul>

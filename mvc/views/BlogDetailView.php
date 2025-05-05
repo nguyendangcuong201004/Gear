@@ -36,7 +36,7 @@ $post_id  = $data['post_id'];
                 <ul>
                     <li><a href="/Gear">HOME</a></li>
                     <li><a href="/Gear/AboutController/index">ABOUT</a></li>
-                    <li><a href="/Gear/shop">SHOP</a></li>
+                    <li><a href="/Gear/ProductController/list">SHOP</a></li>
                     <li><a href="/Gear/contact">CONTACT</a></li>
                     <li><a href="/Gear/BlogController/list">BLOG</a></li>
                     <li><a href="/Gear/QAController/list">Q&A</a></li>
@@ -145,10 +145,10 @@ $post_id  = $data['post_id'];
     </section>
   </main>
 
-  <!-- Footer -->
+  <!-- Footer
   <footer>
     <p>© 2025 GearBK Blog. All rights reserved.</p>
-  </footer>
+  </footer> -->
 
   <style>
 .fixed-back-btn {
