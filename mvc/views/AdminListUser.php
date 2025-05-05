@@ -28,6 +28,8 @@ $searchTerm = $search ?? '';
                 <li><a href="#">Nhóm quyền</a></li>
                 <li><a href="#">Phân quyền</a></li>
                 <li><a href="/Gear/AdminUserController/list">Tài khoản</a></li>
+                <li><a href="/Gear/HomeAdminController">Quản lý trang chủ</a></li>
+                <li><a href="/Gear/ContactAdminController">Quản lý liên hệ</a></li>
             </ul>
         </div>
         <div class="content">

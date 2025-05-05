@@ -11,53 +11,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.10/css/dataTables.bootstrap5.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="/Gear/public/css/adminListUser.css">
     <style>
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-        }
-        .sidebar {
-            min-height: 100vh;
-            background-color: #343a40;
-            color: #fff;
-            padding-top: 20px;
-        }
-        .sidebar-link {
-            color: #ced4da;
-            text-decoration: none;
-            display: block;
-            padding: 12px 20px;
-            transition: all 0.3s;
-        }
-        .sidebar-link:hover, .sidebar-link.active {
-            background-color: #495057;
-            color: #fff;
-        }
         .stats-icon {
             width: 50px;
             height: 50px;
-            display: flex;
+            display: flex;  
             align-items: center;
             justify-content: center;
             border-radius: 10px;
             font-size: 24px;
             color: #fff;
         }
-        .stats-icon.blue {
-            background-color: #435ebe;
-        }
-        .stats-icon.red {
-            background-color: #dc3545;
-        }
-        .stats-icon.green {
-            background-color: #198754;
-        }
-        .stats-icon.purple {
-            background-color: #6f42c1;
-        }
-        .table-primary {
-            background-color: #cfe2ff !important;
-        }
+        .stats-icon.blue { background-color: #435ebe; }
+        .stats-icon.red { background-color: #dc3545; }
+        .stats-icon.green { background-color: #198754; }
+        .stats-icon.purple { background-color: #6f42c1; }
+        .table-primary { background-color: #cfe2ff !important; }
         .dropdown-item i {
             width: 20px;
             text-align: center;
@@ -113,15 +83,56 @@
             display: inline-block;
             width: 120px;
         }
+
+        /* Fix sidebar and content layout */
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .content {
+            flex: 1;
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: fixed;
+                display: none;
+            }
+            .content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
     </style>
 </head>
-
 <body>
-    <div class="container-fluid">
-        <div class="row">          
-                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Quản Lý Liên Hệ</h1>
+    <div class="header">
+        <h1>ADMIN</h1>
+        <div class="buttons">
+            <button class="source-btn" onclick="location.href='/Gear/AdminController/dashboard'">Nguyen Dang Cuong</button>
+            <button class="logout-btn" onclick="location.href='/Gear/AuthController/logout'">Đăng xuất</button>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="sidebar position-fixed" style="padding: unset;">
+            <ul>
+                <li><a href="/Gear/AdminController/dashboard">Tổng quan</a></li>
+                <li><a href="/Gear/AdminProductController/list">Sản phẩm</a></li>
+                <li><a href="/Gear/AdminOrderController/list">Đơn hàng</a></li>
+                <li><a href="#">Nhóm quyền</a></li>
+                <li><a href="#">Phân quyền</a></li>
+                <li><a href="/Gear/AdminUserController/list">Tài khoản</a></li>
+                <li><a href="/Gear/HomeAdminController">Quản lý trang chủ</a></li>
+                <li><a href="/Gear/ContactAdminController">Quản lý liên hệ</a></li>
+            </ul>
+        </div>
+        <div class="content">
+                <div class="pt-3 pb-2 mb-3 border-bottom">
+                    <h2 class="text-center">Quản Lý Liên Hệ</h2>
                 </div>
+
                 
                 <!-- Stats Cards -->
                 <div class="row mb-4">
@@ -233,7 +244,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped dt-responsive nowrap" id="contactTable" width="100%" cellspacing="0">
+                            <table class="table table-striped dt-responsive nowrap" id="contactTable" style= "width:100%; cellspacing:0;">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -264,11 +275,11 @@
                                         </td>
                                         <td onclick="event.stopPropagation();">
                                             <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle btn-sm" type="button" id="dropdownMenuButton<?php echo $contact['id']; ?>" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <button class="btn btn-primary dropdown-toggle btn-sm" type="button" data-bs-toggle="dropdown">
                                                     <span class="d-none d-md-inline">Thao tác</span>
                                                     <span class="d-inline d-md-none"><i class="fas fa-cog"></i></span>
                                                 </button>
-                                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton<?php echo $contact['id']; ?>">
+                                                <ul class="dropdown-menu dropdown-menu-end">
                                                     <li><a class="dropdown-item" href="#" onclick="viewContact(<?php echo $contact['id']; ?>)">
                                                         <i class="fas fa-eye"></i> Xem chi tiết
                                                     </a></li>
@@ -341,9 +352,6 @@
                 </div>
                 <div class="modal-footer flex-wrap gap-2">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-success" id="markAsReadBtn">
-                        <i class="fas fa-check-double me-1 d-none d-sm-inline"></i>Đã đọc
-                    </button>
                     <button type="button" class="btn btn-primary" id="toggleReplyBtn">
                         <i class="fas fa-reply me-1 d-none d-sm-inline"></i>Phản hồi
                     </button>
@@ -495,7 +503,6 @@
             `;
             
             // Hide action buttons and forms until data is loaded
-            document.getElementById('markAsReadBtn').style.display = 'none';
             document.getElementById('markAsRepliedBtn').style.display = 'none';
             document.getElementById('toggleReplyBtn').style.display = 'none';
             document.getElementById('replyForm').style.display = 'none';
@@ -557,15 +564,12 @@
                         
                         // Set up button visibility and actions based on status
                         if (contact.status === 'unread') {
-                            document.getElementById('markAsReadBtn').style.display = 'block';
                             document.getElementById('markAsRepliedBtn').style.display = 'block';
                             document.getElementById('toggleReplyBtn').style.display = 'block';
                         } else if (contact.status === 'read') {
-                            document.getElementById('markAsReadBtn').style.display = 'none';
                             document.getElementById('markAsRepliedBtn').style.display = 'block';
                             document.getElementById('toggleReplyBtn').style.display = 'block';
                         } else if (contact.status === 'replied') {
-                            document.getElementById('markAsReadBtn').style.display = 'none';
                             document.getElementById('markAsRepliedBtn').style.display = 'none';
                             document.getElementById('toggleReplyBtn').style.display = 'none';
                             
@@ -578,12 +582,6 @@
                                 }
                             }
                         }
-                        
-                        // Set up button actions
-                        document.getElementById('markAsReadBtn').onclick = function() {
-                            changeStatus(contact.id, 'read');
-                        };
-                        
                         document.getElementById('markAsRepliedBtn').onclick = function() {
                             changeStatus(contact.id, 'replied');
                         };

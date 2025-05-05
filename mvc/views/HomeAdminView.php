@@ -17,6 +17,8 @@
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <!-- Responsive styles -->
+    <link rel="stylesheet" href="/Gear/public/css/adminListUser.css">
+
     <style>
         @media (max-width: 767.98px) {
             .card-header {
@@ -71,11 +73,55 @@
         .note-toolbar {
             flex-wrap: wrap;
         }
+
+        /* Fix sidebar and content layout */
+        .main-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        .content {
+            flex: 1;
+            margin-left: 250px;
+            min-height: 100vh;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                position: fixed;
+                display: none;
+            }
+            .content {
+                margin-left: 0;
+                width: 100%;
+            }
+        }
     </style>
+
 </head>
 
 <body>
-    <div class="d-flex flex-column flex-md-row">
+    <div class="header">
+        <h1>ADMIN</h1>
+        <div class="buttons">
+            <button class="source-btn" onclick="location.href='/Gear/AdminController/dashboard'">Nguyen Dang Cuong</button>
+            <button class="logout-btn" onclick="location.href='/Gear/AuthController/logout'">Đăng xuất</button>
+        </div>
+    </div>
+    <div class="main-container">
+        <div class="sidebar position-fixed" style="padding: unset;">
+            <ul>
+                <li><a href="/Gear/AdminController/dashboard">Tổng quan</a></li>
+                <li><a href="/Gear/AdminProductController/list">Sản phẩm</a></li>
+                <li><a href="/Gear/AdminOrderController/list">Đơn hàng</a></li>
+                <li><a href="#">Nhóm quyền</a></li>
+                <li><a href="#">Phân quyền</a></li>
+                <li><a href="/Gear/AdminUserController/list">Tài khoản</a></li>
+                <li><a href="/Gear/HomeAdminController">Quản lý trang chủ</a></li>
+                <li><a href="/Gear/ContactAdminController">Quản lý liên hệ</a></li>
+            </ul>
+        </div>
+        <div class="content">
+
         <!-- Main Content -->
         <div class="main-content flex-grow-1">
             <div class="container-fluid p-3 p-md-4">

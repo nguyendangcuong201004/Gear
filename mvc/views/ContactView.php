@@ -1,6 +1,3 @@
-<?php
-// The settings are passed via $data, not directly as $settings
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,8 +11,8 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- SweetAlert2 -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <link rel="stylesheet" href="public/css/style.css">
-    <link rel="stylesheet" href="public/css/contact.css">
+    <link rel="stylesheet" href="/Gear/public/css/style.css">
+    <link rel="stylesheet" href="/Gear/public/css/contact.css">
 </head>
 
 <body class="bg-light d-flex flex-column min-vh-100">
