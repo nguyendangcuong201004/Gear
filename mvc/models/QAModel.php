@@ -353,30 +353,20 @@ class QAModel {
             return $emptyResult;
         }
         
-        // Tạo điều kiện tìm kiếm LIKE
+        // Tạo điều kiện tìm kiếm LIKE chỉ cho title
         $searchConditions = [];
         foreach ($keywords as $kw) {
             $kw = $this->conn->real_escape_string($kw);
-            $searchConditions[] = "(q.title LIKE '%$kw%' OR q.content LIKE '%$kw%')";
+            $searchConditions[] = "q.title LIKE '%$kw%'";
         }
         $searchSql = implode(' OR ', $searchConditions);
-        
-        // Tạo SQL cho tìm kiếm tags
-        $tagConditions = [];
-        foreach ($keywords as $kw) {
-            $kw = $this->conn->real_escape_string($kw);
-            $tagConditions[] = "t.name LIKE '%$kw%'";
-        }
-        $tagSql = !empty($tagConditions) ? 
-            "OR q.id IN (SELECT qt.question_id FROM question_tags qt JOIN tags t ON qt.tag_id = t.id WHERE " . 
-            implode(' OR ', $tagConditions) . ")" : "";
         
         // Kết hợp các điều kiện tìm kiếm
         $sql = "SELECT DISTINCT q.*, u.username, 
                 (SELECT COUNT(*) FROM answers WHERE question_id = q.id) as answer_count
                 FROM questions q
                 LEFT JOIN users u ON q.user_id = u.id
-                WHERE ($searchSql $tagSql)
+                WHERE ($searchSql)
                 ORDER BY q.created_at DESC
                 LIMIT $offset, $limit";
         
@@ -400,28 +390,18 @@ class QAModel {
             return 0;
         }
         
-        // Tạo điều kiện tìm kiếm LIKE
+        // Tạo điều kiện tìm kiếm LIKE chỉ cho title
         $searchConditions = [];
         foreach ($keywords as $kw) {
             $kw = $this->conn->real_escape_string($kw);
-            $searchConditions[] = "(q.title LIKE '%$kw%' OR q.content LIKE '%$kw%')";
+            $searchConditions[] = "q.title LIKE '%$kw%'";
         }
         $searchSql = implode(' OR ', $searchConditions);
-        
-        // Tạo SQL cho tìm kiếm tags
-        $tagConditions = [];
-        foreach ($keywords as $kw) {
-            $kw = $this->conn->real_escape_string($kw);
-            $tagConditions[] = "t.name LIKE '%$kw%'";
-        }
-        $tagSql = !empty($tagConditions) ? 
-            "OR q.id IN (SELECT qt.question_id FROM question_tags qt JOIN tags t ON qt.tag_id = t.id WHERE " . 
-            implode(' OR ', $tagConditions) . ")" : "";
         
         // Kết hợp các điều kiện tìm kiếm
         $sql = "SELECT COUNT(DISTINCT q.id) as total 
                 FROM questions q
-                WHERE ($searchSql $tagSql)";
+                WHERE ($searchSql)";
         
         $result = $this->conn->query($sql);
         $row = $result->fetch_assoc();
