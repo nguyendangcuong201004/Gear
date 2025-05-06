@@ -293,11 +293,11 @@ foreach ($questionTags as $tag) {
     </div>
     
     <!-- Footer -->
-    <div class="copyright-footer">
+    <!-- <div class="copyright-footer">
         <div class="container">
             <p class="mb-0">&copy; <?= date('Y') ?> GearBK Admin Panel. All rights reserved.</p>
         </div>
-    </div>
+    </div> -->
     
     <!-- JS Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
