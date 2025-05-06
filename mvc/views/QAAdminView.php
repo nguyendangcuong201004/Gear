@@ -33,8 +33,8 @@ $active_tab = $data['active_tab'] ?? 'questions';
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
-            background-size: cover;
+            /* background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
+            background-size: cover; */
             color: #333;
         }
         
@@ -52,7 +52,7 @@ $active_tab = $data['active_tab'] ?? 'questions';
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 5px 0;
         }
         
         .header-logo {
@@ -95,7 +95,7 @@ $active_tab = $data['active_tab'] ?? 'questions';
         
         .admin-container {
             max-width: 1200px;
-            margin: 120px auto 50px;
+            margin: 110px auto 50px;
             padding: 0 20px;
         }
         
@@ -214,26 +214,22 @@ $active_tab = $data['active_tab'] ?? 'questions';
               <span>GearBK</span>
             </div>
             <div class="header-menu">
-            <ul>
-    <li><a href="/Gear">HOME</a></li>
-    <li><a href="/Gear/AboutController/index">ABOUT</a></li>
-    <li><a href="/Gear/ProductController/list">SHOP</a></li>
-    <li><a href="/Gear/contact">CONTACT</a></li>
-    <li><a href="/Gear/BlogController/list">BLOG</a></li>
-    <li><a href="/Gear/QAController/list">Q&A</a></li>
-    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-        <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-    <?php endif; ?>
-</ul>
-
+              <ul>
+                <li><a href="/Gear">HOME</a></li>
+                <li><a href="/Gear/AboutController/index">ABOUT</a></li>
+                <li><a href="/Gear/ProductController/list">SHOP</a></li>
+                <li><a href="/Gear/contact">CONTACT</a></li>
+                <li><a href="/Gear/BlogController/list">BLOG</a></li>
+                <li><a href="/Gear/QAController/list">Q&A</a></li>
+              </ul>
             </div>
-            <div class="d-flex">
-              <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-              <div class="header-user"><i class="fa-solid fa-user"></i></div>
+            <div class="d-flex align-items-center">
+              <div class="header-shop" style="display: flex; align-items: center;"><i class="fa-solid fa-bag-shopping"></i></div>
+              <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;"><i class="fa-solid fa-user"></i></div>
               <?php if(isset($_COOKIE['access_token'])): ?>
-                <div class="header-logout ml-3">
-                  <a href="/Gear/AuthController/logout" title="Đăng xuất" style="color: white; text-decoration: none;">
-                    <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+                <div class="header-logout ml-3" style="display: flex; align-items: center;">
+                  <a href="/Gear/AuthController/logout" title="Đăng xuất" style="color: white; text-decoration: none; display: flex; align-items: center;">
+                    <i class="fa-solid fa-sign-out-alt" style="margin-right: 5px;"></i> <span>Đăng xuất</span>
                   </a>
                 </div>
               <?php endif; ?>

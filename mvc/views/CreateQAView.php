@@ -38,8 +38,10 @@
                                 <?php endif; ?>
                             </ul>
                         </div>
-                        <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <div class="header-user"><i class="fa-solid fa-user"></i></div>
+                        <div class="d-flex align-items-center">
+                            <div class="header-shop" style="display: flex; align-items: center;"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;"><i class="fa-solid fa-user"></i></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,7 +50,7 @@
 
     <!-- Main Content -->
     <div class="create-qa-container">
-        <h1 class="create-qa-title animate__animated animate__fadeIn">Ask a Question</h1>
+        <h1 class="create-qa-title animate__animated animate__fadeIn" style="color: #dc3545;">Ask a Question</h1>
         
         <?php if (isset($error)): ?>
             <div class="qa-error qa-error-shake animate__animated animate__headShake">

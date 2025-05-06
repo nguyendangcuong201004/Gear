@@ -41,8 +41,8 @@ if (isset($updateSuccess)) {
         
         body {
             font-family: 'Montserrat', sans-serif;
-            background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
-            background-size: cover;
+            /* background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
+            background-size: cover; */
             color: #333;
         }
         

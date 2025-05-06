@@ -33,8 +33,8 @@ if (!$answer) {
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
-            background-size: cover;
+            /* background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
+            background-size: cover; */
             color: #333;
         }
         
@@ -52,7 +52,7 @@ if (!$answer) {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 5px 0;
         }
         
         .header-logo {
@@ -90,12 +90,12 @@ if (!$answer) {
         }
         
         .header-menu ul li a:hover, .header-menu ul li a.active {
-            color: #6a1b9a;
+            color: #dc3545;
         }
         
         .admin-container {
             max-width: 900px;
-            margin: 120px auto 50px;
+            margin: 110px auto 50px;
             padding: 0 20px;
         }
         
@@ -107,7 +107,7 @@ if (!$answer) {
             position: fixed;
             top: 80px;
             right: 20px;
-            background-color: #6a1b9a;
+            background-color: #dc3545;
             color: white;
             padding: 10px 20px;
             border-radius: 30px;
@@ -131,14 +131,14 @@ if (!$answer) {
         }
         
         .btn-purple {
-            background-color: #6a1b9a;
-            border-color: #6a1b9a;
+            background-color: #dc3545;
+            border-color: #dc3545;
             color: white;
         }
         
         .btn-purple:hover {
-            background-color: #9c27b0;
-            border-color: #9c27b0;
+            background-color: #c82333;
+            border-color: #c82333;
             color: white;
         }
         
@@ -155,15 +155,15 @@ if (!$answer) {
         }
         
         .question-info {
-            background-color: #f8f4fc;
-            border-left: 4px solid #6a1b9a;
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
             padding: 15px;
             margin-bottom: 20px;
             border-radius: 5px;
         }
         
         .question-info h5 {
-            color: #6a1b9a;
+            color: #dc3545;
             margin-bottom: 10px;
         }
         
@@ -201,9 +201,9 @@ if (!$answer) {
                 <li><a href="/Gear/QAController/list">Q&A</a></li>
               </ul>
             </div>
-            <div class="d-flex">
-              <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-              <div class="header-user"><i class="fa-solid fa-user"></i></div>
+            <div class="d-flex align-items-center">
+              <div class="header-shop" style="display: flex; align-items: center;"><i class="fa-solid fa-bag-shopping"></i></div>
+              <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;"><i class="fa-solid fa-user"></i></div>
             </div>
           </div>
         </div>
@@ -220,8 +220,8 @@ if (!$answer) {
     <div class="container admin-container">
         <!-- Admin Header -->
         <div class="admin-header">
-            <h1 class="text-white">Edit Answer</h1>
-            <p class="text-white">Make changes to the answer content below.</p>
+            <h1 class="text-danger">Edit Answer</h1>
+            <p class="text-danger">Make changes to the answer content below.</p>
         </div>
         
         <!-- Error Message -->

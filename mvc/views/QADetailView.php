@@ -13,13 +13,13 @@
     <style>
         /* Q&A Detail specific styles */
         .header-menu ul li a.active {
-            color: #6a1b9a !important;
+            color: #dc3545 !important;
             font-weight: 700;
         }
         
         .qa-detail-container {
-            max-width: 900px;
-            margin: 150px auto 50px;
+            max-width: 1000px;
+            margin: 110px auto 50px;
             padding: 0 20px;
         }
         
@@ -33,7 +33,7 @@
         }
         
         .qa-question-header {
-            background-color: #4a0072;
+            background-color: #dc3545;
             color: white;
             padding: 20px 25px;
             border-top-left-radius: 12px;
@@ -71,8 +71,8 @@
         }
         
         .qa-tag {
-            background-color: #f0e6f5;
-            color: #6a1b9a;
+            background-color: #f8d7da;
+            color: #dc3545;
             padding: 5px 15px;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -80,7 +80,7 @@
         }
         
         .qa-tag:hover {
-            background-color: #6a1b9a;
+            background-color: #dc3545;
             color: white;
             transform: translateY(-2px);
         }
@@ -92,9 +92,9 @@
         .qa-answers-count {
             font-size: 1.4rem;
             font-weight: 600;
-            color: white;
+            color: #dc3545;
             margin-bottom: 20px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            text-shadow: none;
         }
         
         .qa-answer {
@@ -104,7 +104,7 @@
             margin-bottom: 20px;
             padding: 20px;
             position: relative;
-            border-left: 4px solid #6a1b9a;
+            border-left: 4px solid #dc3545;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         
@@ -131,7 +131,7 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background-color: #6a1b9a;
+            background-color: #dc3545;
             color: white;
             display: flex;
             align-items: center;
@@ -151,9 +151,9 @@
         .qa-your-answer-title {
             font-size: 1.4rem;
             font-weight: 600;
-            color: white;
+            color: #dc3545;
             margin-bottom: 20px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            text-shadow: none;
         }
         
         .qa-form-container {
@@ -165,7 +165,7 @@
         
         .qa-form-label {
             font-weight: 600;
-            color: #4a0072;
+            color: #dc3545;
             margin-bottom: 10px;
         }
         
@@ -182,12 +182,12 @@
         
         .qa-textarea:focus {
             outline: none;
-            border-color: #6a1b9a;
-            box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+            border-color: #dc3545;
+            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
         }
         
         .qa-submit-btn {
-            background-color: #6a1b9a;
+            background-color: #dc3545;
             color: white;
             border: none;
             padding: 12px 30px;
@@ -201,7 +201,7 @@
         }
         
         .qa-submit-btn:hover {
-            background-color: #4a0072;
+            background-color: #c82333;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
@@ -210,7 +210,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: white;
+            color: #dc3545;
             font-weight: 600;
             margin-bottom: 20px;
             transition: all 0.3s ease;
@@ -219,7 +219,7 @@
         
         .qa-back-btn:hover {
             transform: translateX(-5px);
-            color: #f0e6f5;
+            color: #c82333;
             text-decoration: none;
         }
         
@@ -232,7 +232,7 @@
         }
         
         .qa-login-btn {
-            background-color: #6a1b9a;
+            background-color: #dc3545;
             color: white;
             border: none;
             padding: 10px 25px;
@@ -245,10 +245,9 @@
         }
         
         .qa-login-btn:hover {
-            background-color: #4a0072;
+            background-color: #c82333;
             transform: translateY(-2px);
             text-decoration: none;
-            color: white;
         }
         
         /* Animations */
@@ -351,22 +350,18 @@
               <span>GearBK</span>
             </div>
             <div class="header-menu">
-            <ul>
-    <li><a href="/Gear">HOME</a></li>
-    <li><a href="/Gear/AboutController/index">ABOUT</a></li>
-    <li><a href="/Gear/ProductController/list">SHOP</a></li>
-    <li><a href="/Gear/contact">CONTACT</a></li>
-    <li><a href="/Gear/BlogController/list">BLOG</a></li>
-    <li><a href="/Gear/QAController/list">Q&A</a></li>
-    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-        <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-    <?php endif; ?>
-</ul>
-
+              <ul>
+                <li><a href="/Gear">HOME</a></li>
+                <li><a href="/Gear/AboutController/index">ABOUT</a></li>
+                <li><a href="/Gear/ProductController/list">SHOP</a></li>
+                <li><a href="/Gear/contact">CONTACT</a></li>
+                <li><a href="/Gear/news">NEWS</a></li>
+                <li><a href="/Gear/QAController/list">Q&A</a></li>
+              </ul>
             </div>
             <div class="d-flex">
-              <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-              <div class="header-user"><i class="fa-solid fa-user"></i></div>
+              <div class="header-shop" style="display: flex; align-items: center;"><i class="fa-solid fa-bag-shopping"></i></div>
+              <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;"><i class="fa-solid fa-user"></i></div>
             </div>
           </div>
         </div>

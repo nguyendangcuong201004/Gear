@@ -424,110 +424,313 @@ if ($result && $result->num_rows > 0) {
   
   <style>
     body {
-      font-family: 'Montserrat', sans-serif;
-      background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
-      background-size: cover;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
       color: #333;
     }
     
-    /* Admin specific styles */
+    /* Add significant space between header and content */
     .admin-container {
-      max-width: 1200px;
-      margin: 120px auto 50px;
-      padding: 0 20px;
+      margin-top: 120px;
+      padding-bottom: 50px;
+    }
+    
+    /* Header styling to match AboutView */
+    header {
+      background-color: #343a40;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+    
+    .header-inner-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+    }
+    
+    .header-logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .header-logo img {
+      width: 50px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 20%;
+      margin-right: 10px;
+    }
+    
+    .header-logo span {
+      font-size: 22px;
+      font-weight: 600;
+      color: white;
+    }
+    
+    .header-menu ul {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .header-menu ul li {
+      margin: 0 15px;
+    }
+    
+    .header-menu ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .header-menu ul li a:hover {
+      color: #dc3545;
+    }
+    
+    .header-shop, .header-user {
+      color: white;
+      font-size: 20px;
+      margin-left: 15px;
+      cursor: pointer;
     }
     
     .section-card {
       background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      padding: 40px;
-      margin-bottom: 40px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      border-left: 5px solid #dc3545;
     }
     
     .section-card:hover {
-      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
     }
     
     .section-header {
-      background-color: #4a0072;
+      background-color: #dc3545;
       color: white;
       padding: 15px;
-      border-radius: 10px 10px 0 0;
-      margin: -40px -40px 30px -40px;
+      margin: -20px -20px 20px -20px;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      align-items: center;
     }
     
-    .nav-pills .nav-link.active {
-      background-color: #6a1b9a;
+    .section-header i {
+      margin-right: 10px;
+      font-size: 1.2rem;
     }
     
-    .nav-pills .nav-link {
-      color: #6a1b9a;
-      border-radius: 10px;
-      margin-bottom: 10px;
-      transition: all 0.3s ease;
+    .form-control:focus {
+      border-color: #dc3545;
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
     }
     
-    .nav-pills .nav-link:hover {
-      background-color: rgba(106, 27, 154, 0.1);
-      transform: translateX(5px);
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #444;
+    }
+    
+    .section-divider {
+      height: 1px;
+      background-color: rgba(220, 53, 69, 0.1);
+      margin: 25px 0;
     }
     
     .btn-primary {
-      background-color: #6a1b9a;
-      border-color: #6a1b9a;
+      background-color: #dc3545;
+      border-color: #dc3545;
+      padding: 8px 20px;
     }
     
     .btn-primary:hover {
-      background-color: #9c27b0;
-      border-color: #9c27b0;
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+    
+    .btn-outline-danger {
+      color: #dc3545;
+      border-color: #dc3545;
+    }
+    
+    .btn-outline-danger:hover {
+      background-color: #dc3545;
+      color: white;
+    }
+    
+    /* Improved Navigation Pills */
+    .nav-pills {
+      margin-bottom: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .nav-pills .nav-link {
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-pills .nav-link i {
+      margin-right: 10px;
+      width: 20px;
+      text-align: center;
+    }
+    
+    .nav-pills .nav-link:hover {
+      background-color: #f8d7da;
+      transform: translateX(5px);
+    }
+    
+    .nav-pills .nav-link.active {
+      background-color: #dc3545;
+      color: white !important;
+      box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+      border-color: #dc3545 !important;
+      transform: translateX(10px);
     }
     
     .alert-success {
       background-color: #e8f5e9;
-      border-color: #a5d6a7;
+      border-color: #c8e6c9;
       color: #2e7d32;
+      margin-bottom: 25px;
     }
     
-    .table th {
+    pre {
       background-color: #f5f5f5;
     }
     
     .admin-menu-container {
       background-color: rgba(255, 255, 255, 0.9);
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 90px;
     }
     
+    .admin-menu-item.active {
+      font-weight: bold;
+      color: white;
+      background-color: #dc3545;
+    }
+    
+    /* Improved Table styling */
+    .table-responsive {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+    
+    table {
+      margin-bottom: 0 !important;
+    }
+    
+    table th {
+      background-color: #f8d7da;
+      padding: 12px !important;
+      font-weight: 600;
+    }
+    
+    table td {
+      padding: 12px !important;
+      vertical-align: middle !important;
+    }
+    
+    /* Action buttons in tables */
+    table .btn-sm {
+      margin: 0 3px;
+      padding: 5px 10px;
+    }
+    
+    /* Buttons styling */
+    .btn-sm.btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    
+    .btn-sm.btn-primary {
+      background-color: #dc3545;
+      border-color: #dc3545;
+    }
+    
+    .btn-sm.btn-light {
+      border: 1px solid #dc3545;
+      color: #dc3545;
+      background-color: white;
+    }
+    
+    .btn-sm.btn-light:hover {
+      background-color: #f8d7da;
+    }
+    
+    /* Nice icon styling */
+    .btn i {
+      margin-right: 5px;
+    }
+    
+    /* Make sure any color references to text-primary use the red color instead */
+    .text-primary {
+      color: #dc3545 !important;
+    }
+    
+    /* Modal improvements */
+    .modal-content {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .modal-header.bg-primary {
+      background-color: #dc3545 !important;
+    }
+    
+    .modal-body {
+      padding: 20px;
+    }
+    
+    /* Admin badge styling */
     .admin-badge {
       position: fixed;
       top: 80px;
       right: 20px;
-      background-color: #6a1b9a;
+      background-color: #dc3545;
       color: white;
-      padding: 10px 20px;
-      border-radius: 30px;
-      font-weight: bold;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-      z-index: 100;
-      animation: fadeInRight 0.5s ease;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      z-index: 999;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     
-    @keyframes fadeInRight {
-      0% {
-        opacity: 0;
-        transform: translateX(50px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateX(0);
-      }
+    /* Improved copyright footer */
+    .copyright-footer {
+      background-color: #dc3545;
+      padding: 15px 0;
+      color: white;
+      margin-top: 40px;
     }
   </style>
 </head>
-<body>
+<body class="bg-light">
   <!-- Header -->
   <header>
     <div class="container">
@@ -542,19 +745,17 @@ if ($result && $result->num_rows > 0) {
               <ul>
                 <li><a href="/Gear">HOME</a></li>
                 <li><a href="/Gear/AboutController/index">ABOUT</a></li>
-                <li><a href="/Gear">SHOP</a></li>
-                <li><a href="/Gear">CONTACT</a></li>
-                <li><a href="/Gear">NEWS</a></li>
+                <li><a href="/Gear/ProductController/list">SHOP</a></li>
+                <li><a href="/Gear/contact">CONTACT</a></li>
+                <li><a href="/Gear/BlogController/list">BLOG</a></li>
                 <li><a href="/Gear/QAController/list">Q&A</a></li>
-                <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-        <?php endif; ?>
                 <li><a href="/Gear/AuthController/logout">ĐĂNG XUẤT</a></li>
-                
               </ul>
             </div>
-            <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-            <div class="header-user"><i class="fa-solid fa-user"></i></div>
+            <div class="d-flex">
+              <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
+              <div class="header-user"><i class="fa-solid fa-user"></i></div>
+            </div>
           </div>
         </div>
       </div>
@@ -581,33 +782,44 @@ if ($result && $result->num_rows > 0) {
       <div class="col-md-3">
         <!-- Nav tabs -->
         <div class="admin-menu-container">
-          <h4 class="mb-4 text-center" style="color: #4a0072; font-weight: bold;">
-            <i class="fas fa-cog"></i> Quản lý nội dung
-          </h4>
-          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="v-pills-story-tab" data-toggle="pill" href="#v-pills-story" role="tab" aria-controls="v-pills-story" aria-selected="true">
-              <i class="fas fa-history"></i> Our Story
-            </a>
-            <a class="nav-link" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false">
-              <i class="fas fa-bullseye"></i> Mission & Values
-            </a>
-            <a class="nav-link" id="v-pills-products-tab" data-toggle="pill" href="#v-pills-products" role="tab" aria-controls="v-pills-products" aria-selected="false">
-              <i class="fas fa-boxes"></i> Product Categories
-            </a>
-            <a class="nav-link" id="v-pills-stats-tab" data-toggle="pill" href="#v-pills-stats" role="tab" aria-controls="v-pills-stats" aria-selected="false">
-              <i class="fas fa-chart-pie"></i> Stats
-            </a>
-            <a class="nav-link" id="v-pills-journey-tab" data-toggle="pill" href="#v-pills-journey" role="tab" aria-controls="v-pills-journey" aria-selected="false">
-              <i class="fas fa-road"></i> Journey
-            </a>
-            <a class="nav-link" id="v-pills-team-tab" data-toggle="pill" href="#v-pills-team" role="tab" aria-controls="v-pills-team" aria-selected="false">
-              <i class="fas fa-users"></i> Team
-            </a>
-            <div class="mt-4">
-              <a href="/Gear/AboutController/index" class="btn btn-primary btn-block" target="_blank">
-                <i class="fas fa-eye"></i> Xem trang About
+          <h3 class="mb-4 text-center" style="color: #dc3545;">About Page Administration</h3>
+          
+          <!-- <div class="mb-4">
+            <div class="d-flex flex-column">
+              <a href="/Gear/AboutController/index" class="btn btn-primary mb-2" target="_blank">
+                <i class="fas fa-eye"></i> View Live Page
+              </a>
+              <a href="/Gear/AdminController/dashboard" class="btn btn-outline-danger mb-2">
+                <i class="fas fa-tachometer-alt"></i> Admin Dashboard
+              </a>
+              <a href="/Gear" class="btn btn-outline-danger">
+                <i class="fas fa-home"></i> Back to Website
               </a>
             </div>
+          </div> -->
+          
+          <div class="section-divider"></div>
+          
+          <!-- Nav tabs with updated styling -->
+          <div class="nav nav-pills flex-column" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-story-tab" data-toggle="pill" href="#v-pills-story" role="tab" aria-controls="v-pills-story" aria-selected="true" style="color: #dc3545; border: 1px solid #dc3545;">
+              <i class="fas fa-history"></i> Our Story
+            </a>
+            <a class="nav-link" id="v-pills-mission-tab" data-toggle="pill" href="#v-pills-mission" role="tab" aria-controls="v-pills-mission" aria-selected="false" style="color: #dc3545; border: 1px solid #dc3545;">
+              <i class="fas fa-bullseye"></i> Mission & Values
+            </a>
+            <a class="nav-link" id="v-pills-products-tab" data-toggle="pill" href="#v-pills-products" role="tab" aria-controls="v-pills-products" aria-selected="false" style="color: #dc3545; border: 1px solid #dc3545;">
+              <i class="fas fa-boxes"></i> Product Categories
+            </a>
+            <a class="nav-link" id="v-pills-stats-tab" data-toggle="pill" href="#v-pills-stats" role="tab" aria-controls="v-pills-stats" aria-selected="false" style="color: #dc3545; border: 1px solid #dc3545;">
+              <i class="fas fa-chart-pie"></i> Stats
+            </a>
+            <a class="nav-link" id="v-pills-journey-tab" data-toggle="pill" href="#v-pills-journey" role="tab" aria-controls="v-pills-journey" aria-selected="false" style="color: #dc3545; border: 1px solid #dc3545;">
+              <i class="fas fa-road"></i> Journey
+            </a>
+            <a class="nav-link" id="v-pills-team-tab" data-toggle="pill" href="#v-pills-team" role="tab" aria-controls="v-pills-team" aria-selected="false" style="color: #dc3545; border: 1px solid #dc3545;">
+              <i class="fas fa-users"></i> Team
+            </a>
           </div>
         </div>
       </div>
@@ -658,74 +870,95 @@ if ($result && $result->num_rows > 0) {
                 <form method="POST" action="">
                   <input type="hidden" name="section" value="mission_values">
                   
-                  <h5 class="mb-3 text-primary">Quality</h5>
+                  <h5 class="mb-3" style="color: #dc3545;">Quality</h5>
                   <div class="form-group">
                     <label for="quality_title"><strong>Quality Title</strong></label>
                     <input type="text" class="form-control" id="quality_title" name="quality_title" value="<?= htmlspecialchars($mission_quality_title) ?>" required>
+                    <small class="form-text text-muted">Main title for the quality section</small>
                   </div>
                   
-                  <div class="form-group">
-                    <label for="quality_item_1"><strong>Quality Item 1</strong></label>
-                    <input type="text" class="form-control" id="quality_item_1" name="quality_item_1" value="<?= htmlspecialchars($mission_quality_item_1) ?>" required>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="quality_item_1"><strong>Quality Item 1</strong></label>
+                        <input type="text" class="form-control" id="quality_item_1" name="quality_item_1" value="<?= htmlspecialchars($mission_quality_item_1) ?>" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="quality_item_2"><strong>Quality Item 2</strong></label>
+                        <input type="text" class="form-control" id="quality_item_2" name="quality_item_2" value="<?= htmlspecialchars($mission_quality_item_2) ?>" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="quality_item_3"><strong>Quality Item 3</strong></label>
+                        <input type="text" class="form-control" id="quality_item_3" name="quality_item_3" value="<?= htmlspecialchars($mission_quality_item_3) ?>" required>
+                      </div>
+                    </div>
                   </div>
                   
-                  <div class="form-group">
-                    <label for="quality_item_2"><strong>Quality Item 2</strong></label>
-                    <input type="text" class="form-control" id="quality_item_2" name="quality_item_2" value="<?= htmlspecialchars($mission_quality_item_2) ?>" required>
-                  </div>
+                  <hr class="section-divider">
                   
-                  <div class="form-group">
-                    <label for="quality_item_3"><strong>Quality Item 3</strong></label>
-                    <input type="text" class="form-control" id="quality_item_3" name="quality_item_3" value="<?= htmlspecialchars($mission_quality_item_3) ?>" required>
-                  </div>
-                  
-                  <hr>
-                  
-                  <h5 class="mb-3 text-primary">Customer Satisfaction</h5>
+                  <h5 class="mb-3" style="color: #dc3545;">Customer Satisfaction</h5>
                   <div class="form-group">
                     <label for="satisfaction_title"><strong>Satisfaction Title</strong></label>
                     <input type="text" class="form-control" id="satisfaction_title" name="satisfaction_title" value="<?= htmlspecialchars($mission_satisfaction_title) ?>" required>
+                    <small class="form-text text-muted">Main title for the satisfaction section</small>
                   </div>
                   
-                  <div class="form-group">
-                    <label for="satisfaction_item_1"><strong>Satisfaction Item 1</strong></label>
-                    <input type="text" class="form-control" id="satisfaction_item_1" name="satisfaction_item_1" value="<?= htmlspecialchars($mission_satisfaction_item_1) ?>" required>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="satisfaction_item_2"><strong>Satisfaction Item 2</strong></label>
-                    <input type="text" class="form-control" id="satisfaction_item_2" name="satisfaction_item_2" value="<?= htmlspecialchars($mission_satisfaction_item_2) ?>" required>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="satisfaction_item_3"><strong>Satisfaction Item 3</strong></label>
-                    <input type="text" class="form-control" id="satisfaction_item_3" name="satisfaction_item_3" value="<?= htmlspecialchars($mission_satisfaction_item_3) ?>" required>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="satisfaction_item_1"><strong>Satisfaction Item 1</strong></label>
+                        <input type="text" class="form-control" id="satisfaction_item_1" name="satisfaction_item_1" value="<?= htmlspecialchars($mission_satisfaction_item_1) ?>" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="satisfaction_item_2"><strong>Satisfaction Item 2</strong></label>
+                        <input type="text" class="form-control" id="satisfaction_item_2" name="satisfaction_item_2" value="<?= htmlspecialchars($mission_satisfaction_item_2) ?>" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="satisfaction_item_3"><strong>Satisfaction Item 3</strong></label>
+                        <input type="text" class="form-control" id="satisfaction_item_3" name="satisfaction_item_3" value="<?= htmlspecialchars($mission_satisfaction_item_3) ?>" required>
+                      </div>
+                    </div>
                   </div>
                   
                   <hr>
                   
-                  <h5 class="mb-3 text-primary">Innovation</h5>
+                  <h5 class="mb-3" style="color: #dc3545;">Innovation</h5>
                   <div class="form-group">
                     <label for="innovation_title"><strong>Innovation Title</strong></label>
                     <input type="text" class="form-control" id="innovation_title" name="innovation_title" value="<?= htmlspecialchars($mission_innovation_title) ?>" required>
+                    <small class="form-text text-muted">Main title for the innovation section</small>
                   </div>
                   
-                  <div class="form-group">
-                    <label for="innovation_item_1"><strong>Innovation Item 1</strong></label>
-                    <input type="text" class="form-control" id="innovation_item_1" name="innovation_item_1" value="<?= htmlspecialchars($mission_innovation_item_1) ?>" required>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="innovation_item_1"><strong>Innovation Item 1</strong></label>
+                        <input type="text" class="form-control" id="innovation_item_1" name="innovation_item_1" value="<?= htmlspecialchars($mission_innovation_item_1) ?>" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="innovation_item_2"><strong>Innovation Item 2</strong></label>
+                        <input type="text" class="form-control" id="innovation_item_2" name="innovation_item_2" value="<?= htmlspecialchars($mission_innovation_item_2) ?>" required>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="innovation_item_3"><strong>Innovation Item 3</strong></label>
+                        <input type="text" class="form-control" id="innovation_item_3" name="innovation_item_3" value="<?= htmlspecialchars($mission_innovation_item_3) ?>" required>
+                      </div>
+                    </div>
                   </div>
                   
-                  <div class="form-group">
-                    <label for="innovation_item_2"><strong>Innovation Item 2</strong></label>
-                    <input type="text" class="form-control" id="innovation_item_2" name="innovation_item_2" value="<?= htmlspecialchars($mission_innovation_item_2) ?>" required>
-                  </div>
-                  
-                  <div class="form-group">
-                    <label for="innovation_item_3"><strong>Innovation Item 3</strong></label>
-                    <input type="text" class="form-control" id="innovation_item_3" name="innovation_item_3" value="<?= htmlspecialchars($mission_innovation_item_3) ?>" required>
-                  </div>
-                  
-                  <div class="text-right">
+                  <div class="text-right mt-4">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Lưu thay đổi</button>
                   </div>
                 </form>
@@ -1282,11 +1515,11 @@ if ($result && $result->num_rows > 0) {
   </div>
 
   <!-- Footer -->
-  <div class="copyright-footer text-center py-3 mt-5">
+  <!-- <div class="copyright-footer text-center py-3 mt-5">
     <div class="container">
       <p class="mb-0 text-white">© 2023 GearBK Admin Panel. All rights reserved.</p>
     </div>
-  </div>
+  </div> -->
 
   <!-- JS libraries -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>

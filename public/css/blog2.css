@@ -2,8 +2,8 @@
 
 body {
     font-family: "Montserrat", serif;
-    background: url('../images/background_login.webp') no-repeat center center fixed;
-    background-size: cover; /* Đảm bảo hình nền bao phủ toàn bộ màn hình */
+    /* background: url('../images/background_login.webp') no-repeat center center fixed;
+    background-size: cover; Đảm bảo hình nền bao phủ toàn bộ màn hình */
     background-attachment: fixed; /* Giữ cho hình nền cố định khi cuộn trang */
     margin: 0;
     padding: 0;

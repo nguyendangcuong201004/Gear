@@ -19,272 +19,382 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
     
     <link rel="stylesheet" href="/Gear/public/css/qa.css">
     <style>
+        body {
+            background-color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            color: #333333;
+        }
+        
         .qa-container {
-    max-width: 1000px;
-    margin: 150px auto 50px;
-    padding: 0 20px;
-}
+            max-width: 1000px;
+            margin: 110px auto 50px;
+            padding: 0 20px;
+        }
+        
+        /* Thống nhất kiểu header giống AboutView */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        .header-inner-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0;
+        }
+        
+        .header-logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+        
+        .header-logo span {
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+        }
+        
+        .header-menu ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .header-menu ul li {
+            margin-left: 30px;
+        }
+        
+        .header-menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .header-menu ul li a:hover {
+            color: #dc3545;
+        }
+        
+        .header-shop, .header-user {
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
 
-.qa-card {
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    margin-bottom: 25px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    overflow: hidden;
-    position: relative;
-    border-left: 5px solid #6a1b9a;
-}
+        .qa-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+            position: relative;
+            border-left: 5px solid #dc3545;
+        }
 
-.qa-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
-}
+        .qa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
 
-.qa-card-body {
-    padding: 25px;
-}
+        .qa-card-body {
+            padding: 25px;
+        }
 
-.qa-title {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: #4a0072;
-    margin-bottom: 15px;
-    transition: color 0.3s ease;
-}
+        .qa-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #b02a37;
+            margin-bottom: 15px;
+            transition: color 0.3s ease;
+        }
 
-.qa-card:hover .qa-title {
-    color: #6a1b9a;
-}
+        .qa-card:hover .qa-title {
+            color: #dc3545;
+        }
 
-.qa-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-    color: #666;
-}
+        .qa-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #666;
+        }
 
-.qa-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 15px;
-}
+        .qa-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 15px;
+        }
 
-.qa-tag {
-    background-color: #f0e6f5;
-    color: #6a1b9a;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
+        .qa-tag {
+            background-color: #f8d7da;
+            color: #dc3545;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
 
-.qa-tag:hover {
-    background-color: #6a1b9a;
-    color: white;
-}
+        .qa-tag:hover {
+            background-color: #dc3545;
+            color: white;
+        }
 
-.qa-stats {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-    padding-top: 15px;
-    border-top: 1px solid #eee;
-    color: #666;
-}
+        .qa-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #666;
+        }
 
-.qa-stat {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
+        .qa-stat {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-.qa-search-container {
-    position: relative;
-    margin-bottom: 40px;
-}
+        .qa-search-container {
+            position: relative;
+            margin-bottom: 40px;
+        }
 
-.qa-search-input {
-    width: 100%;
-    height: 50px;
-    border-radius: 25px;
-    border: none;
-    padding: 0 60px 0 25px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    font-size: 1rem;
-    transition: box-shadow 0.3s ease;
-}
+        .qa-search-input {
+            width: 100%;
+            height: 50px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+            padding: 0 60px 0 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            font-size: 1rem;
+            transition: box-shadow 0.3s ease, border 0.3s ease;
+        }
 
-.qa-search-input:focus {
-    box-shadow: 0 4px 20px rgba(106, 27, 154, 0.2);
-    outline: none;
-}
+        .qa-search-input:focus {
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.15);
+            border-color: #dc3545;
+            outline: none;
+        }
 
-.qa-search-btn {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    height: 40px;
-    width: 40px;
-    border-radius: 20px;
-    background-color: #6a1b9a;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+        .qa-search-btn {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            height: 40px;
+            width: 40px;
+            border-radius: 20px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.qa-search-btn:hover {
-    background-color: #4a0072;
-}
+        .qa-search-btn:hover {
+            background-color: #b02a37;
+        }
 
-.qa-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-}
+        .qa-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background-color: #dc3545;
+            border-radius: 12px;
+            padding: 20px 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
 
-.qa-title-main {
-    font-size: 2rem;
-    font-weight: 700;
-    color: white;
-    margin: 0;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
+        .qa-title-main {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
 
-.qa-ask-btn {
-    background-color: #6a1b9a;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
+        .qa-ask-btn {
+            background-color: white;
+            color: #dc3545;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
 
-.qa-ask-btn:hover {
-    background-color: #4a0072;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-}
+        .qa-ask-btn:hover {
+            background-color: #f8d7da;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
 
-.qa-ask-btn i {
-    font-size: 1.2rem;
-}
+        .qa-ask-btn i {
+            font-size: 1.2rem;
+        }
 
-.qa-empty {
-    text-align: center;
-    padding: 50px 0;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 12px;
-    margin-top: 30px;
-}
+        .qa-empty {
+            text-align: center;
+            padding: 50px 0;
+            background-color: #ffffff;
+            border-radius: 12px;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
 
-.qa-empty h3 {
-    color: #4a0072;
-    margin-bottom: 15px;
-}
+        .qa-empty h3 {
+            color: #b02a37;
+            margin-bottom: 15px;
+        }
 
-.qa-empty p {
-    color: #666;
-    margin-bottom: 25px;
-}
+        .qa-empty p {
+            color: #666;
+            margin-bottom: 25px;
+        }
 
-/* Buttons container */
-.qa-buttons {
-    display: flex;
-    align-items: center;
-}
+        /* Buttons container */
+        .qa-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
 
-/* Secondary button style */
-.qa-btn {
-    padding: 12px 25px;
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-}
+        /* Secondary button style */
+        .qa-btn {
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
 
-.qa-btn-secondary {
-    background-color: transparent;
-    color: white;
-    border: 2px solid white;
-}
+        .qa-btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
 
-.qa-btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    transform: translateY(-2px);
-    text-decoration: none;
-}
+        .qa-btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
 
-/* Animations */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        /* Filter buttons */
+        .qa-filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
 
-.qa-card {
-    animation: fadeInUp 0.5s ease forwards;
-    opacity: 0;
-}
+        .qa-filter-btn {
+            background-color: #f8d7da;
+            color: #dc3545;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
 
-.qa-card:nth-child(1) { animation-delay: 0.1s; }
-.qa-card:nth-child(2) { animation-delay: 0.2s; }
-.qa-card:nth-child(3) { animation-delay: 0.3s; }
-.qa-card:nth-child(4) { animation-delay: 0.4s; }
-.qa-card:nth-child(5) { animation-delay: 0.5s; }
-.qa-card:nth-child(6) { animation-delay: 0.6s; }
+        .qa-filter-btn:hover, .qa-filter-btn.active {
+            background-color: #dc3545;
+            color: white;
+        }
 
-.pulse-animation {
-    animation: pulse 2s infinite;
-}
+        /* Pagination styling */
+        .pagination {
+            margin-top: 30px;
+            justify-content: center;
+        }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
+        .page-item.active .page-link {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
 
-.qa-answer-count {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: #6a1b9a;
-    color: white;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-weight: 600;
-    font-size: 0.9rem;
-    transition: transform 0.3s ease;
-}
+        .page-link {
+            color: #dc3545;
+            border-radius: 5px;
+            margin: 0 3px;
+        }
 
-.qa-card:hover .qa-answer-count {
-    transform: scale(1.1);
-}
+        .page-link:hover {
+            color: #b02a37;
+            background-color: #f8d7da;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .qa-card {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        /* Animation delay for cards */
+        .qa-card:nth-child(1) { animation-delay: 0.1s; }
+        .qa-card:nth-child(2) { animation-delay: 0.2s; }
+        .qa-card:nth-child(3) { animation-delay: 0.3s; }
+        .qa-card:nth-child(4) { animation-delay: 0.4s; }
+        .qa-card:nth-child(5) { animation-delay: 0.5s; }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .qa-header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .qa-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .qa-title-main {
+                font-size: 1.6rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -300,34 +410,30 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                 </div>
                 <div class="header-menu">
                 <ul>
-    <li><a href="/Gear">HOME</a></li>
-    <li><a href="/Gear/AboutController/index">ABOUT</a></li>
-    <li><a href="/Gear/ProductController/list">SHOP</a></li>
-    <li><a href="/Gear/contact">CONTACT</a></li>
-    <li><a href="/Gear/BlogController/list">BLOG</a></li>
-    <li><a href="/Gear/QAController/list">Q&A</a></li>
-    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-        <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-    <?php endif; ?>
-</ul>
-
+                    <li><a href="/Gear">HOME</a></li>
+                    <li><a href="/Gear/AboutController/index">ABOUT</a></li>
+                    <li><a href="/Gear/ProductController/list">SHOP</a></li>
+                    <li><a href="/Gear/contact">CONTACT</a></li>
+                    <li><a href="/Gear/BlogController/list">BLOG</a></li>
+                    <li><a href="/Gear/QAController/list">Q&A</a></li>
+                </ul>
                 </div>
-                <div class="d-flex">
-                <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
+                <div class="d-flex align-items-center">
+                <div class="header-shop" style="display: flex; align-items: center;"><i class="fa-solid fa-bag-shopping"></i></div>
                 <?php if(isset($_COOKIE['access_token'])): ?>
-                  <div class="header-user">
-                    <a href="/Gear/AuthController/profile" title="Thông tin cá nhân" style="color: white; text-decoration: none;">
+                  <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;">
+                    <a href="/Gear/AuthController/profile" title="Thông tin cá nhân" style="color: white; text-decoration: none; display: flex; align-items: center;">
                       <i class="fa-solid fa-user"></i>
                     </a>
                   </div>
-                  <div class="header-logout ml-3">
-                    <a href="/Gear/AuthController/logout" title="Đăng xuất" style="color: white; text-decoration: none;">
-                      <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+                  <div class="header-logout ml-3" style="display: flex; align-items: center;">
+                    <a href="/Gear/AuthController/logout" title="Đăng xuất" style="color: white; text-decoration: none; display: flex; align-items: center;">
+                      <i class="fa-solid fa-sign-out-alt" style="margin-right: 5px;"></i> <span>Đăng xuất</span>
                     </a>
                   </div>
                 <?php else: ?>
-                  <div class="header-user">
-                    <a href="/Gear/AuthController/login" title="Đăng nhập" style="color: white; text-decoration: none;">
+                  <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;">
+                    <a href="/Gear/AuthController/login" title="Đăng nhập" style="color: white; text-decoration: none; display: flex; align-items: center;">
                       <i class="fa-solid fa-user"></i>
                     </a>
                   </div>
@@ -508,10 +614,10 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
             // Hover effects for cards with jQuery for smoother transitions
             $('.qa-card').hover(
                 function() {
-                    $(this).find('.qa-title').css('color', '#6a1b9a');
+                    $(this).find('.qa-title').css('color', '#dc3545');
                 },
                 function() {
-                    $(this).find('.qa-title').css('color', '#4a0072');
+                    $(this).find('.qa-title').css('color', '#b02a37');
                 }
             );
         });

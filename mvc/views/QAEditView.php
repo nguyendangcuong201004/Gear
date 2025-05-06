@@ -38,8 +38,8 @@ foreach ($questionTags as $tag) {
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
-            background-size: cover;
+            /* background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
+            background-size: cover; */
             color: #333;
         }
         
@@ -57,7 +57,7 @@ foreach ($questionTags as $tag) {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
+            padding: 5px 0;
         }
         
         .header-logo {
@@ -95,12 +95,12 @@ foreach ($questionTags as $tag) {
         }
         
         .header-menu ul li a:hover, .header-menu ul li a.active {
-            color: #6a1b9a;
+            color: #dc3545;
         }
         
         .admin-container {
             max-width: 1000px;
-            margin: 120px auto 50px;
+            margin: 110px auto 50px;
             padding: 0 20px;
         }
         
@@ -112,7 +112,7 @@ foreach ($questionTags as $tag) {
             position: fixed;
             top: 80px;
             right: 20px;
-            background-color: #6a1b9a;
+            background-color: #dc3545;
             color: white;
             padding: 10px 20px;
             border-radius: 30px;
@@ -136,20 +136,20 @@ foreach ($questionTags as $tag) {
         }
         
         .btn-purple {
-            background-color: #6a1b9a;
-            border-color: #6a1b9a;
+            background-color: #dc3545;
+            border-color: #dc3545;
             color: white;
         }
         
         .btn-purple:hover {
-            background-color: #9c27b0;
-            border-color: #9c27b0;
+            background-color: #c82333;
+            border-color: #c82333;
             color: white;
         }
         
         .select2-container--default .select2-selection--multiple .select2-selection__choice {
-            background-color: #6a1b9a;
-            border-color: #6a1b9a;
+            background-color: #dc3545;
+            border-color: #dc3545;
             color: white;
         }
         
@@ -166,7 +166,7 @@ foreach ($questionTags as $tag) {
         }
         
         .select2-container--default .select2-results__option--highlighted[aria-selected] {
-            background-color: #6a1b9a;
+            background-color: #dc3545;
         }
         
         @keyframes fadeInRight {
@@ -194,22 +194,18 @@ foreach ($questionTags as $tag) {
               <span>GearBK</span>
             </div>
             <div class="header-menu">
-            <ul>
-    <li><a href="/Gear">HOME</a></li>
-    <li><a href="/Gear/AboutController/index">ABOUT</a></li>
-    <li><a href="/Gear/ProductController/list">SHOP</a></li>
-    <li><a href="/Gear/contact">CONTACT</a></li>
-    <li><a href="/Gear/BlogController/list">BLOG</a></li>
-    <li><a href="/Gear/QAController/list">Q&A</a></li>
-    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-        <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-    <?php endif; ?>
-</ul>
-
+              <ul>
+                <li><a href="/Gear">HOME</a></li>
+                <li><a href="/Gear/AboutController/index">ABOUT</a></li>
+                <li><a href="/Gear/ProductController/list">SHOP</a></li>
+                <li><a href="/Gear/contact">CONTACT</a></li>
+                <li><a href="/Gear/BlogController/list">BLOG</a></li>
+                <li><a href="/Gear/QAController/list">Q&A</a></li>
+              </ul>
             </div>
-            <div class="d-flex">
-              <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-              <div class="header-user"><i class="fa-solid fa-user"></i></div>
+            <div class="d-flex align-items-center">
+              <div class="header-shop" style="display: flex; align-items: center;"><i class="fa-solid fa-bag-shopping"></i></div>
+              <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;"><i class="fa-solid fa-user"></i></div>
             </div>
           </div>
         </div>
@@ -226,8 +222,8 @@ foreach ($questionTags as $tag) {
     <div class="container admin-container">
         <!-- Admin Header -->
         <div class="admin-header">
-            <h1 class="text-white">Edit Question</h1>
-            <p class="text-white">Make changes to the question details below.</p>
+            <h1 class="text-danger">Edit Question</h1>
+            <p class="text-danger">Make changes to the question details below.</p>
         </div>
         
         <!-- Error Message -->

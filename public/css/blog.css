@@ -1,8 +1,8 @@
 /* Set the background image */
 body {
     font-family: 'Montserrat', sans-serif;
-    background: url('../../public/images/background_login.webp') no-repeat center center fixed;
-    background-size: cover; /* Giữ background hình ảnh */
+    /* background: url('../../public/images/background_login.webp') no-repeat center center fixed;
+    background-size: cover; Giữ background hình ảnh */
     margin: 0;
     padding: 0;
     height: 100%; /* Giữ chiều cao body */
@@ -16,7 +16,7 @@ header {
     top: 0;
     left: 0;
     width: 100%;
-    padding: 10px 0; /* Giảm chiều cao của header */
+    padding: 5px 0; /* Giảm chiều cao của header */
     background-color: rgba(0, 0, 0, 0.7); /* Màu nền đen mờ */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow nhẹ cho header */
     z-index: 1000;
@@ -57,6 +57,7 @@ header {
     display: flex;
     list-style: none;
     align-items: center;
+    justify-content: center;
 }
 
 .header-menu ul li {
@@ -127,11 +128,13 @@ header {
     font-size: 1rem; /* Giảm kích thước font */
     text-decoration: none;
     transition: color 0.3s ease; /* Hiệu ứng chuyển màu khi hover */
+    display: inline-block;
+    text-align: center;
 }
 
 /* Màu khi hover trên menu */
 .header-menu ul li a:hover {
-    color: #6a1b9a; /* Màu tím khi hover */
+    color: #dc3545; /* Thay màu tím bằng màu đỏ */
 }
 
 /* Giảm kích thước icon giỏ hàng và người dùng */

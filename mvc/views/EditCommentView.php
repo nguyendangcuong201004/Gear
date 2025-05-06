@@ -18,8 +18,8 @@ $post_id = $data['post_id'];
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
-      background: url('../../../public/images/background_login.webp') no-repeat center center fixed;
-      background-size: cover;
+      /* background: url('../../../public/images/background_login.webp') no-repeat center center fixed;
+      background-size: cover; */
       margin: 0;
       padding: 0;
       min-height: 100vh;

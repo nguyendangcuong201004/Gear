@@ -33,34 +33,31 @@ $post_id  = $data['post_id'];
                 <span>GearBK</span>
                 </div>
                 <div class="header-menu">
-                <ul>
-                <li><a href="/Gear">HOME</a></li>
-                        <li><a href="/Gear/AboutController/index">ABOUT</a></li>
-                        <li><a href="/Gear/ProductController/list">SHOP</a></li>
-                        <li><a href="/Gear/contact">CONTACT</a></li>
-                        <li><a href="/Gear/BlogController/list">BLOG</a></li>
-                        <li><a href="/Gear/QAController/list">Q&A</a></li>
-                        <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-    <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-<?php endif; ?>
+                <ul style="display: flex; align-items: center; justify-content: center;">
+                    <li><a href="/Gear" style="display: inline-block; text-align: center;">HOME</a></li>
+                    <li><a href="/Gear/AboutController/index" style="display: inline-block; text-align: center;">ABOUT</a></li>
+                    <li><a href="/Gear/ProductController/list" style="display: inline-block; text-align: center;">SHOP</a></li>
+                    <li><a href="/Gear/contact" style="display: inline-block; text-align: center;">CONTACT</a></li>
+                    <li><a href="/Gear/BlogController/list" style="display: inline-block; text-align: center;">BLOG</a></li>
+                    <li><a href="/Gear/QAController/list" style="display: inline-block; text-align: center;">Q&A</a></li>
                 </ul>
                 </div>
-                <div class="d-flex">
-                <div class="header-shop"><i class="fa-solid fa-bag-shopping"></i></div>
+                <div class="d-flex align-items-center">
+                <div class="header-shop" style="display: flex; align-items: center;"><i class="fa-solid fa-bag-shopping"></i></div>
                 <?php if(isset($_COOKIE['access_token'])): ?>
-                  <div class="header-user">
-                    <a href="/Gear/AuthController/profile" title="Thông tin cá nhân" style="color: white; text-decoration: none;">
+                  <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;">
+                    <a href="/Gear/AuthController/profile" title="Thông tin cá nhân" style="color: white; text-decoration: none; display: flex; align-items: center;">
                       <i class="fa-solid fa-user"></i>
                     </a>
                   </div>
-                  <div class="header-logout ml-3">
-                    <a href="/Gear/AuthController/logout" title="Đăng xuất" style="color: white; text-decoration: none;">
-                      <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+                  <div class="header-logout ml-3" style="display: flex; align-items: center;">
+                    <a href="/Gear/AuthController/logout" title="Đăng xuất" style="color: white; text-decoration: none; display: flex; align-items: center;">
+                      <i class="fa-solid fa-sign-out-alt" style="margin-right: 5px;"></i> Đăng xuất
                     </a>
                   </div>
                 <?php else: ?>
-                  <div class="header-user">
-                    <a href="/Gear/AuthController/login" title="Đăng nhập" style="color: white; text-decoration: none;">
+                  <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;">
+                    <a href="/Gear/AuthController/login" title="Đăng nhập" style="color: white; text-decoration: none; display: flex; align-items: center;">
                       <i class="fa-solid fa-user"></i>
                     </a>
                   </div>

@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 body {
     font-family: "Montserrat", serif;
-    background: url('../images/background_login.webp') no-repeat center center fixed;
-    background-size: cover;
+    /* background: url('../images/background_login.webp') no-repeat center center fixed;
+    background-size: cover; */
     background-attachment: fixed;
     margin: 0;
     padding: 0;
@@ -86,7 +86,7 @@ header {
 
 h2 {
     font-size: 1.5rem;
-    color: #4a0072; /* Màu tím */
+    color: #dc3545; /* Changed from purple to red */
     text-align: center;
     margin-bottom: 20px;
 }
@@ -100,26 +100,30 @@ label {
 
 input {
     width: 100%;
-    padding: 10px;
+    padding: 12px 10px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
+    background-color: transparent;
+    color: #dc3545; /* Changed from purple to red */
+    transition: all 0.3s ease-in-out; /* Hiệu ứng mượt mà */
 }
 
 button {
     width: 100%;
     padding: 12px;
-    background: #4a0072; /* Màu tím chủ đạo */
+    background: #dc3545;
     border: none;
     border-radius: 5px;
     color: white;
     font-size: 1rem;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background: #6a1b9a; /* Màu tím sáng hơn khi hover */
+    background-color: #c82333;
 }
 
 p {
@@ -128,7 +132,7 @@ p {
 }
 
 p a {
-    color: #4a0072; /* Màu tím */
+    color: #dc3545; /* Changed from purple to red */
     text-decoration: none;
 }
 
@@ -210,24 +214,12 @@ footer {
     margin-bottom: 20px;
 }
 
-input {
-    width: 100%;
-    padding: 12px 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
-    background-color: transparent;
-    color: #6a1b9a;
-    transition: all 0.3s ease-in-out; /* Hiệu ứng mượt mà */
-}
-
 /* Cấu hình label */
 
 
 /* Khi focus vào input */
 input:focus {
-    border-color: #6a1b9a; /* Màu viền khi focus */
+    border-color: #dc3545; /* Changed from purple to red */
     outline: none;
 }
 
@@ -237,7 +229,7 @@ input:not(:placeholder-shown) + label {
     top: -10px;
     left: 10px;
     font-size: 0.9rem;
-    color: #6a1b9a; /* Màu tím cho label */
+    color: #dc3545; /* Changed from purple to red */
 }
 
 /* Hiệu ứng cho label nếu input có giá trị (dù không focus) */
@@ -245,48 +237,31 @@ input:valid + label {
     top: -10px;
     left: 10px;
     font-size: 0.9rem;
-    color: #6a1b9a;
+    color: #dc3545; /* Changed from purple to red */
 }
 
 /* Hiệu ứng hover cho nút */
 button {
     width: 100%;
     padding: 12px;
-    background: #4a0072; /* Màu tím chủ đạo */
+    background: #dc3545;
     border: none;
     border-radius: 5px;
     color: white;
     font-size: 1rem;
     cursor: pointer;
-    position: relative;
-    overflow: unset;
-    transition: color 0.4s, background-color 0.4s;
-}
-
-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background-color: #6a1b9a; /* Màu tím sáng hơn */
-    transition: left 0.4s;
-    z-index: -1; /* Đảm bảo lớp phủ ở dưới chữ */
-}
-
-button:hover::before {
-    left: 0;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    color: #fff;
+    background-color: #c82333;
 }
+
 label.float-up {
     top: -10px;
     left: 10px;
     font-size: 0.9rem;
-    color: #6a1b9a; /* Màu tím khi focus vào input */
+    color: #dc3545; /* Màu tím khi focus vào input */
 }
 
 /* Hiệu ứng chuyển động cho form đăng ký */
@@ -310,13 +285,13 @@ button.clicked::before {
     left: 0;
 }
 a {
-    color: #4a0072; /* Màu tím */
+    color: #dc3545; /* Changed from purple to red */
     text-decoration: none;
     transition: color 0.3s ease-in-out; /* Mượt mà khi đổi màu chữ */
 }
 
 a:hover {
-    color: #6a1b9a; /* Màu sáng hơn khi hover */
+    color: #c82333; /* Màu sáng hơn khi hover */
 }
 
 /* Hiệu ứng khi nhấn vào Đăng ký */

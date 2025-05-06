@@ -1,12 +1,29 @@
 /* Create QA specific styles */
 .header-menu ul li a.active {
-    color: #6a1b9a !important;
+    color: #dc3545 !important;
     font-weight: 700;
+}
+
+/* Header styling */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.header-inner-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
 }
 
 .create-qa-container {
     max-width: 800px;
-    margin: 150px auto 50px;
+    margin: 110px auto 50px;
     padding: 0 20px;
 }
 
@@ -36,7 +53,7 @@
     left: 0;
     width: 5px;
     height: 100%;
-    background-color: #6a1b9a;
+    background-color: #dc3545;
 }
 
 .qa-form-group {
@@ -45,7 +62,7 @@
 
 .qa-form-label {
     font-weight: 600;
-    color: #4a0072;
+    color: #dc3545;
     margin-bottom: 10px;
     font-size: 1.1rem;
 }
@@ -61,8 +78,8 @@
 
 .qa-form-input:focus {
     outline: none;
-    border-color: #6a1b9a;
-    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
     transform: scale(1.01);
 }
 
@@ -79,8 +96,8 @@
 
 .qa-form-textarea:focus {
     outline: none;
-    border-color: #6a1b9a;
-    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
     transform: scale(1.01);
 }
 
@@ -95,8 +112,8 @@
 
 .qa-tags-input:focus {
     outline: none;
-    border-color: #6a1b9a;
-    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
 }
 
 .qa-tags-help {
@@ -124,8 +141,8 @@
 
 .qa-tag-select label {
     display: inline-block;
-    background-color: #f0e6f5;
-    color: #6a1b9a;
+    background-color: #f8d7da;
+    color: #dc3545;
     padding: 8px 15px;
     border-radius: 20px;
     cursor: pointer;
@@ -135,19 +152,19 @@
 }
 
 .qa-tag-select input[type="checkbox"]:checked + label {
-    background-color: #6a1b9a;
+    background-color: #dc3545;
     color: white;
-    box-shadow: 0 3px 10px rgba(106, 27, 154, 0.3);
+    box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
     transform: translateY(-2px);
 }
 
 .qa-tag-select label:hover {
-    background-color: #e0d0e9;
+    background-color: #f5c6cb;
     transform: translateY(-2px);
 }
 
 .qa-tag-select input[type="checkbox"]:checked + label:hover {
-    background-color: #5c1985;
+    background-color: #c82333;
 }
 
 /* Hiển thị thông báo giới hạn số lượng tag */
@@ -164,7 +181,7 @@
 }
 
 .qa-submit-btn {
-    background-color: #6a1b9a;
+    background-color: #dc3545;
     color: white;
     border: none;
     padding: 15px 35px;
@@ -180,7 +197,7 @@
 }
 
 .qa-submit-btn:hover {
-    background-color: #4a0072;
+    background-color: #c82333;
     transform: translateY(-3px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
@@ -197,9 +214,9 @@
 }
 
 .qa-back-btn {
-    color: #6a1b9a;
+    color: #dc3545;
     background-color: transparent;
-    border: 2px solid #6a1b9a;
+    border: 2px solid #dc3545;
     padding: 12px 25px;
     border-radius: 30px;
     font-weight: 600;
@@ -211,10 +228,10 @@
 }
 
 .qa-back-btn:hover {
-    background-color: rgba(106, 27, 154, 0.1);
+    background-color: rgba(220, 53, 69, 0.1);
     transform: translateX(-5px);
     text-decoration: none;
-    color: #4a0072;
+    color: #c82333;
 }
 
 .qa-error {
@@ -240,7 +257,7 @@
 .qa-form-title {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #4a0072;
+    color: #dc3545;
     margin-bottom: 25px;
     padding-bottom: 15px;
     border-bottom: 2px solid #f0e6f5;
@@ -257,7 +274,7 @@
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
     transition: right 0.5s ease;
     z-index: 100;
-    border-left: 4px solid #6a1b9a;
+    border-left: 4px solid #dc3545;
 }
 
 .qa-floating-tips.active {
@@ -267,7 +284,7 @@
 .qa-tips-title {
     font-size: 1.1rem;
     font-weight: 600;
-    color: #4a0072;
+    color: #dc3545;
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -299,7 +316,7 @@
 }
 
 .qa-close-tips:hover {
-    color: #4a0072;
+    color: #dc3545;
     transform: scale(1.1);
 }
 
@@ -345,8 +362,8 @@
 
 .qa-tags-input:focus {
     outline: none;
-    border-color: #6a1b9a;
-    box-shadow: 0 0 0 3px rgba(106, 27, 154, 0.2);
+    border-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
 }
 
 .show-tags-btn {
@@ -355,7 +372,7 @@
     border: 1px solid #ddd;
     border-radius: 20px;
     padding: 8px 15px;
-    color: #6a1b9a;
+    color: #dc3545;
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 0.9rem;
@@ -366,7 +383,7 @@
 
 .show-tags-btn:hover {
     background-color: #f0e6f5;
-    border-color: #6a1b9a;
+    border-color: #dc3545;
 }
 
 .tags-dropdown {
@@ -388,7 +405,7 @@
 
 .tag-item {
     background-color: #f0e6f5;
-    color: #6a1b9a;
+    color: #dc3545;
     padding: 8px 15px;
     border-radius: 20px;
     cursor: pointer;
@@ -403,9 +420,9 @@
 }
 
 .tag-item.selected {
-    background-color: #6a1b9a;
+    background-color: #dc3545;
     color: white;
-    box-shadow: 0 3px 10px rgba(106, 27, 154, 0.3);
+    box-shadow: 0 3px 10px rgba(220, 53, 69, 0.3);
 }
 
 .selected-tags-container {
@@ -415,7 +432,7 @@
 }
 
 .selected-tag {
-    background-color: #6a1b9a;
+    background-color: #dc3545;
     color: white;
     padding: 8px 32px 8px 15px;
     border-radius: 20px;

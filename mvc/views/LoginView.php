@@ -35,8 +35,8 @@
 
     body {
       font-family: 'Montserrat', sans-serif;
-      background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
-      background-size: cover;
+      /* background: url('/Gear/public/images/background_login.webp') no-repeat center center fixed;
+      background-size: cover; */
       min-height: 100vh;
       display: flex;
       overflow-y: auto;
@@ -64,7 +64,7 @@
     }
     
     .header-inner-content .nav-link:hover {
-      color: #6a1b9a !important;
+      color: #dc3545 !important;
       transition: color 0.3s ease;
     }
     
@@ -107,11 +107,10 @@
       max-width: 500px;
       margin: 0 auto;
       animation: fadeIn 0.6s;
-      border-left: 5px solid #6a1b9a;
     }
     
     .form-container h2 {
-      color: #4a0072;
+      color: #b71c1c;
       font-weight: 700;
       margin-bottom: 30px;
       text-align: center;
@@ -124,7 +123,7 @@
       position: absolute;
       width: 60px;
       height: 3px;
-      background: #6a1b9a;
+      background: #dc3545;
       bottom: 0;
       left: 50%;
       transform: translateX(-50%);
@@ -149,8 +148,8 @@
     }
     
     .form-control:focus {
-      border-color: #6a1b9a;
-      box-shadow: 0 0 0 0.2rem rgba(106, 27, 154, 0.25);
+      border-color: #dc3545;
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
     }
     
     .form-check-label {
@@ -160,7 +159,7 @@
     
     /* Button styles */
     .btn-purple {
-      background-color: #6a1b9a;
+      background-color: #dc3545;
       color: #fff;
       border: none;
       border-radius: 30px;
@@ -176,24 +175,24 @@
     }
     
     .btn-purple:hover {
-      background-color: #4a0072;
+      background-color: #c82333;
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       color: #fff;
     }
     
     .text-purple {
-      color: #6a1b9a;
+      color: #dc3545;
     }
     
     .form-container a {
-      color: #6a1b9a;
+      color: #dc3545;
       font-weight: 500;
       transition: all 0.3s;
     }
     
     .form-container a:hover {
-      color: #4a0072;
+      color: #c82333;
       text-decoration: none;
     }
     
@@ -207,7 +206,7 @@
       top: 50%;
       transform: translateY(-50%);
       left: 15px;
-      color: #6a1b9a;
+      color: #dc3545;
     }
     
     .input-icon input {

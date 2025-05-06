@@ -141,10 +141,364 @@ $conn->close();
   <!-- Swiper for sliders -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
   <!-- Khác với trang trước, chỉ sử dụng Animate.css và không dùng AOS để đơn giản hóa -->
-  <link rel="stylesheet" href="/Gear/public/css/blog.css">
+  <!-- <link rel="stylesheet" href="/Gear/public/css/blog.css"> -->
   <link rel="stylesheet" href="/Gear/public/css/AboutView.css">
   <!-- CSS thêm vào file ngoài hoặc <style> -->
   <style>
+    body {
+      background-color: #ffffff;
+      color: #333333;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    /* Improve readability with better spacing */
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      margin-top: 60px; /* Add space between header and content */
+    }
+    
+    /* Enhance section distinction */
+    .about-section {
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      padding: 30px;
+      margin-bottom: 40px;
+    }
+    
+    /* Improve headings */
+    .section-title {
+      color: #dc3545;
+      font-weight: 600;
+      margin-bottom: 30px;
+      position: relative;
+      padding-bottom: 15px;
+      text-align: center;
+    }
+    
+    .section-title:after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: #dc3545;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    /* Enhance info cards */
+    .info-card {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+    
+    .info-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Improve icon circles */
+    .icon-circle {
+      width: 60px;
+      height: 60px;
+      background-color: #f8d7da;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 15px;
+    }
+    
+    .icon-circle i {
+      color: #dc3545;
+      font-size: 24px;
+    }
+    
+    /* Enhance list items */
+    .info-list {
+      padding-left: 18px;
+      list-style: none;
+    }
+    
+    .info-list li {
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    .info-list li i {
+      position: absolute;
+      left: 0;
+      top: 4px;
+      color: #dc3545;
+    }
+    
+    /* Improve timeline */
+    .timeline {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: #dc3545;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+    }
+    
+    .timeline-content {
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+    
+    .timeline-content::after {
+      content: '';
+      position: absolute;
+      border: 10px solid #ffffff;
+      top: 20px;
+    }
+    
+    .left {
+      left: 0;
+    }
+    
+    .right {
+      left: 50%;
+    }
+    
+    .left .timeline-content::after {
+      border-color: transparent transparent transparent white;
+      right: -20px;
+    }
+    
+    .right .timeline-content::after {
+      border-color: transparent white transparent transparent;
+      left: -20px;
+    }
+    
+    /* Stats section improvements */
+    .stats-section {
+      background-color: transparent;
+      padding: 40px 20px;
+      border-radius: 0;
+      margin-bottom: 40px;
+      box-shadow: none;
+    }
+    
+    .stat-item {
+      text-align: center;
+      padding: 15px 10px;
+      background-color: transparent;
+      border-radius: 8px;
+      box-shadow: none;
+      height: 100%;
+      margin-bottom: 15px;
+    }
+    
+    .stat-number {
+      font-size: 36px;
+      font-weight: bold;
+      color: #dc3545;
+      margin-bottom: 5px;
+    }
+    
+    /* Team section improvements */
+    .team-member {
+      text-align: center;
+    }
+    
+    .member-img {
+      width: 120px;
+      height: 120px;
+      overflow: hidden;
+      border-radius: 50%;
+      margin: 0 auto 15px;
+      border: 4px solid #f8d7da;
+    }
+    
+    .member-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background-color: #f8d7da;
+      border-radius: 50%;
+      color: #dc3545;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links a:hover {
+      background-color: #dc3545;
+      color: white;
+    }
+    
+    /* Contact form improvements */
+    .form-control {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-control:focus {
+      border-color: #dc3545;
+      box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+    }
+    
+    /* Hero section improvements */
+    .hero-section {
+      position: relative;
+      padding: 100px 0;
+      margin-bottom: 40px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: white;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    }
+    
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+    
+    .hero-title {
+      font-size: 48px;
+      font-weight: 700;
+      margin-bottom: 15px;
+    }
+    
+    .hero-subtitle {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .btn-hero {
+      padding: 12px 30px;
+      border-radius: 30px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      margin: 0 10px 10px;
+      display: inline-block;
+    }
+    
+    .btn-primary {
+      background-color: #dc3545;
+      border: none;
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: #e35d6a;
+      transform: translateY(-3px);
+    }
+    
+    .btn-secondary {
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+    }
+    
+    .btn-secondary:hover {
+      background-color: white;
+      color: #dc3545;
+      transform: translateY(-3px);
+    }
+    
+    /* Product section improvements */
+    .product-info {
+      padding: 15px;
+      background-color: white;
+      border-radius: 0 0 8px 8px;
+      text-align: center;
+      opacity: 0; /* Hide description initially */
+      transition: opacity 0.3s ease;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      color: #dc3545; /* Set text color to red */
+    }
+    
+    .product-info h4 {
+      color: #dc3545;
+      font-weight: 600;
+    }
+    
+    .product-info p {
+      color: #dc3545;
+    }
+    
+    .swiper-slide {
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+      height: 280px; /* Fixed height for consistent cards */
+    }
+    
+    .swiper-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    /* Show description on hover */
+    .swiper-slide:hover .product-info {
+      opacity: 1;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    
     /* Custom styles for slider navigation - keep these inline for consistency */
     .slider-navigation-container {
       display: flex;
@@ -159,14 +513,14 @@ $conn->close();
       margin: 0 !important;
       width: 50px !important;
       height: 50px !important;
-      background-color: #6a1b9a;
+      background-color: #dc3545;
       border-radius: 50%;
       box-shadow: 0 3px 6px rgba(0,0,0,0.2);
       transition: all 0.3s ease;
     }
     
     .custom-nav-btn:hover {
-      background-color: #9c27b0;
+      background-color: #e35d6a;
       transform: scale(1.1);
     }
     
@@ -181,9 +535,71 @@ $conn->close();
     .swiper-button-prev:focus {
       outline: none;
     }
+    
+    /* Footer improvements */
+    .copyright-footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #dc3545;
+      color: white;
+      margin-top: 40px;
+      border-radius: 10px;
+    }
+    
+    /* Responsive improvements */
+    @media (max-width: 767px) {
+      .timeline::after {
+        left: 31px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      
+      .right {
+        left: 0;
+      }
+      
+      .left .timeline-content::after,
+      .right .timeline-content::after {
+        left: -20px;
+        border-color: transparent white transparent transparent;
+      }
+    }
+    
+    /* Enhanced social links for the Connect With Us section */
+    .social-links-large a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background-color: #f8d7da;
+      border-radius: 50%;
+      color: #dc3545;
+      transition: all 0.3s ease;
+    }
+    
+    .social-links-large a:hover {
+      background-color: #dc3545;
+      color: white;
+      transform: translateY(-5px);
+    }
+    
+    /* Core values styling */
+    .info-card h5 {
+      font-weight: 600;
+    }
+    
+    .info-card p {
+      color: #666;
+      line-height: 1.6;
+    }
   </style>
 </head>
-<body>
+<body class="bg-light">
   <!-- Header -->
   <header>
         <div class="container">
@@ -202,9 +618,6 @@ $conn->close();
                     <li><a href="/Gear/contact">CONTACT</a></li>
                     <li><a href="/Gear/BlogController/list">BLOG</a></li>
                     <li><a href="/Gear/QAController/list">Q&A</a></li>
-                    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-        <?php endif; ?>
                 </ul>
                 </div>
                 <div class="d-flex">
@@ -393,46 +806,47 @@ $conn->close();
 
     <!-- Contact Section -->
     <div class="about-section">
-      <h2 class="section-title fade-in">Get In Touch</h2>
+      <h2 class="section-title fade-in">Connect With Us</h2>
       <div class="row">
         <div class="col-md-6 fade-in-left delay-1">
-          <p><i class="fas fa-map-marker-alt" style="color: #6a1b9a; margin-right: 10px;"></i> 268 Đ. Lý Thường Kiệt, Phường 14, Quận 10, Hồ Chí Minh</p>
-          <p><i class="fas fa-phone" style="color: #6a1b9a; margin-right: 10px;"></i> +84 123 456 789</p>
-          <p><i class="fas fa-envelope" style="color: #6a1b9a; margin-right: 10px;"></i> info@gearbk.com</p>
+          <p><i class="fas fa-map-marker-alt" style="color: #dc3545; margin-right: 10px;"></i> 268 Đ. Lý Thường Kiệt, Phường 14, Quận 10, Hồ Chí Minh</p>
+          <p><i class="fas fa-phone" style="color: #dc3545; margin-right: 10px;"></i> +84 123 456 789</p>
+          <p><i class="fas fa-envelope" style="color: #dc3545; margin-right: 10px;"></i> info@gearbk.com</p>
           
           <div class="mt-4">
             <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1959.7478390425963!2d106.6543134!3d10.7732967!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ec3c161a3fb%3A0xef77cd47a1cc691e!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBCw6FjaCBraG9hIC0gxJDhuqFpIGjhu41jIFF14buRYyBnaWEgVFAuSENN!5e0!3m2!1svi!2s!4v1745597886100!5m2!1svi!2s" width="100%" height="300" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
         <div class="col-md-6 fade-in-right delay-2">
-          <!-- Hiển thị thông báo -->
-          <?php if (isset($_GET['status'])): ?>
-            <?php if ($_GET['status'] == 'success'): ?>
-              <div class="alert alert-success" role="alert">
-                Message sent successfully! We'll get back to you soon.
+          <div class="info-card h-100">
+            <h3 class="mb-4 text-center" style="color: #dc3545;">Our Core Values</h3>
+            
+            <div class="mb-4">
+              <h5 style="color: #dc3545;"><i class="fas fa-star mr-2"></i> Excellence in Everything</h5>
+              <p>We strive for excellence in every product and service we deliver, ensuring our customers receive only the best.</p>
+            </div>
+            
+            <div class="mb-4">
+              <h5 style="color: #dc3545;"><i class="fas fa-handshake mr-2"></i> Customer Partnership</h5>
+              <p>We consider our customers as partners in our journey, working together to achieve mutual success.</p>
+            </div>
+            
+            <div class="mb-4">
+              <h5 style="color: #dc3545;"><i class="fas fa-shield-alt mr-2"></i> Trust & Reliability</h5>
+              <p>Building trust through reliable products, honest communication, and exceptional service.</p>
+            </div>
+            
+            <div class="social-links-large text-center mt-5">
+              <h5 style="color: #dc3545;">Follow Us</h5>
+              <div class="d-flex justify-content-center mt-3">
+                <a href="#" class="mx-2" style="font-size: 24px;"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="mx-2" style="font-size: 24px;"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="mx-2" style="font-size: 24px;"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="mx-2" style="font-size: 24px;"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="mx-2" style="font-size: 24px;"><i class="fab fa-linkedin"></i></a>
               </div>
-            <?php elseif ($_GET['status'] == 'error'): ?>
-              <div class="alert alert-danger" role="alert">
-                Failed to send message. Please try again later.
-              </div>
-            <?php endif; ?>
-          <?php endif; ?>
-          
-          <form method="POST" action="/Gear/send_email.php">
-            <div class="form-group">
-              <input type="text" name="name" class="form-control" placeholder="Your Name" required>
             </div>
-            <div class="form-group">
-              <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-            </div>
-            <div class="form-group">
-              <input type="text" name="subject" class="form-control" placeholder="Subject" required>
-            </div>
-            <div class="form-group">
-              <textarea name="message" class="form-control" rows="5" placeholder="Your Message" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-block" style="background-color: #6a1b9a; color: white;">Send Message</button>
-          </form>
+          </div>
         </div>
       </div>
     </div>
