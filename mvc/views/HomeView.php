@@ -56,6 +56,31 @@
         </div>
     </header>
 
+    <!-- Search Section -->
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="search-wrapper bg-white rounded-4 shadow-sm p-3">
+                    <form onsubmit="handleSearch(event)" class="search-form">
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0">
+                                <i class="fas fa-search text-muted"></i>
+                            </span>
+                            <input type="text" 
+                                   class="form-control border-start-0 ps-0 search-input" 
+                                   id="searchInput" 
+                                   placeholder="Tìm kiếm sản phẩm..." 
+                                   aria-label="Search">
+                            <button class="btn btn-danger rounded-end-pill px-4 search-btn" type="submit">
+                                Tìm kiếm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Carousel and Categories Section -->
     <div class="container-fluid pt-3">
         <div class="row g-3">
@@ -191,7 +216,7 @@
                 <?php foreach ($data['featuredProducts'] as $product): ?>
                 <div class="col-9 col-sm-6 pe-3">
                     <div class="card shadow-sm h-100 product-card">
-                        <a href="#" class="card-body p-3 text-decoration-none d-flex flex-column h-100">
+                        <a href="/Gear/ProductController/detail/slug=<?php echo htmlspecialchars($product['slug']); ?>" class="card-body p-3 text-decoration-none d-flex flex-column h-100">
                             <?php if(isset($product['discount']) && $product['discount'] > 0): ?>
                                 <div class="discount-badge position-absolute top-0 end-0 bg-danger text-white fw-bold p-2 rounded m-2">
                                     -<?php echo $product['discount']; ?>%
@@ -247,7 +272,7 @@
                 <?php foreach ($data['featuredProducts'] as $product): ?>
                 <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                     <div class="card shadow-sm h-100 product-card">
-                        <a href="#" class="card-body p-3 text-decoration-none d-flex flex-column h-100">
+                        <a href="/Gear/ProductController/detail/slug=<?php echo htmlspecialchars($product['slug']); ?>" class="card-body p-3 text-decoration-none d-flex flex-column h-100">
                             <?php if(isset($product['discount']) && $product['discount'] > 0): ?>
                                 <div class="discount-badge position-absolute top-0 end-0 bg-danger text-white fw-bold p-2 rounded m-2">
                                     -<?php echo $product['discount']; ?>%
@@ -314,7 +339,7 @@
                     ?>
                         <div class="col-9 col-sm-6 pe-3">
                             <div class="card shadow-sm h-100 product-card">
-                                <a href="#" class="card-body p-3 text-decoration-none d-flex flex-column h-100">
+                                <a href="/Gear/ProductController/detail/slug=<?php echo htmlspecialchars($product['slug']); ?>" class="card-body p-3 text-decoration-none d-flex flex-column h-100">
                                     <?php if(isset($product['discount']) && $product['discount'] > 0): ?>
                                         <div class="discount-badge position-absolute top-0 end-0 bg-danger text-white fw-bold p-2 rounded m-2">
                                             -<?php echo $product['discount']; ?>%
@@ -382,7 +407,7 @@
                     ?>
                         <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
                             <div class="card shadow-sm h-100 product-card">
-                                <a href="#" class="card-body p-3 text-decoration-none d-flex flex-column h-100">
+                                <a href="/Gear/ProductController/detail/slug=<?php echo htmlspecialchars($product['slug']); ?>" class="card-body p-3 text-decoration-none d-flex flex-column h-100">
                                     <?php if(isset($product['discount']) && $product['discount'] > 0): ?>
                                         <div class="discount-badge position-absolute top-0 end-0 bg-danger text-white fw-bold p-2 rounded m-2">
                                             -<?php echo $product['discount']; ?>%
@@ -670,6 +695,12 @@
             } else {
                 container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
             }
+        }
+        
+        function handleSearch(event) {
+            event.preventDefault();
+            const searchValue = document.getElementById('searchInput').value;
+            window.location.href = '/Gear/ProductController/list/search=' + searchValue;
         }
         
         // Add custom styles for responsiveness
