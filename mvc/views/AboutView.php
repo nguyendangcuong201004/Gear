@@ -548,24 +548,406 @@ $conn->close();
     
     /* Responsive improvements */
     @media (max-width: 767px) {
+      /* Timeline vertical line adjustments */
       .timeline::after {
-        left: 31px;
+        left: 20px;
+        margin-left: 0;
+      }
+      
+      /* Timeline item positioning and styling */
+      .timeline-item {
+        width: 100%;
+        padding-left: 50px;
+        padding-right: 15px;
+        left: 0 !important;
+        margin-bottom: 30px;
+        animation: fadeInLeft 0.5s ease forwards !important; /* Override any other animations */
+        opacity: 0;
+      }
+      
+      /* Timeline items animation delay */
+      .timeline-item:nth-child(1) { animation-delay: 0.1s !important; }
+      .timeline-item:nth-child(2) { animation-delay: 0.2s !important; }
+      .timeline-item:nth-child(3) { animation-delay: 0.3s !important; }
+      .timeline-item:nth-child(4) { animation-delay: 0.4s !important; }
+      .timeline-item:nth-child(5) { animation-delay: 0.5s !important; }
+      
+      /* Add circle indicators for each timeline item */
+      .timeline-item::before {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: #dc3545;
+        border-radius: 50%;
+        left: 10px;
+        top: 20px;
+        z-index: 1;
+        box-shadow: 0 0 0 4px #f8d7da;
+        transition: all 0.3s ease;
+      }
+      
+      /* Subtle pulsing effect for the circle indicators */
+      @keyframes pulseCircle {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+      }
+      
+      .timeline-item:hover::before {
+        animation: pulseCircle 1s infinite;
+      }
+      
+      /* Timeline content styling */
+      .timeline-content {
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+        border-left: 3px solid #dc3545;
+        transition: all 0.3s ease;
+      }
+      
+      .timeline-content:hover {
+        transform: translateX(5px);
+      }
+      
+      /* Adjust pointer position */
+      .left .timeline-content::after,
+      .right .timeline-content::after {
+        display: none; /* Remove the pointer triangles */
+      }
+      
+      /* Year text styling */
+      .timeline-content h3 {
+        color: #dc3545;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 8px;
+        margin-bottom: 10px;
+      }
+      
+      /* Description text spacing */
+      .timeline-content p {
+        margin-bottom: 0;
+      }
+      
+      /* Fade in animation for timeline items */
+      @keyframes fadeInLeft {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    }
+    
+    /* Mobile menu styles */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+      z-index: 2000;
+    }
+    
+    .mobile-menu-toggle span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background-color: white;
+      border-radius: 3px;
+      transition: all 0.3s ease;
+    }
+    
+    /* Enhanced responsive styles for tablet and mobile */
+    /* Tablet styles (768px - 992px) */
+    @media (max-width: 992px) {
+      .about-container {
+        margin-top: 90px;
+        padding: 0 15px;
+      }
+      
+      .section-title {
+        font-size: 26px;
+      }
+      
+      .hero-title {
+        font-size: 40px;
+      }
+      
+      .hero-subtitle {
+        font-size: 18px;
+      }
+      
+      .btn-hero {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+      
+      .icon-circle {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .icon-circle i {
+        font-size: 20px;
+      }
+      
+      .info-card {
+        padding: 15px;
+      }
+      
+      .info-card h4 {
+        font-size: 18px;
+      }
+      
+      .info-list li {
+        font-size: 14px;
+      }
+      
+      .stat-number {
+        font-size: 30px;
+      }
+      
+      .member-img {
+        width: 100px;
+        height: 100px;
+      }
+    }
+    
+    /* Mobile styles (up to 767px) */
+    @media (max-width: 767px) {
+      .about-container {
+        margin-top: 80px;
+        padding: 0 10px;
+      }
+      
+      .about-section {
+        padding: 20px 15px;
+        margin-bottom: 30px;
+      }
+      
+      .section-title {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+      
+      .hero-section {
+        padding: 60px 0;
+      }
+      
+      .hero-title {
+        font-size: 32px;
+      }
+      
+      .hero-subtitle {
+        font-size: 16px;
+        margin-bottom: 20px;
+      }
+      
+      .btn-hero {
+        padding: 8px 18px;
+        margin: 0 5px 10px;
+        font-size: 13px;
+      }
+      
+      .info-card h4 {
+        font-size: 16px;
+      }
+      
+      /* Make the header menu responsive */
+      .mobile-menu-toggle {
+        display: flex;
+      }
+      
+      .header-menu {
+        display: none;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 15px;
+        z-index: 1000;
+      }
+      
+      .header-menu.active {
+        display: block;
+      }
+      
+      .header-menu ul {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .header-menu ul li {
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .header-menu ul li a {
+        display: block;
+        padding: 8px 0;
+        font-size: 1rem;
+      }
+      
+      /* Animation for hamburger to X */
+      .mobile-menu-toggle.active span:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+      }
+      
+      .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+      
+      .mobile-menu-toggle.active span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+      }
+      
+      /* Header content adjustments */
+      .header-inner-content {
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+      
+      /* Timeline adjustments */
+      .timeline-content {
+        padding: 15px;
+      }
+      
+      .timeline-content h3 {
+        font-size: 18px;
+      }
+      
+      /* Stats section */
+      .stat-number {
+        font-size: 26px;
+      }
+      
+      .stat-item {
+        margin-bottom: 20px;
+      }
+      
+      /* Team section */
+      .member-img {
+        width: 90px;
+        height: 90px;
+      }
+      
+      .team-member h4 {
+        font-size: 16px;
+      }
+      
+      .team-member p {
+        font-size: 14px;
+      }
+      
+      .social-links a {
+        width: 28px;
+        height: 28px;
+      }
+      
+      /* Swiper navigation */
+      .custom-nav-btn {
+        width: 40px !important;
+        height: 40px !important;
+      }
+      
+      .slider-navigation-container {
+        gap: 20px;
+      }
+    }
+    
+    /* Small phones (up to 480px) */
+    @media (max-width: 480px) {
+      .about-container {
+        margin-top: 70px;
+      }
+      
+      .section-title {
+        font-size: 20px;
+      }
+      
+      .hero-title {
+        font-size: 28px;
+      }
+      
+      .hero-subtitle {
+        font-size: 14px;
+      }
+      
+      .btn-hero {
+        padding: 8px 15px;
+        font-size: 12px;
+        width: 80%;
+        margin-bottom: 10px;
+      }
+      
+      .info-card {
+        padding: 12px;
+      }
+      
+      .info-list li {
+        margin-bottom: 8px;
+        font-size: 13px;
+      }
+      
+      /* Timeline specific styles for small phones */
+      .timeline::after {
+        left: 15px;
       }
       
       .timeline-item {
-        width: 100%;
-        padding-left: 70px;
-        padding-right: 25px;
+        padding-left: 40px;
+        padding-right: 10px;
+        margin-bottom: 25px;
       }
       
-      .right {
-        left: 0;
+      .timeline-item::before {
+        width: 16px;
+        height: 16px;
+        left: 7px;
+        top: 18px;
       }
       
-      .left .timeline-content::after,
-      .right .timeline-content::after {
-        left: -20px;
-        border-color: transparent white transparent transparent;
+      .timeline-content {
+        padding: 15px;
+      }
+      
+      .timeline-content h3 {
+        font-size: 16px;
+        padding-bottom: 6px;
+        margin-bottom: 8px;
+      }
+      
+      .timeline-content p {
+        font-size: 13px;
+      }
+      
+      .social-links-large a {
+        width: 40px;
+        height: 40px;
+      }
+      
+      /* Header adjustments */
+      .header-logo span {
+        font-size: 16px;
+      }
+      
+      .header-logo img {
+        height: 30px;
+      }
+      
+      .header-shop, .header-user {
+        font-size: 16px;
+      }
+      
+      .copyright-footer {
+        padding: 15px;
+        font-size: 14px;
       }
     }
     
@@ -610,7 +992,12 @@ $conn->close();
                 <img src="/Gear/public/images/LogoGearBK.webp" alt="Logo">
                 <span>GearBK</span>
                 </div>
-                <div class="header-menu">
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="header-menu" id="header-menu">
                 <ul>
                     <li><a href="/Gear">HOME</a></li>
                     <li><a href="/Gear/AboutController/index">ABOUT</a></li>
@@ -618,9 +1005,6 @@ $conn->close();
                     <li><a href="/Gear/contact">CONTACT</a></li>
                     <li><a href="/Gear/BlogController/list">BLOG</a></li>
                     <li><a href="/Gear/QAController/list">Q&A</a></li>
-                    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-        <?php endif; ?>
                 </ul>
                 </div>
                 <div class="d-flex">
@@ -935,6 +1319,37 @@ $conn->close();
       });
       
       observer.observe(statsSection);
+      
+      // Mobile menu toggle functionality
+      const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+      const headerMenu = document.getElementById('header-menu');
+      
+      if (mobileMenuToggle && headerMenu) {
+        mobileMenuToggle.addEventListener('click', function() {
+          this.classList.toggle('active');
+          headerMenu.classList.toggle('active');
+        });
+        
+        // Close menu when clicking on a link
+        const menuLinks = headerMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+          link.addEventListener('click', function() {
+            mobileMenuToggle.classList.remove('active');
+            headerMenu.classList.remove('active');
+          });
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+          const isClickInsideMenu = headerMenu.contains(event.target);
+          const isClickOnToggle = mobileMenuToggle.contains(event.target);
+          
+          if (!isClickInsideMenu && !isClickOnToggle && headerMenu.classList.contains('active')) {
+            mobileMenuToggle.classList.remove('active');
+            headerMenu.classList.remove('active');
+          }
+        });
+      }
     });
   </script>
 </body>

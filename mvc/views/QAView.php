@@ -395,6 +395,266 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                 font-size: 1.6rem;
             }
         }
+
+        /* Enhanced responsive styles for tablet and mobile */
+        /* Tablet styles (768px - 992px) */
+        @media (max-width: 992px) {
+            .qa-container {
+                margin: 90px auto 30px;
+                padding: 0 15px;
+                max-width: 95%;
+            }
+            
+            .qa-card-body {
+                padding: 20px;
+            }
+            
+            .qa-title {
+                font-size: 1.2rem;
+            }
+            
+            .qa-filters {
+                justify-content: center;
+            }
+            
+            .qa-ask-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .qa-btn-secondary {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .header-menu ul {
+                gap: 15px;
+            }
+            
+            .header-menu ul li {
+                margin-left: 15px;
+            }
+        }
+        
+        /* Mobile styles (up to 767px) */
+        @media (max-width: 767px) {
+            .qa-container {
+                margin: 80px auto 20px;
+                padding: 0 10px;
+            }
+            
+            .qa-card-body {
+                padding: 15px;
+            }
+            
+            .qa-title {
+                font-size: 1.1rem;
+                margin-bottom: 10px;
+            }
+            
+            .qa-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+                font-size: 0.8rem;
+            }
+            
+            .qa-stats {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .qa-tags {
+                margin-top: 10px;
+            }
+            
+            .qa-tag {
+                padding: 4px 8px;
+                font-size: 0.7rem;
+            }
+            
+            .qa-search-input {
+                height: 45px;
+                font-size: 0.9rem;
+                padding: 0 50px 0 15px;
+            }
+            
+            .qa-search-btn {
+                right: 5px;
+                top: 5px;
+                height: 35px;
+                width: 35px;
+            }
+            
+            .qa-filter-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .pagination .page-link {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.9rem;
+            }
+            
+            /* Make the header menu responsive */
+            .header-inner-content {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .header-menu {
+                order: 3;
+                width: 100%;
+                margin-top: 10px;
+            }
+            
+            .header-menu ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px;
+            }
+            
+            .header-menu ul li {
+                margin-left: 0;
+                margin-bottom: 5px;
+            }
+            
+            .header-menu ul li a {
+                font-size: 0.9rem;
+                padding: 5px 8px;
+            }
+            
+            .qa-empty {
+                padding: 30px 15px;
+            }
+            
+            .qa-empty h3 {
+                font-size: 1.2rem;
+            }
+            
+            .qa-empty p {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Small phones (up to 480px) */
+        @media (max-width: 480px) {
+            .qa-container {
+                margin: 70px auto 15px;
+            }
+            
+            .qa-header {
+                padding: 15px;
+            }
+            
+            .qa-title-main {
+                font-size: 1.3rem;
+            }
+            
+            .qa-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .qa-btn, .qa-ask-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+            
+            .header-logo span {
+                font-size: 16px;
+            }
+            
+            .header-logo img {
+                height: 30px;
+            }
+            
+            .header-user, .header-shop {
+                font-size: 16px;
+            }
+            
+            .header-logout span {
+                display: none;
+            }
+            
+            .qa-stats {
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* Mobile menu styles */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            cursor: pointer;
+            z-index: 2000;
+        }
+        
+        .mobile-menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: white;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+        
+        @media (max-width: 767px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .header-menu {
+                display: none;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                padding: 15px;
+                z-index: 1000;
+            }
+            
+            .header-menu.active {
+                display: block;
+            }
+            
+            .header-menu ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header-menu ul li {
+                margin: 10px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            .header-menu ul li a {
+                display: block;
+                padding: 8px 0;
+                font-size: 1rem;
+            }
+            
+            /* Animation for hamburger to X */
+            .mobile-menu-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .mobile-menu-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+        }
     </style>
 </head>
 <body>
@@ -408,7 +668,12 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                 <img src="/Gear/public/images/LogoGearBK.webp" alt="Logo">
                 <span>GearBK</span>
                 </div>
-                <div class="header-menu">
+                <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="header-menu" id="header-menu">
                 <ul>
                     <li><a href="/Gear">HOME</a></li>
                     <li><a href="/Gear/AboutController/index">ABOUT</a></li>
@@ -416,9 +681,6 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                     <li><a href="/Gear/contact">CONTACT</a></li>
                     <li><a href="/Gear/BlogController/list">BLOG</a></li>
                     <li><a href="/Gear/QAController/list">Q&A</a></li>
-                    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-        <?php endif; ?>
                 </ul>
                 </div>
                 <div class="d-flex align-items-center">
@@ -623,6 +885,37 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                     $(this).find('.qa-title').css('color', '#b02a37');
                 }
             );
+            
+            // Mobile menu toggle functionality
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const headerMenu = document.getElementById('header-menu');
+            
+            if (mobileMenuToggle && headerMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    headerMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const menuLinks = headerMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenuToggle.classList.remove('active');
+                        headerMenu.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    const isClickInsideMenu = headerMenu.contains(event.target);
+                    const isClickOnToggle = mobileMenuToggle.contains(event.target);
+                    
+                    if (!isClickInsideMenu && !isClickOnToggle && headerMenu.classList.contains('active')) {
+                        mobileMenuToggle.classList.remove('active');
+                        headerMenu.classList.remove('active');
+                    }
+                });
+            }
         });
     </script>
 </body>

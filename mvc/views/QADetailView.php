@@ -10,367 +10,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <!-- Summernote CSS -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
-    <style>
-        /* Q&A Detail specific styles */
-        .header-menu ul li a.active {
-            color: #dc3545 !important;
-            font-weight: 700;
-        }
-        
-        .qa-detail-container {
-            max-width: 1000px;
-            margin: 110px auto 50px;
-            padding: 0 20px;
-        }
-        
-        .qa-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-        
-        .qa-question-header {
-            background-color: #dc3545;
-            color: white;
-            padding: 20px 25px;
-            border-top-left-radius: 12px;
-            border-top-right-radius: 12px;
-        }
-        
-        .qa-question-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-        
-        .qa-question-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .qa-question-body {
-            padding: 25px;
-        }
-        
-        .qa-question-content {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-        
-        .qa-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 20px;
-        }
-        
-        .qa-tag {
-            background-color: #f8d7da;
-            color: #dc3545;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-        }
-        
-        .qa-tag:hover {
-            background-color: #dc3545;
-            color: white;
-            transform: translateY(-2px);
-        }
-        
-        .qa-answers-section {
-            margin-top: 40px;
-        }
-        
-        .qa-answers-count {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #dc3545;
-            margin-bottom: 20px;
-            text-shadow: none;
-        }
-        
-        .qa-answer {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
-            margin-bottom: 20px;
-            padding: 20px;
-            position: relative;
-            border-left: 4px solid #dc3545;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .qa-answer:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .qa-answer-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 15px;
-        }
-        
-        .qa-user {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .qa-user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: #dc3545;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-        }
-        
-        .qa-answer-content {
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-        
-        .qa-your-answer {
-            margin-top: 40px;
-        }
-        
-        .qa-your-answer-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: #dc3545;
-            margin-bottom: 20px;
-            text-shadow: none;
-        }
-        
-        .qa-form-container {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .qa-form-label {
-            font-weight: 600;
-            color: #dc3545;
-            margin-bottom: 10px;
-        }
-        
-        .qa-textarea {
-            width: 100%;
-            min-height: 150px;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-        }
-        
-        .qa-textarea:focus {
-            outline: none;
-            border-color: #dc3545;
-            box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
-        }
-        
-        .qa-submit-btn {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .qa-submit-btn:hover {
-            background-color: #c82333;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        
-        .qa-back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: #dc3545;
-            font-weight: 600;
-            margin-bottom: 20px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        
-        .qa-back-btn:hover {
-            transform: translateX(-5px);
-            color: #c82333;
-            text-decoration: none;
-        }
-        
-        .qa-required-login {
-            text-align: center;
-            padding: 30px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            margin-top: 20px;
-        }
-        
-        .qa-login-btn {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 15px;
-            transition: all 0.3s ease;
-        }
-        
-        .qa-login-btn:hover {
-            background-color: #c82333;
-            transform: translateY(-2px);
-            text-decoration: none;
-        }
-        
-        /* Animations */
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
-        .qa-answer {
-            animation: slideInRight 0.5s ease forwards;
-            opacity: 0;
-        }
-        
-        .qa-answer:nth-child(1) { animation-delay: 0.1s; }
-        .qa-answer:nth-child(2) { animation-delay: 0.2s; }
-        .qa-answer:nth-child(3) { animation-delay: 0.3s; }
-        .qa-answer:nth-child(4) { animation-delay: 0.4s; }
-        .qa-answer:nth-child(5) { animation-delay: 0.5s; }
-        
-        .qa-highlight {
-            background-color: rgba(106, 27, 154, 0.1);
-            border-radius: 3px;
-            padding: 2px 5px;
-            transition: background-color 0.3s ease;
-        }
-        
-        .qa-highlight:hover {
-            background-color: rgba(106, 27, 154, 0.2);
-        }
-        
-        .qa-empty-answers {
-            text-align: center;
-            padding: 40px 20px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 12px;
-            margin-bottom: 30px;
-        }
-        
-        .qa-empty-answers h3 {
-            color: #4a0072;
-            margin-bottom: 15px;
-        }
-        
-        .qa-empty-answers p {
-            color: #666;
-            margin-bottom: 0;
-        }
-        
-        /* Flash message styles */
-        .qa-flash-success {
-            background-color: rgba(76, 175, 80, 0.9);
-            color: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .qa-flash-success i {
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-        
-        .qa-flash-close {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-            padding: 0;
-            margin: 0;
-            line-height: 1;
-        }
-        
-        .qa-flash-close:hover {
-            transform: scale(1.2);
-        }
-    </style>
+    <link rel="stylesheet" href="/Gear/public/css/QADetailView.css">
 </head>
 <body>
     <!-- Header -->
-      <!-- Header -->
-  <header>
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="header-inner-content">
-            <div class="header-logo">
-              <img src="/Gear/public/images/LogoGearBK.webp" alt="Logo">
-              <span>GearBK</span>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="header-inner-content">
+                        <div class="header-logo">
+                            <img src="/Gear/public/images/LogoGearBK.webp" alt="Logo">
+                            <span>GearBK</span>
+                        </div>
+                        <div class="mobile-menu-toggle" id="mobile-menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                        <div class="header-menu" id="header-menu">
+                            <ul>
+                                <li><a href="/Gear">HOME</a></li>
+                                <li><a href="/Gear/AboutController/index">ABOUT</a></li>
+                                <li><a href="/Gear/ProductController/list">SHOP</a></li>
+                                <li><a href="/Gear/contact">CONTACT</a></li>
+                                <li><a href="/Gear/BlogController/list">BLOG</a></li>
+                                <li><a href="/Gear/QAController/list" class="active">Q&A</a></li>
+                            </ul>
+                        </div>
+                        <div class="d-flex">
+                            <div class="header-shop" style="display: flex; align-items: center;"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;"><i class="fa-solid fa-user"></i></div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="header-menu">
-              <ul>
-                <li><a href="/Gear">HOME</a></li>
-                <li><a href="/Gear/AboutController/index">ABOUT</a></li>
-                <li><a href="/Gear/ProductController/list">SHOP</a></li>
-                <li><a href="/Gear/contact">CONTACT</a></li>
-                <li><a href="/Gear/news">NEWS</a></li>
-                <li><a href="/Gear/QAController/list">Q&A</a></li>
-                <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-        <?php endif; ?>
-              </ul>
-            </div>
-            <div class="d-flex">
-              <div class="header-shop" style="display: flex; align-items: center;"><i class="fa-solid fa-bag-shopping"></i></div>
-              <div class="header-user" style="display: flex; align-items: center; margin-left: 15px;"><i class="fa-solid fa-user"></i></div>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </header>
+    </header>
 
     <!-- Main Content -->
     <div class="qa-detail-container">
@@ -550,6 +226,40 @@
             }).blur(function() {
                 $(this).css('transform', 'scale(1)');
             });
+        });
+
+        // Add mobile menu JavaScript functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const headerMenu = document.getElementById('header-menu');
+            
+            if (mobileMenuToggle && headerMenu) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    this.classList.toggle('active');
+                    headerMenu.classList.toggle('active');
+                });
+                
+                // Close menu when clicking on a link
+                const menuLinks = headerMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenuToggle.classList.remove('active');
+                        headerMenu.classList.remove('active');
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    const isClickInsideMenu = headerMenu.contains(event.target);
+                    const isClickOnToggle = mobileMenuToggle.contains(event.target);
+                    
+                    if (!isClickInsideMenu && !isClickOnToggle && headerMenu.classList.contains('active')) {
+                        mobileMenuToggle.classList.remove('active');
+                        headerMenu.classList.remove('active');
+                    }
+                });
+            }
         });
     </script>
 </body>
