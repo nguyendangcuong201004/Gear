@@ -1,8 +1,11 @@
 <?php
 class AdminOrderModel extends Database
 {
-    public function getListOrder($search = null)
+    public function getListOrder($search = null, $page = 1, $limit = 10)
     {
+        // Tính offset dựa trên trang hiện tại
+        $offset = ($page - 1) * $limit;
+        
         $conds = ["o.deleted = 0"];
         if ($search) {
             $s = mysqli_real_escape_string($this->con, $search);
@@ -19,6 +22,7 @@ class AdminOrderModel extends Database
           {$where}
           GROUP BY o.id
           ORDER BY o.created_at DESC
+          LIMIT {$offset}, {$limit}
         ";
 
         $res = mysqli_query($this->con, $sql)
@@ -28,6 +32,32 @@ class AdminOrderModel extends Database
             $orders[] = $row;
         }
         return $orders;
+    }
+    
+    /**
+     * Đếm tổng số đơn hàng để phân trang
+     */
+    public function countOrders($search = null)
+    {
+        $conds = ["o.deleted = 0"];
+        if ($search) {
+            $s = mysqli_real_escape_string($this->con, $search);
+            $conds[] = "(o.code LIKE '%{$s}%' OR o.full_name LIKE '%{$s}%' OR o.phone LIKE '%{$s}%')";
+        }
+        $where = "WHERE " . implode(" AND ", $conds);
+
+        $sql = "
+          SELECT COUNT(DISTINCT o.id) as total
+          FROM orders o
+          JOIN orders_products op ON op.order_id = o.id
+          {$where}
+        ";
+
+        $res = mysqli_query($this->con, $sql)
+            or die("Query failed: " . mysqli_error($this->con));
+        $row = mysqli_fetch_assoc($res);
+        
+        return (int)$row['total'];
     }
 
     public function getOrderById($id) {

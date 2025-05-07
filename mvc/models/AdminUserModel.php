@@ -1,13 +1,35 @@
 <?php
 
 class AdminUserModel extends Database {
-    public function getAllUsers($search = null) {
+    public function getAllUsers($search = null, $page = 1, $limit = 10) {
+        // Tính offset dựa vào trang hiện tại
+        $offset = ($page - 1) * $limit;
+        
         $sql = "SELECT * FROM users WHERE deleted = 0";
         if ($search) {
-            $s    = mysqli_real_escape_string($this->con, $search);
+            $s = mysqli_real_escape_string($this->con, $search);
             $sql .= " AND username LIKE '%{$s}%'";
         }
+        
+        // Thêm LIMIT và OFFSET cho phân trang
+        $sql .= " ORDER BY id DESC LIMIT {$offset}, {$limit}";
+        
         return mysqli_query($this->con, $sql);
+    }
+    
+    /**
+     * Đếm tổng số người dùng để phân trang
+     */
+    public function countUsers($search = null) {
+        $sql = "SELECT COUNT(*) as total FROM users WHERE deleted = 0";
+        if ($search) {
+            $s = mysqli_real_escape_string($this->con, $search);
+            $sql .= " AND username LIKE '%{$s}%'";
+        }
+        
+        $result = mysqli_query($this->con, $sql);
+        $row = mysqli_fetch_assoc($result);
+        return (int)$row['total'];
     }
 
     public function getUserById(int $id) {

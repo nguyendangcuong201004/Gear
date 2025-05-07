@@ -30,6 +30,7 @@
                 <li><a href="/Gear/ContactAdminController">Quản lý liên hệ</a></li>
                 <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
     <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
+<?php endif; ?>
             </ul>
         </div>
         <div class="content">
@@ -38,15 +39,16 @@
                 <?php if (!empty($error)): ?>
                     <h2 class="alert alert-danger"><?= htmlspecialchars($error) ?></h2>
                 <?php endif; ?>
-                <form action="/Gear/AdminProductController/store" method="POST" id="createProductForm">
+                <form action="/Gear/AdminProductController/store" method="POST" id="createProductForm" enctype="multipart/form-data">
                     <label for="name">Tên sản phẩm</label>
                     <input type="text" id="name" name="name" value="<?= htmlspecialchars($product['name'] ?? '') ?>" required>
 
                     <label for="code">Mã sản phẩm</label>
                     <input type="text" id="code" name="code" value="<?= htmlspecialchars($product['code'] ?? '') ?>">
 
-                    <label for="images">Link ảnh online (JSON)</label>
-                    <textarea id="images" name="images"><?= htmlspecialchars($product['images'] ?? '') ?></textarea>
+                    <label for="product_image">Ảnh sản phẩm</label>
+                    <input type="file" id="product_image" name="product_image" accept="image/*">
+                    <small class="form-text text-muted">Chọn file ảnh có định dạng: jpg, jpeg, png, gif</small>
 
                     <label for="price">Giá bán</label>
                     <input type="number" id="price" name="price" value="<?= (int)($product['price'] ?? 0) ?>" min="0" required>

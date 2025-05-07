@@ -51,7 +51,14 @@
     <div class="container d-flex">
         <!-- Left Section: Promotional Banner -->
         <div class="left-section">
-            <img src=<?= $data["detailProduct"]["images"] ?> alt="" width="500px" height="550px">
+            <img src="<?php echo isset($data["detailProduct"]["images"]) && !empty($data["detailProduct"]["images"]) ? 
+                     '/Gear/public/images/products/' . htmlspecialchars($data["detailProduct"]["images"]) : 
+                     '/Gear/public/images/default-product.jpg'; ?>" 
+                 alt="<?= htmlspecialchars($data["detailProduct"]["name"]) ?>" 
+                 width="500px" 
+                 height="550px"
+                 onerror="this.onerror=null; this.src='/Gear/public/images/default-product.jpg';"
+                 style="object-fit: contain;">
         </div>
 
         <!-- Right Section: Product Details -->

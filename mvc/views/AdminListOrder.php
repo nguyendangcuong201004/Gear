@@ -6,6 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý đơn hàng</title>
     <link rel="stylesheet" href="/Gear/public/css/adminOrder.css">
+    <style>
+        /* CSS cho phân trang */
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .pagination-info {
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .pagination-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            justify-content: center;
+        }
+        
+        .page-link {
+            display: inline-block;
+            padding: 8px 12px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        
+        .page-link:hover {
+            background-color: #e0e0e0;
+        }
+        
+        .page-link.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+    </style>
 </head>
 
 <body>
@@ -50,6 +93,8 @@
                     var slug = term.replace(/\s+/g, '-');
                     var url = '/Gear/AdminOrderController/list';
                     if (slug) url += '/search=' + encodeURIComponent(slug);
+                    // Reset về trang 1 khi tìm kiếm mới
+                    url += '/page=1';
                     window.location.href = url;
                 }
             </script>
@@ -105,6 +150,47 @@
                     <?php endif; ?>
                 </tbody>
             </table>
+            
+            <!-- Phân trang -->
+            <?php if (isset($totalPages) && $totalPages > 1): ?>
+            <div class="pagination">
+                <div class="pagination-info">
+                    Trang <?= $currentPage ?> / <?= $totalPages ?>
+                </div>
+                <div class="pagination-links">
+                    <?php if ($currentPage > 1): ?>
+                        <a href="/Gear/AdminOrderController/list<?= isset($search) && $search ? '/search=' . $search : '' ?>/page=<?= $currentPage - 1 ?>" class="page-link">&laquo; Trang trước</a>
+                    <?php endif; ?>
+                    
+                    <?php
+                    // Hiển thị các nút số trang
+                    $startPage = max(1, $currentPage - 2);
+                    $endPage = min($totalPages, $currentPage + 2);
+                    
+                    // Nếu đang ở gần cuối, hiển thị thêm các trang đầu
+                    if ($endPage - $startPage < 4 && $startPage > 1) {
+                        $startPage = max(1, $endPage - 4);
+                    }
+                    
+                    // Nếu đang ở gần đầu, hiển thị thêm các trang cuối
+                    if ($endPage - $startPage < 4 && $endPage < $totalPages) {
+                        $endPage = min($totalPages, $startPage + 4);
+                    }
+                    
+                    for ($i = $startPage; $i <= $endPage; $i++): 
+                    ?>
+                        <a href="/Gear/AdminOrderController/list<?= isset($search) && $search ? '/search=' . $search : '' ?>/page=<?= $i ?>" 
+                           class="page-link <?= $i == $currentPage ? 'active' : '' ?>">
+                           <?= $i ?>
+                        </a>
+                    <?php endfor; ?>
+                    
+                    <?php if ($currentPage < $totalPages): ?>
+                        <a href="/Gear/AdminOrderController/list<?= isset($search) && $search ? '/search=' . $search : '' ?>/page=<?= $currentPage + 1 ?>" class="page-link">Trang sau &raquo;</a>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
     </div>
 </body>

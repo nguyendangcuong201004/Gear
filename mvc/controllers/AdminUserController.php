@@ -2,20 +2,37 @@
 class AdminUserController extends Controller {
 
     public function list(...$filters) {
-        // 1. Lấy từ khóa search nếu có
+        // 1. Lấy từ khóa search và trang nếu có
         $search = null;
+        $page = 1; // Mặc định là trang 1
+        
         foreach ($filters as $segment) {
             if (strpos($segment, 'search=') === 0) {
                 $search = substr($segment, strlen('search='));
-                break;
+            }
+            if (strpos($segment, 'page=') === 0) {
+                $page = (int)substr($segment, strlen('page='));
+                if ($page < 1) $page = 1; // Đảm bảo trang luôn ≥ 1
             }
         }
-
+        
         // 2. Gọi model lấy dữ liệu
-        $model      = $this->model("AdminUserModel");
-        $resultSet  = $model->getAllUsers($search);
+        $model = $this->model("AdminUserModel");
+        
+        // 3. Tính toán phân trang
+        $limit = 10; // Số người dùng trên mỗi trang
+        $totalUsers = $model->countUsers($search);
+        $totalPages = ceil($totalUsers / $limit);
+        
+        // Đảm bảo trang hiện tại không vượt quá tổng số trang
+        if ($page > $totalPages && $totalPages > 0) {
+            $page = $totalPages;
+        }
+        
+        // 4. Lấy danh sách người dùng cho trang hiện tại
+        $resultSet = $model->getAllUsers($search, $page, $limit);
 
-        // 3. Chuyển kết quả thành mảng để truyền view
+        // 5. Chuyển kết quả thành mảng để truyền view
         $listUsers = [];
         if ($resultSet) {
             while ($row = mysqli_fetch_assoc($resultSet)) {
@@ -23,10 +40,12 @@ class AdminUserController extends Controller {
             }
         }
 
-        // 4. Render view
+        // 6. Render view
         $this->view("AdminListUser", [
             "listUsers" => $listUsers,
-            "search"    => $search
+            "search" => $search,
+            "currentPage" => $page,
+            "totalPages" => $totalPages
         ]);
     }
 

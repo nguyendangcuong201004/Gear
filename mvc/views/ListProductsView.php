@@ -11,6 +11,67 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/Gear/public/css/product.css">
     <link rel="stylesheet" href="/Gear/public/css/style.css">
+    <style>
+        .product-image-container {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        
+        .product-image-container img {
+            max-width: 100%;
+            max-height: 180px;
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        
+        .inner-item:hover .product-image-container img {
+            transform: scale(1.05);
+        }
+        
+        .inner-item {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+        
+        .inner-item:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .inner-title {
+            font-weight: bold;
+            margin: 10px 0;
+            height: 40px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        
+        .inner-new-price {
+            color: #dc3545;
+            font-weight: bold;
+            font-size: 18px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .inner-old-price {
+            text-decoration: line-through;
+            color: #6c757d;
+            font-size: 14px;
+        }
+    </style>
 </head>
 
 <body>
@@ -221,7 +282,11 @@
                                     <div class="col-4">
                                         <a href="/Gear/ProductController/detail/slug=<?= $row['slug'] ?>">
                                             <div class="inner-item">
-                                                <img src="<?= $row['images'] ?>" alt="">
+                                                <div class="product-image-container">
+                                                    <img src="/Gear/public/images/products/<?= htmlspecialchars($row['images']) ?>" 
+                                                         alt="<?= htmlspecialchars($row['name']) ?>"
+                                                         onerror="this.onerror=null; this.src='/Gear/public/images/default-product.jpg';">
+                                                </div>
                                                 <div class="inner-title"><?= $row['name'] ?></div>
                                                 <span class="inner-new-price"><?= number_format($row['price']) ?>₫</span>
                                                 <?php if ($row['discount'] > 0): ?>
