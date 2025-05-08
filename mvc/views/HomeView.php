@@ -259,7 +259,7 @@
                                 <img src="public/images/products/<?php echo htmlspecialchars($product['images']); ?>" 
                                         class="card-img-top" 
                                         alt="<?php echo htmlspecialchars($product['name']); ?>"
-                                        onerror="this.onerror=null; this.src='public/images/default-product.jpg';"
+                                        onerror="this.onerror=null; this.src='public/images/products/default-product.jpg';"
                                         style="height: 150px; object-fit: contain;">
                             </div>
                             <h5 class="card-title fw-bold text-dark mb-2 fs-6" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; min-height: 38px;">
@@ -315,7 +315,7 @@
                                 <img src="public/images/products/<?php echo htmlspecialchars($product['images']); ?>" 
                                         class="card-img-top" 
                                         alt="<?php echo htmlspecialchars($product['name']); ?>"
-                                        onerror="this.onerror=null; this.src='public/images/default-product.jpg';"
+                                        onerror="this.onerror=null; this.src='public/images/products/default-product.jpg';"
                                         style="height: 180px; object-fit: contain;">
                             </div>
                             <h5 class="card-title fw-bold text-dark mb-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; min-height: 48px;">
@@ -382,7 +382,7 @@
                                         <img src="public/images/products/<?php echo htmlspecialchars($product['images']); ?>" 
                                              class="card-img-top" 
                                              alt="<?php echo htmlspecialchars($product['name']); ?>"
-                                             onerror="this.onerror=null; this.src='public/images/default-product.jpg';"
+                                             onerror="this.onerror=null; this.src='public/images/products/default-product.jpg';"
                                              style="height: 150px; object-fit: contain;">
                                     </div>
                                     <h5 class="card-title fw-bold text-dark mb-2 fs-6" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; min-height: 38px;">
@@ -450,7 +450,7 @@
                                         <img src="public/images/products/<?php echo htmlspecialchars($product['images']); ?>" 
                                              class="card-img-top" 
                                              alt="<?php echo htmlspecialchars($product['name']); ?>"
-                                             onerror="this.onerror=null; this.src='public/images/default-product.jpg';"
+                                             onerror="this.onerror=null; this.src='public/images/products/default-product.jpg';"
                                              style="height: 180px; object-fit: contain;">
                                     </div>
                                     <h5 class="card-title fw-bold text-dark mb-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; min-height: 48px;">

@@ -37,7 +37,7 @@ $post_id  = $data['post_id'];
                     <li><a href="/Gear" style="display: inline-block; text-align: center;">HOME</a></li>
                     <li><a href="/Gear/AboutController/index" style="display: inline-block; text-align: center;">ABOUT</a></li>
                     <li><a href="/Gear/ProductController/list" style="display: inline-block; text-align: center;">SHOP</a></li>
-                    <li><a href="/Gear/contact" style="display: inline-block; text-align: center;">CONTACT</a></li>
+                    <li><a href="/Gear/ContactController" style="display: inline-block; text-align: center;">CONTACT</a></li>
                     <li><a href="/Gear/BlogController/list" style="display: inline-block; text-align: center;">BLOG</a></li>
                     <li><a href="/Gear/QAController/list" style="display: inline-block; text-align: center;">Q&A</a></li>
                 </ul>

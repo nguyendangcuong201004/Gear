@@ -229,7 +229,7 @@
                     <div class="inner-menu">
                         <ul>
                             <li>
-                                <a href="">Home</a>
+                                <a href="/Gear">Home</a>
                             </li>
                             <li>
                                 <a href="">About</a>
@@ -238,7 +238,7 @@
                                 <a href="">Shop</a>
                             </li>
                             <li>
-                                <a href="">Contact</a>
+                                <a href="/Gear/ContactController">Contact</a>
                             </li>
                             <li>
                                 <a href="">News</a>

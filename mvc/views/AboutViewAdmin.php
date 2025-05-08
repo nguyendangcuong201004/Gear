@@ -825,7 +825,7 @@ if ($result && $result->num_rows > 0) {
                 <li><a href="/Gear">HOME</a></li>
                 <li><a href="/Gear/AboutController/index">ABOUT</a></li>
                 <li><a href="/Gear/ProductController/list">SHOP</a></li>
-                <li><a href="/Gear/contact">CONTACT</a></li>
+                <li><a href="/Gear/ContactController">CONTACT</a></li>
                 <li><a href="/Gear/BlogController/list">BLOG</a></li>
                 <li><a href="/Gear/QAController/list">Q&A</a></li>
                 <li><a href="/Gear/AuthController/logout">ĐĂNG XUẤT</a></li>

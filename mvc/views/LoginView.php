@@ -283,7 +283,7 @@
                 <li class="nav-item"><a class="nav-link" href="/Gear">HOME</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Gear/AboutController/index">ABOUT</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Gear/ProductController/list">SHOP</a></li>
-                <li class="nav-item"><a class="nav-link" href="/Gear/contact">CONTACT</a></li>
+                <li class="nav-item"><a class="nav-link" href="/Gear/ContactController">CONTACT</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Gear/BlogController/list">BLOG</a></li>
                 <li class="nav-item"><a class="nav-link" href="/Gear/QAController/list">Q&A</a></li>
               </ul>
