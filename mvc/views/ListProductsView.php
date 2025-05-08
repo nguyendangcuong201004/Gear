@@ -80,7 +80,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="inner-content">
-                        <a href="/Gear">
+                        <a class="text-decoration-none text-dark" href="/Gear">
                             <div class="inner-logo" style="color: #000;">
                                 <img src="/Gear/public/images/logos/<?php echo $data['settings']['logo']; ?>" alt="<?php echo $data['settings']['company_name']; ?>">
                                 <span><?php echo $data['settings']['company_name']; ?></span>

@@ -67,7 +67,7 @@
                         data-price="<?= (int)$item['price'] ?>">
 
                         <!-- Ảnh sản phẩm -->
-                        <img src="<?= htmlspecialchars($item['images']) ?>"
+                        <img src="/Gear/public/images/products/<?= htmlspecialchars($item['images']) ?>"
                             alt="<?= htmlspecialchars($item['name']) ?>"
                             class="me-3"
                             style="width:120px; height:auto;">
