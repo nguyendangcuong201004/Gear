@@ -25,11 +25,9 @@ $items = $items ?? [];
     <div class="main-container">
         <div class="sidebar">
             <ul>
-                <li><a href="/AdminController/dashboard">Tổng quan</a></li>
+                <li><a href="/Gear/AdminController/dashboard">Tổng quan</a></li>
                 <li><a href="/Gear/AdminProductController/list">Sản phẩm</a></li>
                 <li><a href="/Gear/AdminOrderController/list">Đơn hàng</a></li>
-                <li><a href="">Nhóm quyền</a></li>
-                <li><a href="#">Phân quyền</a></li>
                 <li><a href="/Gear/AdminUserController/list">Tài khoản</a></li>
             </ul>
         </div>

@@ -348,6 +348,9 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                     <li><a href="/Gear/ContactController" style="display: inline-block; text-align: center;">CONTACT</a></li>
                     <li><a href="/Gear/BlogController/list" style="display: inline-block; text-align: center;">BLOG</a></li>
                     <li><a href="/Gear/QAController/list" style="display: inline-block; text-align: center;">Q&A</a></li>
+        <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
+            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
+        <?php endif; ?>
                 </ul>
                 </div>
                 <div class="d-flex align-items-center">
