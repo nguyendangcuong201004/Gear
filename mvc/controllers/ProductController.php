@@ -1,6 +1,12 @@
 <?php
 
 class ProductController extends Controller{
+    private $homeAdminModel;
+
+    public function __construct() {
+        $this->homeAdminModel = $this->model("HomeAdminModel");
+    }
+
     public function list (...$filters) {
         $search = null;
         $sortfilter = null;
@@ -20,14 +26,22 @@ class ProductController extends Controller{
         }
         $model = $this->model("ProductModel");
         $listProducts = $model->getListProducts($search,  $sortfilter, $pricefilter);
-        $this->view("ListProductsView", ["listProducts" => $listProducts]);
+        $settings = $this->homeAdminModel->getSiteSettings();
+        $this->view("ListProductsView", [
+            "listProducts" => $listProducts,
+            "settings" => $settings
+        ]);
     }
 
     public function detail ($slug) {
         $h = $this->model("ProductModel");
         $slug = explode('=', $slug, 2)[1] ?? ''; 
         $detailProduct = $h->getDetailProduct($slug);
-        $this->view("ProductView", ["detailProduct" => $detailProduct]);
+        $settings = $this->homeAdminModel->getSiteSettings();
+        $this->view("ProductView", [
+            "detailProduct" => $detailProduct,
+            "settings" => $settings
+        ]);
     }
 
     public function addToCart() {

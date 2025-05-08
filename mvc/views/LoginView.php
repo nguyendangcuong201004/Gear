@@ -275,8 +275,13 @@
         <div class="col-12">
           <div class="header-inner-content d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
-              <img src="/Gear/public/images/LogoGearBK.webp" alt="GearBK Logo" style="height:40px;">
-              <span class="ml-2">GearBK</span>
+
+                  <a class="text-decoration-none text-dark" href="/Gear">
+                            <div class="inner-logo" style="color: #000;">
+                                <img src="/Gear/public/images/logos/<?php echo $data['settings']['logo']; ?>" alt="<?php echo $data['settings']['company_name']; ?>">
+                                <span><?php echo $data['settings']['company_name']; ?></span>
+                            </div>
+                        </a>
             </div>
             <nav>
               <ul class="nav">

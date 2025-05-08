@@ -1,11 +1,14 @@
 <?php
 require_once "./mvc/models/UserModel.php";
+require_once "./mvc/models/HomeAdminModel.php";
 
 class AuthController {
     private $userModel;
+    private $homeAdminModel;
 
     public function __construct() {
         $this->userModel = new UserModel();
+        $this->homeAdminModel = new HomeAdminModel();
     }
 
     public function login(...$params) {
@@ -21,8 +24,11 @@ class AuthController {
             return;
         }
 
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
+
         // GET: hiển thị form
-        $this->render("LoginView");
+        $this->render("LoginView", ['settings' => $settings]);
     }
     
     public function logout() {
@@ -57,7 +63,11 @@ class AuthController {
         }
 
         $userInfo = $this->userModel->getUserById($userId);
-        $this->render("ProfileView", ['userInfo' => $userInfo]);
+        $settings = $this->homeAdminModel->getSiteSettings();
+        $this->render("ProfileView", [
+            'userInfo' => $userInfo,
+            'settings' => $settings
+        ]);
     }
 
     // Cập nhật thông tin cá nhân
@@ -84,8 +94,10 @@ class AuthController {
             // Kiểm tra email hợp lệ
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $userInfo = $this->userModel->getUserById($userId);
+                $settings = $this->homeAdminModel->getSiteSettings();
                 $this->render("ProfileView", [
                     'userInfo' => $userInfo,
+                    'settings' => $settings,
                     'updateError' => "Email không hợp lệ"
                 ]);
                 return;
@@ -95,14 +107,18 @@ class AuthController {
             $updated = $this->userModel->updateUserProfile($userId, $email, $fullname, $dob, $address);
             if ($updated) {
                 $userInfo = $this->userModel->getUserById($userId);
+                $settings = $this->homeAdminModel->getSiteSettings();
                 $this->render("ProfileView", [
                     'userInfo' => $userInfo,
+                    'settings' => $settings,
                     'updateSuccess' => true
                 ]);
             } else {
                 $userInfo = $this->userModel->getUserById($userId);
+                $settings = $this->homeAdminModel->getSiteSettings();
                 $this->render("ProfileView", [
                     'userInfo' => $userInfo,
+                    'settings' => $settings,
                     'updateError' => "Cập nhật thông tin thất bại"
                 ]);
             }
@@ -136,8 +152,10 @@ class AuthController {
             // Kiểm tra mật khẩu hiện tại
             $user = $this->userModel->getUserById($userId);
             if (!password_verify($currentPassword, $user['password'])) {
+                $settings = $this->homeAdminModel->getSiteSettings();
                 $this->render("ProfileView", [
                     'userInfo' => $user,
+                    'settings' => $settings,
                     'passwordError' => "Mật khẩu hiện tại không đúng"
                 ]);
                 return;
@@ -145,8 +163,10 @@ class AuthController {
 
             // Kiểm tra mật khẩu mới và xác nhận mật khẩu
             if ($newPassword !== $confirmPassword) {
+                $settings = $this->homeAdminModel->getSiteSettings();
                 $this->render("ProfileView", [
                     'userInfo' => $user,
+                    'settings' => $settings,
                     'passwordError' => "Mật khẩu mới và xác nhận mật khẩu không khớp"
                 ]);
                 return;
@@ -154,8 +174,10 @@ class AuthController {
 
             // Kiểm tra độ mạnh của mật khẩu
             if (strlen($newPassword) < 6) {
+                $settings = $this->homeAdminModel->getSiteSettings();
                 $this->render("ProfileView", [
                     'userInfo' => $user,
+                    'settings' => $settings,
                     'passwordError' => "Mật khẩu mới phải có ít nhất 6 ký tự"
                 ]);
                 return;
@@ -166,13 +188,17 @@ class AuthController {
             $updated = $this->userModel->updatePassword($userId, $passwordHash);
 
             if ($updated) {
+                $settings = $this->homeAdminModel->getSiteSettings();
                 $this->render("ProfileView", [
                     'userInfo' => $user,
+                    'settings' => $settings,
                     'passwordSuccess' => true
                 ]);
             } else {
+                $settings = $this->homeAdminModel->getSiteSettings();
                 $this->render("ProfileView", [
                     'userInfo' => $user,
+                    'settings' => $settings,
                     'passwordError' => "Cập nhật mật khẩu thất bại"
                 ]);
             }
@@ -202,8 +228,12 @@ class AuthController {
             header("Location: /Gear");
             exit;
         } else {
+            $settings = $this->homeAdminModel->getSiteSettings();
             $error = "Tên đăng nhập hoặc mật khẩu không đúng.";
-            $this->render("LoginView", ['loginError' => $error]);
+            $this->render("LoginView", [
+                'loginError' => $error,
+                'settings' => $settings
+            ]);
         }
     }
 
@@ -216,7 +246,12 @@ class AuthController {
         $address = trim($_POST['register-address'] ?? '');
 
         if ($this->userModel->getUserByUsername($username)) {
-            $this->render("LoginView", ['registerError' => "Tên đăng nhập đã tồn tại.", 'showRegister' => true]);
+            $settings = $this->homeAdminModel->getSiteSettings();
+            $this->render("LoginView", [
+                'registerError' => "Tên đăng nhập đã tồn tại.",
+                'showRegister' => true,
+                'settings' => $settings
+            ]);
             return;
         }
 
@@ -224,7 +259,12 @@ class AuthController {
         $ok = $this->userModel->createUser($username, $passwordHash, $email, $fullname, $dob, $address);
         if (!$ok) {
             $dbError = $this->userModel->con->error ?? 'Unknown error';
-            $this->render("LoginView", ['registerError' => "Đăng ký thất bại: $dbError", 'showRegister' => true]);
+            $settings = $this->homeAdminModel->getSiteSettings();
+            $this->render("LoginView", [
+                'registerError' => "Đăng ký thất bại: $dbError",
+                'showRegister' => true,
+                'settings' => $settings
+            ]);
             return;
         }
 

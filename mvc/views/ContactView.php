@@ -22,7 +22,7 @@
                 <div class="col-12">
                     <div class="inner-content">
                         <a class="inner-logo text-decoration-none text-dark" href="./">
-                            <img src="<?php echo isset($data['settings']['logo_url']) ? $data['settings']['logo_url'] : 'public/images/LogoGearBK.webp'; ?>" alt="<?php echo isset($data['settings']['site_name']) ? $data['settings']['site_name'] : 'GearBK'; ?>">
+                            <img src="<?php echo isset($data['settings']['logo']); ?>" alt="<?php echo isset($data['settings']['site_name']) ? $data['settings']['site_name'] : 'GearBK'; ?>">
                             <span><?php echo isset($data['settings']['site_name']) ? $data['settings']['site_name'] : 'GearBK'; ?></span>
                         </a>
                         <div class="inner-menu">

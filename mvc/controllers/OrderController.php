@@ -2,6 +2,12 @@
 
 class OrderController extends Controller
 {
+    private $homeAdminModel;
+
+    public function __construct() {
+        $this->homeAdminModel = $this->model("HomeAdminModel");
+    }
+
     // alias list → home
     public function list()
     {
@@ -14,9 +20,14 @@ class OrderController extends Controller
         $model = $this->model("OrderModel");
         // Lấy mảng item
         $order = $model->getDashboard();
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
         // Render view, truyền mảng vào key 'order'
         // print_r($order);
-        $this->view("CartView", ["order" => $order]);
+        $this->view("CartView", [
+            "order" => $order,
+            "settings" => $settings
+        ]);
     }
 
     public function update()
@@ -93,6 +104,10 @@ class OrderController extends Controller
         }
         $model = $this->model("OrderModel");
         $order = $model->getOrder($orderId);
-        $this->view("ThanksView", ["order" => $order]);
+        $settings = $this->homeAdminModel->getSiteSettings();
+        $this->view("ThanksView", [
+            "order" => $order,
+            "settings" => $settings
+        ]);
     }
 }

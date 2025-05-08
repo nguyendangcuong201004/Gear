@@ -33,13 +33,13 @@
             <div class="row">
                 <div class="col-12">
                     <div class="inner-content">
-                        <?php if (isset($data['settings']['logo']) && !empty($data['settings']['logo'])
-                                && isset($data['settings']['company_name']) && !empty($data['settings']['company_name'])): ?>
-                        <a class="inner-logo text-decoration-none text-dark" href="">
-                            <img src="./public/images/logos/<?php echo htmlspecialchars($data['settings']['logo']); ?>" alt="GearBK Logo">
-                            <span><?php echo htmlspecialchars($data['settings']['company_name']); ?></span>
+
+                    <a class="text-decoration-none text-dark" href="/Gear">
+                            <div class="inner-logo" style="color: #000;">
+                                <img src="/Gear/public/images/logos/<?php echo $data['settings']['logo']; ?>" alt="<?php echo $data['settings']['company_name']; ?>">
+                                <span><?php echo $data['settings']['company_name']; ?></span>
+                            </div>
                         </a>
-                        <?php endif; ?>
                         <div class="inner-menu">
                             <ul>
                                 <li>

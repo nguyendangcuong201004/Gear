@@ -20,8 +20,13 @@
                 <div class="col-12">
                     <div class="inner-content">
                         <div class="inner-logo">
-                            <img src="/Gear/public/images/LogoGearBK.webp" alt="">
-                            <span>GearBK</span>
+                            
+                        <a class="text-decoration-none text-dark" href="/Gear">
+                            <div class="inner-logo" style="color: #000;">
+                                <img src="/Gear/public/images/logos/<?php echo $data['settings']['logo']; ?>" alt="<?php echo $data['settings']['company_name']; ?>">
+                                <span><?php echo $data['settings']['company_name']; ?></span>
+                            </div>
+                        </a>
                         </div>
                         <div class="inner-menu">
                             <ul>

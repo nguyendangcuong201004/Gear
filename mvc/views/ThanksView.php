@@ -21,19 +21,23 @@
                 <div class="col-12">
                     <div class="inner-content">
                         <div class="inner-logo">
-                            <img src="/Gear/public/images/LogoGearBK.webp" alt="">
-                            <span>GearBK</span>
+                            <a class="text-decoration-none text-dark" href="/Gear">
+                                <div class="inner-logo" style="color: #000;">
+                                    <img src="/Gear/public/images/logos/<?php echo $data['settings']['logo']; ?>" alt="<?php echo $data['settings']['company_name']; ?>">
+                                    <span><?php echo $data['settings']['company_name']; ?></span>
+                                </div>
+                            </a>
                         </div>
                         <div class="inner-menu">
                             <ul>
-                            <li><a href="/Gear">HOME</a></li>
-        <li><a href="/Gear/AboutController/index">ABOUT</a></li>
-        <li><a href="/Gear/ProductController/list">SHOP</a></li>
-        <li><a href="/Gear/contact">CONTACT</a></li>
-        <li><a href="/Gear/BlogController/list">NEWS</a></li>
-        <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-        <?php endif; ?>
+                                <li><a href="/Gear">HOME</a></li>
+                                <li><a href="/Gear/AboutController/index">ABOUT</a></li>
+                                <li><a href="/Gear/ProductController/list">SHOP</a></li>
+                                <li><a href="/Gear/contact">CONTACT</a></li>
+                                <li><a href="/Gear/BlogController/list">NEWS</a></li>
+                                <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
+                                    <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
+                                <?php endif; ?>
                             </ul>
                         </div>
                         <div class="inner-shop"><i class="fa-solid fa-bag-shopping"></i></div>

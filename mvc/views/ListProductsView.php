@@ -80,10 +80,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="inner-content">
-                        <a href="/Gear/ProductController/list">
+                        <a href="/Gear">
                             <div class="inner-logo" style="color: #000;">
-                                <img src="/Gear/public/images/LogoGearBK.webp" alt="">
-                                <span>GearBK</span>
+                                <img src="/Gear/public/images/logos/<?php echo $data['settings']['logo']; ?>" alt="<?php echo $data['settings']['company_name']; ?>">
+                                <span><?php echo $data['settings']['company_name']; ?></span>
                             </div>
                         </a>
                         <div class="inner-menu">

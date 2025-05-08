@@ -210,8 +210,13 @@ $active_tab = $data['active_tab'] ?? 'questions';
         <div class="col-12">
           <div class="header-inner-content">
             <div class="header-logo">
-              <img src="/Gear/public/images/LogoGearBK.webp" alt="Logo">
-              <span>GearBK</span>
+
+                <a class="text-decoration-none text-dark" href="/Gear">
+                            <div class="inner-logo" style="color: #000;">
+                                <img src="/Gear/public/images/logos/<?php echo $data['settings']['logo']; ?>" alt="<?php echo $data['settings']['company_name']; ?>">
+                                <span><?php echo $data['settings']['company_name']; ?></span>
+                            </div>
+                        </a>
             </div>
             <div class="header-menu">
               <ul>

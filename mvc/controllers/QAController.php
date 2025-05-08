@@ -1,11 +1,13 @@
 <?php
 require_once 'mvc/models/QAModel.php';
 require_once 'mvc/models/UserModel.php';
+require_once 'mvc/models/HomeAdminModel.php';
 
 class QAController {
     private $model;
     private $con;
     private $userModel;
+    private $homeAdminModel;
     
     public function __construct() {
         // Kiểm tra xem biến $con đã được định nghĩa chưa
@@ -27,6 +29,7 @@ class QAController {
         
         $this->model = new QAModel($this->con);
         $this->userModel = new UserModel();
+        $this->homeAdminModel = new HomeAdminModel();
     }
     
     // Admin panel - Quản lý Q&A
@@ -58,6 +61,9 @@ class QAController {
         // Lấy danh sách tags
         $tags = $this->model->getAllTagsWithCount();
         
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
+        
         $data = [
             'questions' => $questions,
             'page' => $page,
@@ -66,7 +72,8 @@ class QAController {
             'answers_page' => $answers_page,
             'answers_total_pages' => $answersTotalPages,
             'active_tab' => $active_tab,
-            'tags' => $tags
+            'tags' => $tags,
+            'settings' => $settings
         ];
         
         require_once 'mvc/views/QAAdminView.php';
@@ -93,6 +100,9 @@ class QAController {
         // Lấy tags của câu hỏi
         $questionTags = $this->model->getTagsByQuestionId($id);
         
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
+        
         // Xử lý form submit
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title = $_POST['title'];
@@ -114,7 +124,8 @@ class QAController {
             'question' => $question->fetch_assoc(),
             'tags' => $tags,
             'questionTags' => $questionTags,
-            'error' => isset($error) ? $error : null
+            'error' => isset($error) ? $error : null,
+            'settings' => $settings
         ];
         
         require_once 'mvc/views/QAEditView.php';
@@ -136,6 +147,9 @@ class QAController {
             exit;
         }
         
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
+        
         // Xử lý form submit
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $content = $_POST['content'];
@@ -153,7 +167,8 @@ class QAController {
         
         $data = [
             'answer' => $answer,
-            'error' => isset($error) ? $error : null
+            'error' => isset($error) ? $error : null,
+            'settings' => $settings
         ];
         
         require_once 'mvc/views/QAEditAnswerView.php';
@@ -278,11 +293,15 @@ class QAController {
         
         $totalPages = ceil($totalQuestions / 6);
         
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
+        
         $data = [
             'questions' => $questions,
             'page' => $page,
             'total_pages' => $totalPages,
-            'search' => $keyword
+            'search' => $keyword,
+            'settings' => $settings
         ];
         
         require_once 'mvc/views/QAView.php';
@@ -298,9 +317,13 @@ class QAController {
         
         $answers = $this->model->getAnswersByQuestionId($id);
         
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
+        
         $data = [
             'question' => $question->fetch_assoc(),
-            'answers' => $answers
+            'answers' => $answers,
+            'settings' => $settings
         ];
         
         require_once 'mvc/views/QADetailView.php';
@@ -308,15 +331,17 @@ class QAController {
     
     public function create() {
         // Kiểm tra đăng nhập
-        if (!isset($_COOKIE['access_token'])) {
-            header('Location: /Gear/AuthController/login');
-            exit;
-        }
+
         
         // Lấy danh sách tags để hiển thị trong form
         $tags = $this->model->getAllTags();
+        
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
+        
         $data = [
-            'tags' => $tags
+            'tags' => $tags,
+            'settings' => $settings
         ];
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -398,11 +423,15 @@ class QAController {
         $totalQuestions = $this->model->getTotalQuestionsBySearch($keyword);
         $totalPages = ceil($totalQuestions / 6);
         
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
+        
         $data = [
             'questions' => $questions,
             'page' => $page,
             'total_pages' => $totalPages,
-            'search' => $keyword
+            'search' => $keyword,
+            'settings' => $settings
         ];
         
         require_once 'mvc/views/QAView.php';
@@ -432,11 +461,15 @@ class QAController {
         $totalQuestions = $this->model->getTotalQuestionsByUserId($userId);
         $totalPages = ceil($totalQuestions / 6);
         
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
+        
         $data = [
             'questions' => $questions,
             'page' => $page,
             'total_pages' => $totalPages,
-            'is_my_questions' => true
+            'is_my_questions' => true,
+            'settings' => $settings
         ];
         
         require_once 'mvc/views/QAView.php';
@@ -452,11 +485,15 @@ class QAController {
         
         $totalPages = ceil($totalQuestions / 6);
         
+        // Get site settings
+        $settings = $this->homeAdminModel->getSiteSettings();
+        
         $data = [
             'questions' => $questions,
             'page' => $page,
             'total_pages' => $totalPages,
-            'search' => ''
+            'search' => '',
+            'settings' => $settings
         ];
         
         require_once 'mvc/views/QAView.php';
