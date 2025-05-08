@@ -110,7 +110,7 @@
     <div class="main-container">
         <div class="sidebar position-fixed" style="padding: unset;">
             <ul>
-                <li><a href="/Gear/AdminController/dashboard">Tổng quan</a></li>
+                <li><a href="#">Tổng quan</a></li>
                 <li><a href="/Gear/AdminProductController/list">Sản phẩm</a></li>
                 <li><a href="/Gear/AdminOrderController/list">Đơn hàng</a></li>
                 <li><a href="#">Nhóm quyền</a></li>

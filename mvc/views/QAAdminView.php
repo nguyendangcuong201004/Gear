@@ -224,7 +224,6 @@ $active_tab = $data['active_tab'] ?? 'questions';
                 <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
             <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
         <?php endif; ?>
-                
               </ul>
             </div>
             <div class="d-flex align-items-center">

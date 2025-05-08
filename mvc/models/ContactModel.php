@@ -6,8 +6,11 @@ class ContactModel {
         $this->db = new Database();
     }
 
+    
     // Lưu tin nhắn liên hệ mới
     public function saveContactMessage($name, $email, $subject, $phone, $message, $newsletter) {
+        // Đảm bảo bảng đã được tạo
+        
         
         // Chuẩn bị dữ liệu
         $name = mysqli_real_escape_string($this->db->con, $name);

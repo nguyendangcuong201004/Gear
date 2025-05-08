@@ -199,7 +199,7 @@ class AuthController {
             setcookie('user_role', $user['user_role'], time()+7*24*60*60, '/');
 
             // Redirect
-            header("Location: http://localhost/Gear/QAController/list");
+            header("Location: /Gear");
             exit;
         } else {
             $error = "Tên đăng nhập hoặc mật khẩu không đúng.";
@@ -240,7 +240,7 @@ class AuthController {
         setcookie('user_name', $user['username'], time()+7*24*60*60, '/');
         setcookie('user_role', $user['user_role'], time()+7*24*60*60, '/');
 
-        header("Location: http://localhost/Gear/QAController/list");
+        header("Location: /Gear");
         exit;
     }
 

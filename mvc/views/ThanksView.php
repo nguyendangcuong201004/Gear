@@ -151,16 +151,16 @@
                                 <a href="/Gear">Home</a>
                             </li>
                             <li>
-                                <a href="">About</a>
+                                <a href="/Gear/AboutController">About</a>
                             </li>
                             <li>
-                                <a href="">Shop</a>
+                                <a href="/Gear/ProductController">Shop</a>
                             </li>
                             <li>
                                 <a href="/Gear/ContactController">Contact</a>
                             </li>
                             <li>
-                                <a href="">News</a>
+                                <a href="/Gear/BlogController">Blogs</a>
                             </li>
                         </ul>
                     </div>
