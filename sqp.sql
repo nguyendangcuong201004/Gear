@@ -557,3 +557,26 @@ INSERT INTO carousel_slides (title, description, button_text, button_link, image
 ('Thiết Bị Gaming Cao Cấp', 'Trải nghiệm hiệu suất vượt trội với thiết bị gaming hàng đầu thị trường', 'Mua Ngay', '#featured-products', 'd90f441209670271_1746261088.jpg', 1),
 ('Laptop Gaming Chính Hãng', 'Chiến game mượt mà mọi lúc mọi nơi với laptop gaming đỉnh cao', 'Mua Ngay', '#featured-products', '473c992e8bbd7e0d_1746258606.jpg', 2),
 ('Phụ Kiện Gaming Chất Lượng', 'Nâng cấp trải nghiệm với phụ kiện gaming chất lượng, bền bỉ', 'Mua Ngay', '#featured-products', 'f33c887d1d0c06ba_1746258590.jpg', 3); 
+
+
+CREATE TABLE contact_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    subject VARCHAR(255),
+    phone VARCHAR(50),
+    message TEXT NOT NULL,
+    admin_reply TEXT NULL,
+    newsletter TINYINT(1) DEFAULT 0,
+    status ENUM('unread', 'read', 'replied') DEFAULT 'unread',
+    replied_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert sample data for contact_messages
+INSERT INTO contact_messages (name, email, subject, phone, message, newsletter, status) VALUES
+('Nguyễn Văn A', 'nguyenvana@email.com', 'Hỏi về sản phẩm', '0987654321', 'Tôi muốn biết thêm thông tin về sản phẩm X. Có thể cho tôi biết giá và thời gian giao hàng không?', 1, 'unread'),
+('Trần Thị B', 'tranthib@email.com', 'Khiếu nại dịch vụ', '0123456789', 'Tôi đã đặt hàng từ 3 ngày trước nhưng vẫn chưa nhận được. Mong được hỗ trợ sớm.', 0, 'read'),
+('Lê Văn C', 'levanc@email.com', 'Đề xuất cải thiện', '0912345678', 'Tôi có một số góp ý để cải thiện website của bạn. Mong được phản hồi.', 1, 'replied'),
+('Phạm Thị D', 'phamthid@email.com', 'Hợp tác kinh doanh', '0987123456', 'Công ty chúng tôi muốn tìm hiểu về khả năng hợp tác. Vui lòng liên hệ lại.', 0, 'unread'),
+('Hoàng Văn E', 'hoangvane@email.com', 'Tư vấn sản phẩm', '0978123456', 'Tôi cần tư vấn về việc chọn sản phẩm phù hợp với nhu cầu của công ty.', 1, 'read');
