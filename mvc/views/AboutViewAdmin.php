@@ -28,13 +28,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($section === 'our_story') {
             $paragraph1 = $_POST['paragraph_1'];
             $paragraph2 = $_POST['paragraph_2'];
-            $banner_image = $_POST['banner_image'];
+            
+            // Giữ lại ảnh cũ nếu không có ảnh mới
+            $banner_image = isset($_POST['current_banner_image']) ? $_POST['current_banner_image'] : '';
+            
+            // Xử lý upload ảnh mới nếu có
+            if (isset($_FILES['banner_image']) && $_FILES['banner_image']['error'] == 0) {
+                $upload_dir = "public/uploads/about/";
+                
+                // Tạo thư mục nếu chưa tồn tại
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+                
+                // Tạo tên file duy nhất
+                $file_name = time() . '_' . basename($_FILES['banner_image']['name']);
+                $target_file = $upload_dir . $file_name;
+                
+                // Upload file
+                if (move_uploaded_file($_FILES['banner_image']['tmp_name'], $target_file)) {
+                    // Xóa ảnh cũ nếu tồn tại và không phải là ảnh mặc định
+                    if (!empty($banner_image) && file_exists($banner_image) && strpos($banner_image, 'public/uploads/about/') === 0) {
+                        @unlink($banner_image);
+                    }
+                    $banner_image = $target_file;
+                } else {
+                    $message = "Error uploading banner image. Other changes were saved.";
+                }
+            }
             
             updateContent($conn, 'our_story', 'paragraph_1', $paragraph1);
             updateContent($conn, 'our_story', 'paragraph_2', $paragraph2);
             updateContent($conn, 'our_story', 'banner_image', $banner_image);
             
-            $message = "Our Story section updated successfully!";
+            $message = isset($message) ? $message : "Our Story section updated successfully!";
         }
         // Mission & Values section update
         else if ($section === 'mission_values') {
@@ -74,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         else if ($section === 'product_category_add') {
             $title = $_POST['title'];
             $description = $_POST['description'];
-            $image_url = $_POST['image_url'];
+            $image = $_FILES['image'];
             $display_order = $_POST['display_order'];
             
             // Get section_id for product_categories
@@ -83,6 +110,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result && $result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $section_id = $row['id'];
+                
+                // Upload image
+                $upload_dir = "public/uploads/about/";
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+                $file_name = time() . '_' . basename($image['name']);
+                $target_file = $upload_dir . $file_name;
+                if (move_uploaded_file($image['tmp_name'], $target_file)) {
+                    $image_url = $target_file;
+                } else {
+                    $image_url = '';
+                }
                 
                 // Insert new category
                 $query = "INSERT INTO product_categories (section_id, title, description, image_url, display_order) 
@@ -100,8 +140,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $id = $_POST['id'];
             $title = $_POST['title'];
             $description = $_POST['description'];
-            $image_url = $_POST['image_url'];
+            $image = $_FILES['image'];
             $display_order = $_POST['display_order'];
+            
+            // Upload image
+            $upload_dir = "public/uploads/about/";
+            if (!file_exists($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+            $file_name = time() . '_' . basename($image['name']);
+            $target_file = $upload_dir . $file_name;
+            if (move_uploaded_file($image['tmp_name'], $target_file)) {
+                $image_url = $target_file;
+            } else {
+                $image_url = $_POST['current_image_url'];
+            }
             
             // Update category
             $query = "UPDATE product_categories 
@@ -203,7 +256,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'];
             $role = $_POST['role'];
             $info = $_POST['info'];
-            $image_url = $_POST['image_url'];
+            $image = $_FILES['image'];
             $display_order = $_POST['display_order'];
             
             // Get section_id for team
@@ -212,6 +265,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($result && $result->num_rows > 0) {
                 $row = $result->fetch_assoc();
                 $section_id = $row['id'];
+                
+                // Upload image
+                $upload_dir = "public/uploads/about/team/";
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+                $file_name = time() . '_' . basename($image['name']);
+                $target_file = $upload_dir . $file_name;
+                if (move_uploaded_file($image['tmp_name'], $target_file)) {
+                    $image_url = $target_file;
+                } else {
+                    $image_url = '';
+                }
                 
                 // Insert new team member
                 $query = "INSERT INTO team_members (section_id, name, role, info, image_url, display_order) 
@@ -230,8 +296,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'];
             $role = $_POST['role'];
             $info = $_POST['info'];
-            $image_url = $_POST['image_url'];
+            $image = $_FILES['image'];
             $display_order = $_POST['display_order'];
+            
+            // Upload image
+            $upload_dir = "public/uploads/about/team/";
+            if (!file_exists($upload_dir)) {
+                mkdir($upload_dir, 0777, true);
+            }
+            $file_name = time() . '_' . basename($image['name']);
+            $target_file = $upload_dir . $file_name;
+            if (move_uploaded_file($image['tmp_name'], $target_file)) {
+                $image_url = $target_file;
+            } else {
+                $image_url = $_POST['current_team_image_url'];
+            }
             
             // Update team member
             $query = "UPDATE team_members 
@@ -749,9 +828,6 @@ if ($result && $result->num_rows > 0) {
                 <li><a href="/Gear/contact">CONTACT</a></li>
                 <li><a href="/Gear/BlogController/list">BLOG</a></li>
                 <li><a href="/Gear/QAController/list">Q&A</a></li>
-                <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-        <?php endif; ?>
                 <li><a href="/Gear/AuthController/logout">ĐĂNG XUẤT</a></li>
               </ul>
             </div>
@@ -836,7 +912,7 @@ if ($result && $result->num_rows > 0) {
                 <h4 class="m-0"><i class="fas fa-history"></i> Our Story</h4>
               </div>
               <div class="section-body">
-                <form method="POST" action="">
+                <form method="POST" action="" enctype="multipart/form-data">
                   <input type="hidden" name="section" value="our_story">
                   
                   <div class="form-group">
@@ -850,9 +926,17 @@ if ($result && $result->num_rows > 0) {
                   </div>
                   
                   <div class="form-group">
-                    <label for="banner_image"><strong>Banner Image URL</strong></label>
-                    <input type="text" class="form-control" id="banner_image" name="banner_image" value="<?= htmlspecialchars($banner_image) ?>" required>
-                    <small class="form-text text-muted">Enter the URL of the banner image</small>
+                    <label for="banner_image"><strong>Banner Image</strong></label>
+                    <input type="file" class="form-control-file" id="banner_image" name="banner_image" accept="image/*">
+                    <small class="form-text text-muted">Để trống nếu không muốn thay đổi ảnh hiện tại</small>
+                    
+                    <?php if (!empty($banner_image)): ?>
+                    <div class="mt-2">
+                      <label>Current Image:</label>
+                      <img src="<?= strpos($banner_image, 'http') === 0 ? $banner_image : '/Gear/' . ltrim($banner_image, '/') ?>" alt="Banner Image" class="img-thumbnail" style="max-height: 150px;">
+                      <input type="hidden" name="current_banner_image" value="<?= htmlspecialchars($banner_image) ?>">
+                    </div>
+                    <?php endif; ?>
                   </div>
                   
                   <div class="text-right">
@@ -996,7 +1080,7 @@ if ($result && $result->num_rows > 0) {
                       <tr>
                         <td><?= $category['id'] ?></td>
                         <td>
-                          <img src="<?= htmlspecialchars($category['image_url']) ?>" alt="Category" class="img-thumbnail" style="max-height: 60px;">
+                          <img src="<?= strpos($category['image_url'], 'http') === 0 ? $category['image_url'] : '/Gear/' . ltrim($category['image_url'], '/') ?>" alt="Category" class="img-thumbnail" style="max-height: 60px;">
                         </td>
                         <td><?= htmlspecialchars($category['title']) ?></td>
                         <td><?= htmlspecialchars(substr($category['description'], 0, 100)) ?>...</td>
@@ -1152,7 +1236,7 @@ if ($result && $result->num_rows > 0) {
                       <tr>
                         <td><?= $member['id'] ?></td>
                         <td>
-                          <img src="<?= htmlspecialchars($member['image_url']) ?>" alt="Team Member" class="img-thumbnail" style="max-height: 60px;">
+                          <img src="<?= strpos($member['image_url'], 'http') === 0 ? $member['image_url'] : '/Gear/' . ltrim($member['image_url'], '/') ?>" alt="Team Member" class="img-thumbnail" style="max-height: 60px;">
                         </td>
                         <td><?= htmlspecialchars($member['name']) ?></td>
                         <td><?= htmlspecialchars($member['role']) ?></td>
@@ -1197,7 +1281,7 @@ if ($result && $result->num_rows > 0) {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form id="addProductCategoryForm" method="POST" action="">
+        <form id="addProductCategoryForm" method="POST" action="" enctype="multipart/form-data">
           <div class="modal-body">
             <input type="hidden" name="section" value="product_category_add">
             <div class="form-group">
@@ -1209,8 +1293,9 @@ if ($result && $result->num_rows > 0) {
               <textarea class="form-control" id="category_description" name="description" rows="3" required></textarea>
             </div>
             <div class="form-group">
-              <label for="category_image">Image URL</label>
-              <input type="text" class="form-control" id="category_image" name="image_url" required>
+              <label for="category_image">Upload Image</label>
+              <input type="file" class="form-control-file" id="category_image" name="image" accept="image/*" required>
+              <small class="form-text text-muted">Hãy chọn ảnh có kích thước phù hợp (tối đa 2MB)</small>
             </div>
             <div class="form-group">
               <label for="category_order">Display Order</label>
@@ -1235,7 +1320,7 @@ if ($result && $result->num_rows > 0) {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form id="editProductCategoryForm" method="POST" action="">
+        <form id="editProductCategoryForm" method="POST" action="" enctype="multipart/form-data">
           <div class="modal-body">
             <input type="hidden" name="section" value="product_category_update">
             <input type="hidden" id="edit_category_id" name="id">
@@ -1248,8 +1333,14 @@ if ($result && $result->num_rows > 0) {
               <textarea class="form-control" id="edit_category_description" name="description" rows="3" required></textarea>
             </div>
             <div class="form-group">
-              <label for="edit_category_image">Image URL</label>
-              <input type="text" class="form-control" id="edit_category_image" name="image_url" required>
+              <label for="edit_category_image">Upload New Image</label>
+              <input type="file" class="form-control-file" id="edit_category_image" name="image" accept="image/*">
+              <small class="form-text text-muted">Để trống nếu không muốn thay đổi ảnh hiện tại</small>
+              <div class="mt-2" id="current_category_image_container">
+                <label>Current Image:</label>
+                <img id="current_category_image" src="" alt="Current Image" class="img-thumbnail" style="max-height: 100px;">
+                <input type="hidden" id="current_image_url" name="current_image_url">
+              </div>
             </div>
             <div class="form-group">
               <label for="edit_category_order">Display Order</label>
@@ -1415,7 +1506,7 @@ if ($result && $result->num_rows > 0) {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form id="addTeamMemberForm" method="POST" action="">
+        <form id="addTeamMemberForm" method="POST" action="" enctype="multipart/form-data">
           <div class="modal-body">
             <input type="hidden" name="section" value="team_add">
             <div class="form-group">
@@ -1431,8 +1522,9 @@ if ($result && $result->num_rows > 0) {
               <textarea class="form-control" id="team_info" name="info" rows="3" required></textarea>
             </div>
             <div class="form-group">
-              <label for="team_image">Image URL</label>
-              <input type="text" class="form-control" id="team_image" name="image_url" required>
+              <label for="team_image">Upload Image</label>
+              <input type="file" class="form-control-file" id="team_image" name="image" accept="image/*" required>
+              <small class="form-text text-muted">Hãy chọn ảnh có kích thước phù hợp (tối đa 2MB)</small>
             </div>
             <div class="form-group">
               <label for="team_order">Display Order</label>
@@ -1457,7 +1549,7 @@ if ($result && $result->num_rows > 0) {
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form id="editTeamMemberForm" method="POST" action="">
+        <form id="editTeamMemberForm" method="POST" action="" enctype="multipart/form-data">
           <div class="modal-body">
             <input type="hidden" name="section" value="team_update">
             <input type="hidden" id="edit_team_id" name="id">
@@ -1474,8 +1566,14 @@ if ($result && $result->num_rows > 0) {
               <textarea class="form-control" id="edit_team_info" name="info" rows="3" required></textarea>
             </div>
             <div class="form-group">
-              <label for="edit_team_image">Image URL</label>
-              <input type="text" class="form-control" id="edit_team_image" name="image_url" required>
+              <label for="edit_team_image">Upload New Image</label>
+              <input type="file" class="form-control-file" id="edit_team_image" name="image" accept="image/*">
+              <small class="form-text text-muted">Để trống nếu không muốn thay đổi ảnh hiện tại</small>
+              <div class="mt-2" id="current_team_image_container">
+                <label>Current Image:</label>
+                <img id="current_team_image" src="" alt="Current Image" class="img-thumbnail" style="max-height: 100px;">
+                <input type="hidden" id="current_team_image_url" name="current_image_url">
+              </div>
             </div>
             <div class="form-group">
               <label for="edit_team_order">Display Order</label>
@@ -1551,7 +1649,8 @@ if ($result && $result->num_rows > 0) {
           document.getElementById('edit_category_id').value = id;
           document.getElementById('edit_category_title').value = title;
           document.getElementById('edit_category_description').value = description;
-          document.getElementById('edit_category_image').value = image;
+          document.getElementById('current_image_url').value = image;
+          document.getElementById('current_category_image').src = image.startsWith('http') ? image : '/Gear/' + image.replace(/^\/+/, '');
           document.getElementById('edit_category_order').value = order;
           
           $('#editProductCategoryModal').modal('show');
@@ -1645,7 +1744,8 @@ if ($result && $result->num_rows > 0) {
           document.getElementById('edit_team_name').value = name;
           document.getElementById('edit_team_role').value = role;
           document.getElementById('edit_team_info').value = info;
-          document.getElementById('edit_team_image').value = image;
+          document.getElementById('current_team_image_url').value = image;
+          document.getElementById('current_team_image').src = image.startsWith('http') ? image : '/Gear/' + image.replace(/^\/+/, '');
           document.getElementById('edit_team_order').value = order;
           
           $('#editTeamMemberModal').modal('show');

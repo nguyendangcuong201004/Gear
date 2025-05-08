@@ -37,7 +37,8 @@
                 <form
                     id="updateProductForm"
                     action="/Gear/AdminProductController/update/<?= $product['id'] ?>"
-                    method="POST">
+                    method="POST"
+                    enctype="multipart/form-data">
                     <label for="name">Tên sản phẩm</label>
                     <input
                         type="text"
@@ -53,10 +54,21 @@
                         name="code"
                         value="<?= htmlspecialchars($product["code"] ?? '') ?>">
 
-                    <label for="images">Link ảnh online</label>
-                    <textarea
-                        id="images"
-                        name="images"><?= htmlspecialchars($product["images"]) ?></textarea>
+                    <label for="product_image">Ảnh sản phẩm</label>
+                    <?php if (!empty($product["images"])): ?>
+                    <div class="current-image">
+                        <img src="/Gear/public/images/products/<?= htmlspecialchars($product["images"]) ?>"
+                             alt="<?= htmlspecialchars($product["name"]) ?>"
+                             style="max-width: 200px; max-height: 200px; margin-bottom: 10px;">
+                        <p>Ảnh hiện tại: <?= htmlspecialchars($product["images"]) ?></p>
+                    </div>
+                    <?php endif; ?>
+                    <input
+                        type="file"
+                        id="product_image"
+                        name="product_image"
+                        accept="image/*">
+                    <small class="form-text text-muted">Chọn file ảnh mới nếu muốn thay đổi (jpg, jpeg, png, gif)</small>
 
                     <label for="price">Giá bán</label>
                     <input

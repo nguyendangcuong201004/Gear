@@ -348,9 +348,6 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                     <li><a href="/Gear/contact" style="display: inline-block; text-align: center;">CONTACT</a></li>
                     <li><a href="/Gear/BlogController/list" style="display: inline-block; text-align: center;">BLOG</a></li>
                     <li><a href="/Gear/QAController/list" style="display: inline-block; text-align: center;">Q&A</a></li>
-                    <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-        <?php endif; ?>
                 </ul>
                 </div>
                 <div class="d-flex align-items-center">
@@ -406,7 +403,7 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
                 <?php while ($row = mysqli_fetch_assoc($data["posts"])): ?>
                     <a href="/Gear/BlogController/detail/<?= $row['id']; ?>" class="blog-post">
                         <div>
-                            <img src="<?= $row['image'] ? '../' . $row['image'] : 'https://via.placeholder.com/300x200'; ?>" alt="<?= htmlspecialchars($row['title']); ?>">
+                            <img src="<?= $row['image'] ? '/Gear/' . $row['image'] : 'https://via.placeholder.com/300x200'; ?>" alt="<?= htmlspecialchars($row['title']); ?>">
                             <div class="post-info">
                                 <span class="category"><?= htmlspecialchars($row['category']); ?></span>
                                 <h2 class="post-title"><?= htmlspecialchars($row['title']); ?></h2>

@@ -1,12 +1,16 @@
 <?php
 // mvc/controllers/CommentController.php
 require_once "./mvc/models/CommentModel.php";
+require_once "./mvc/models/UserModel.php";
+require_once "./mvc/core/Controller.php";
 
 class CommentController extends Controller {
     private $commentModel;
+    private $userModel;
 
     public function __construct() {
         $this->commentModel = new CommentModel();
+        $this->userModel = new UserModel();
     }
 
     public function add() {
@@ -15,7 +19,16 @@ class CommentController extends Controller {
             $name    = $_POST['name'];
             $comment = $_POST['comment'];
 
-            $this->commentModel->addComment($post_id, $name, $comment);
+            // Lấy email của người dùng nếu đã đăng nhập
+            $email = '';
+            if (isset($_COOKIE['user_name'])) {
+                $user = $this->userModel->getUserByUsername($_COOKIE['user_name']);
+                if ($user && isset($user['email'])) {
+                    $email = $user['email'];
+                }
+            }
+
+            $this->commentModel->addComment($post_id, $name, $comment, $email);
             header("Location: http://localhost/Gear/BlogController/detail/$post_id");
         }
     }

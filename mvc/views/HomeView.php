@@ -11,6 +11,20 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/Gear/public/css/style.css">
     <link rel="stylesheet" href="/Gear/public/css/home.css">
+    <style>
+        /* Styles for login/logout buttons */
+        .inner-user a, .inner-logout a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .inner-user a:hover, .inner-logout a:hover {
+            color: #e74c3c;
+        }
+        .inner-logout {
+            margin-left: 15px;
+        }
+    </style>
 </head>
 
 <body class="bg-light">
@@ -48,8 +62,27 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="inner-shop"><i class="fa-solid fa-bag-shopping"></i></div>
-                        <div class="inner-user"><i class="fa-solid fa-user"></i></div>
+                        <div class="d-flex">
+                            <div class="inner-shop"><i class="fa-solid fa-bag-shopping"></i></div>
+                            <?php if(isset($_COOKIE['access_token'])): ?>
+                                <div class="inner-user mx-3">
+                                    <a href="/Gear/AuthController/profile" title="Thông tin cá nhân" style="color: inherit; text-decoration: none;">
+                                        <i class="fa-solid fa-user"></i>
+                                    </a>
+                                </div>
+                                <div class="inner-logout">
+                                    <a href="/Gear/AuthController/logout" title="Đăng xuất" style="color: inherit; text-decoration: none;">
+                                        <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+                                    </a>
+                                </div>
+                            <?php else: ?>
+                                <div class="inner-user">
+                                    <a href="/Gear/AuthController/login" title="Đăng nhập" style="color: inherit; text-decoration: none;">
+                                        <i class="fa-solid fa-user"></i>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>

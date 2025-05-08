@@ -77,7 +77,7 @@ class AuthController {
             }
 
             $email = trim($_POST['email']);
-            $fullname = trim($_POST['fullname']);
+            $fullname = trim($_POST['full_name']);
             $dob = $_POST['dob'] ?? null;
             $address = trim($_POST['address'] ?? '');
 
@@ -238,7 +238,7 @@ class AuthController {
         // Set cookie
         setcookie('access_token', $token, time()+7*24*60*60, '/');
         setcookie('user_name', $user['username'], time()+7*24*60*60, '/');
-        setcookie('user_role', $user['role'], time()+7*24*60*60, '/');
+        setcookie('user_role', $user['user_role'], time()+7*24*60*60, '/');
 
         header("Location: http://localhost/Gear/QAController/list");
         exit;

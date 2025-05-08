@@ -35,8 +35,30 @@ class AboutAdminController {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $title = $this->conn->real_escape_string($_POST['title']);
             $description = $this->conn->real_escape_string($_POST['description']);
-            $image_url = $this->conn->real_escape_string($_POST['image_url']);
             $display_order = (int)$_POST['display_order'];
+            
+            // Xử lý upload ảnh
+            $image_url = '';
+            if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+                $upload_dir = "public/uploads/about/";
+                
+                // Tạo thư mục nếu chưa tồn tại
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+                
+                // Tạo tên file duy nhất
+                $file_name = time() . '_' . basename($_FILES['image']['name']);
+                $target_file = $upload_dir . $file_name;
+                
+                // Upload file
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+                    $image_url = $target_file;
+                } else {
+                    header("Location: /Gear/AboutAdminController/index?status=error&message=Failed to upload image");
+                    return;
+                }
+            }
             
             // Get section_id for product_categories
             $query = "SELECT id FROM page_sections WHERE name = 'product_categories'";
@@ -60,8 +82,36 @@ class AboutAdminController {
             $id = (int)$_POST['id'];
             $title = $this->conn->real_escape_string($_POST['title']);
             $description = $this->conn->real_escape_string($_POST['description']);
-            $image_url = $this->conn->real_escape_string($_POST['image_url']);
             $display_order = (int)$_POST['display_order'];
+            
+            // Giữ lại ảnh cũ nếu không có ảnh mới
+            $image_url = isset($_POST['current_image_url']) ? $_POST['current_image_url'] : '';
+            
+            // Xử lý upload ảnh mới nếu có
+            if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+                $upload_dir = "public/uploads/about/";
+                
+                // Tạo thư mục nếu chưa tồn tại
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+                
+                // Tạo tên file duy nhất
+                $file_name = time() . '_' . basename($_FILES['image']['name']);
+                $target_file = $upload_dir . $file_name;
+                
+                // Upload file
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+                    // Xóa ảnh cũ nếu tồn tại và không phải là ảnh mặc định
+                    if (!empty($image_url) && file_exists($image_url) && strpos($image_url, 'public/uploads/about/') === 0) {
+                        @unlink($image_url);
+                    }
+                    $image_url = $target_file;
+                } else {
+                    header("Location: /Gear/AboutAdminController/index?status=error&message=Failed to upload image");
+                    return;
+                }
+            }
             
             $query = "UPDATE product_categories 
                       SET title = '$title', description = '$description', image_url = '$image_url', display_order = '$display_order' 
@@ -209,8 +259,30 @@ class AboutAdminController {
             $name = $this->conn->real_escape_string($_POST['name']);
             $role = $this->conn->real_escape_string($_POST['role']);
             $info = $this->conn->real_escape_string($_POST['info']);
-            $image_url = $this->conn->real_escape_string($_POST['image_url']);
             $display_order = (int)$_POST['display_order'];
+            
+            // Xử lý upload ảnh
+            $image_url = '';
+            if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+                $upload_dir = "public/uploads/about/team/";
+                
+                // Tạo thư mục nếu chưa tồn tại
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+                
+                // Tạo tên file duy nhất
+                $file_name = time() . '_' . basename($_FILES['image']['name']);
+                $target_file = $upload_dir . $file_name;
+                
+                // Upload file
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+                    $image_url = $target_file;
+                } else {
+                    header("Location: /Gear/AboutAdminController/index?status=error&message=Failed to upload team member image");
+                    return;
+                }
+            }
             
             // Get section_id for team
             $query = "SELECT id FROM page_sections WHERE name = 'team'";
@@ -235,8 +307,36 @@ class AboutAdminController {
             $name = $this->conn->real_escape_string($_POST['name']);
             $role = $this->conn->real_escape_string($_POST['role']);
             $info = $this->conn->real_escape_string($_POST['info']);
-            $image_url = $this->conn->real_escape_string($_POST['image_url']);
             $display_order = (int)$_POST['display_order'];
+            
+            // Giữ lại ảnh cũ nếu không có ảnh mới
+            $image_url = isset($_POST['current_image_url']) ? $_POST['current_image_url'] : '';
+            
+            // Xử lý upload ảnh mới nếu có
+            if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+                $upload_dir = "public/uploads/about/team/";
+                
+                // Tạo thư mục nếu chưa tồn tại
+                if (!file_exists($upload_dir)) {
+                    mkdir($upload_dir, 0777, true);
+                }
+                
+                // Tạo tên file duy nhất
+                $file_name = time() . '_' . basename($_FILES['image']['name']);
+                $target_file = $upload_dir . $file_name;
+                
+                // Upload file
+                if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+                    // Xóa ảnh cũ nếu tồn tại và không phải là ảnh mặc định
+                    if (!empty($image_url) && file_exists($image_url) && strpos($image_url, 'public/uploads/about/team/') === 0) {
+                        @unlink($image_url);
+                    }
+                    $image_url = $target_file;
+                } else {
+                    header("Location: /Gear/AboutAdminController/index?status=error&message=Failed to upload team member image");
+                    return;
+                }
+            }
             
             $query = "UPDATE team_members 
                       SET name = '$name', role = '$role', info = '$info', 

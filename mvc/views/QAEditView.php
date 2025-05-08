@@ -201,9 +201,6 @@ foreach ($questionTags as $tag) {
                 <li><a href="/Gear/contact">CONTACT</a></li>
                 <li><a href="/Gear/BlogController/list">BLOG</a></li>
                 <li><a href="/Gear/QAController/list">Q&A</a></li>
-                <?php if (isset($_COOKIE['user_role']) && $_COOKIE['user_role'] === 'admin'): ?>
-            <li><a href="/Gear/AdminProductController/list">ADMIN</a></li>
-        <?php endif; ?>
               </ul>
             </div>
             <div class="d-flex align-items-center">
@@ -293,11 +290,11 @@ foreach ($questionTags as $tag) {
     </div>
     
     <!-- Footer -->
-    <!-- <div class="copyright-footer">
+    <div class="copyright-footer">
         <div class="container">
             <p class="mb-0">&copy; <?= date('Y') ?> GearBK Admin Panel. All rights reserved.</p>
         </div>
-    </div> -->
+    </div>
     
     <!-- JS Libraries -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

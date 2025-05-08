@@ -9,9 +9,9 @@ class CommentModel extends Database {
         return $stmt->get_result();
     }
 
-    public function addComment($post_id, $name, $comment) {
-        $stmt = $this->con->prepare("INSERT INTO comments (post_id, name, comment, created_at) VALUES (?, ?, ?, NOW())");
-        $stmt->bind_param("iss", $post_id, $name, $comment);
+    public function addComment($post_id, $name, $comment, $email = '') {
+        $stmt = $this->con->prepare("INSERT INTO comments (post_id, name, comment, email, created_at) VALUES (?, ?, ?, ?, NOW())");
+        $stmt->bind_param("isss", $post_id, $name, $comment, $email);
         return $stmt->execute();
     }
 
