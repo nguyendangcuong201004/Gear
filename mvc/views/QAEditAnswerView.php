@@ -177,6 +177,7 @@ if (!$answer) {
                 transform: translateX(0);
             }
         }
+        
     </style>
 </head>
 <body>

@@ -179,6 +179,7 @@ foreach ($questionTags as $tag) {
                 transform: translateX(0);
             }
         }
+        
     </style>
 </head>
 <body>
