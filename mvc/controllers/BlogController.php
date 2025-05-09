@@ -10,7 +10,7 @@ class BlogController extends Controller {
         $search = str_replace('-', ' ', $search); // convert 'hello-world' -> 'hello world'
     
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $limit = 5;
+        $limit = 6;
         $start = ($page - 1) * $limit;
     
         $blogModel = $this->model("BlogModel");
@@ -35,7 +35,7 @@ class BlogController extends Controller {
     public function search($keyword = '') {
         $keyword = str_replace('-', ' ', $keyword); // hello-world → hello world
         $page    = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $limit   = 5;
+        $limit   = 6;
         $start   = ($page - 1) * $limit;
     
         $blogModel = $this->model("BlogModel");
@@ -62,9 +62,14 @@ class BlogController extends Controller {
             $category = $_POST['category'];
             $content  = $_POST['content'];
             $image    = "";
-
+            
             // Xử lý upload ảnh nếu có
             if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+                $allowed_types = ['image/jpeg', 'image/png', 'image/webp'];
+if (!in_array($_FILES['image']['type'], $allowed_types)) {
+    die("File không đúng định dạng ảnh!");
+}
+
                 $target_dir = "public/uploads/";  // Thư mục lưu ảnh
                 if (!file_exists($target_dir)) {
                     mkdir($target_dir, 0777, true);
