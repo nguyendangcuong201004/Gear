@@ -48,6 +48,7 @@ class QAAdminController {
         
         $page = isset($queryParams['page']) ? (int)$queryParams['page'] : 1;
         $answers_page = isset($queryParams['answers_page']) ? (int)$queryParams['answers_page'] : 1;
+        $tags_page = isset($queryParams['tags_page']) ? (int)$queryParams['tags_page'] : 1;
         $active_tab = isset($queryParams['tab']) ? $queryParams['tab'] : 'questions';
         
         // Lấy danh sách câu hỏi
@@ -61,17 +62,27 @@ class QAAdminController {
         $answersTotalPages = ceil($totalAnswers / 10);
         
         // Lấy danh sách tags
-        $tags = $this->model->getAllTagsWithCount();
+        $tags = $this->model->getAllTagsWithCount($tags_page, 10);
+        $totalTags = $this->model->getTotalTags();
+        $tagsTotalPages = ceil($totalTags / 10);
         
         $data = [
             'questions' => $questions,
             'page' => $page,
             'total_pages' => $totalPages,
+            'total_questions' => $totalQuestions,
+            
             'answers' => $answers,
             'answers_page' => $answers_page,
             'answers_total_pages' => $answersTotalPages,
-            'active_tab' => $active_tab,
-            'tags' => $tags
+            'total_answers' => $totalAnswers,
+            
+            'tags' => $tags,
+            'tags_page' => $tags_page,
+            'tags_total_pages' => $tagsTotalPages,
+            'total_tags' => $totalTags,
+            
+            'active_tab' => $active_tab
         ];
         
         // Hiển thị thông báo nếu có

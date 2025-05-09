@@ -1,16 +1,7 @@
 <?php
-// Kết nối database với MySQLi
-$host = 'localhost';
-$dbname = 'gear';
-$username = 'root';
-$password = '';
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Include AboutAdminModel
+require_once 'mvc/models/AboutAdminModel.php';
+$aboutModel = new AboutAdminModel();
 
 // Check if user is admin - Basic authentication
 if (!isset($_COOKIE['user_role']) || $_COOKIE['user_role'] !== 'admin') {
@@ -28,144 +19,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($section === 'our_story') {
             $paragraph1 = $_POST['paragraph_1'];
             $paragraph2 = $_POST['paragraph_2'];
+            $current_banner_image = isset($_POST['current_banner_image']) ? $_POST['current_banner_image'] : '';
             
-            // Giữ lại ảnh cũ nếu không có ảnh mới
-            $banner_image = isset($_POST['current_banner_image']) ? $_POST['current_banner_image'] : '';
-            
-            // Xử lý upload ảnh mới nếu có
-            if (isset($_FILES['banner_image']) && $_FILES['banner_image']['error'] == 0) {
-                $upload_dir = "public/uploads/about/";
-                
-                // Tạo thư mục nếu chưa tồn tại
-                if (!file_exists($upload_dir)) {
-                    mkdir($upload_dir, 0777, true);
-                }
-                
-                // Tạo tên file duy nhất
-                $file_name = time() . '_' . basename($_FILES['banner_image']['name']);
-                $target_file = $upload_dir . $file_name;
-                
-                // Upload file
-                if (move_uploaded_file($_FILES['banner_image']['tmp_name'], $target_file)) {
-                    // Xóa ảnh cũ nếu tồn tại và không phải là ảnh mặc định
-                    if (!empty($banner_image) && file_exists($banner_image) && strpos($banner_image, 'public/uploads/about/') === 0) {
-                        @unlink($banner_image);
-                    }
-                    $banner_image = $target_file;
-                } else {
-                    $message = "Error uploading banner image. Other changes were saved.";
-                }
-            }
-            
-            updateContent($conn, 'our_story', 'paragraph_1', $paragraph1);
-            updateContent($conn, 'our_story', 'paragraph_2', $paragraph2);
-            updateContent($conn, 'our_story', 'banner_image', $banner_image);
-            
-            $message = isset($message) ? $message : "Our Story section updated successfully!";
+            $message = $aboutModel->updateOurStory($paragraph1, $paragraph2, $current_banner_image, 
+                (isset($_FILES['banner_image']) && $_FILES['banner_image']['error'] == 0) ? $_FILES['banner_image'] : null);
         }
         // Mission & Values section update
         else if ($section === 'mission_values') {
-            $quality_title = $_POST['quality_title'];
-            $quality_item_1 = $_POST['quality_item_1'];
-            $quality_item_2 = $_POST['quality_item_2'];
-            $quality_item_3 = $_POST['quality_item_3'];
-            
-            $satisfaction_title = $_POST['satisfaction_title'];
-            $satisfaction_item_1 = $_POST['satisfaction_item_1'];
-            $satisfaction_item_2 = $_POST['satisfaction_item_2'];
-            $satisfaction_item_3 = $_POST['satisfaction_item_3'];
-            
-            $innovation_title = $_POST['innovation_title'];
-            $innovation_item_1 = $_POST['innovation_item_1'];
-            $innovation_item_2 = $_POST['innovation_item_2'];
-            $innovation_item_3 = $_POST['innovation_item_3'];
-            
-            updateContent($conn, 'mission_values', 'quality_title', $quality_title);
-            updateContent($conn, 'mission_values', 'quality_item_1', $quality_item_1);
-            updateContent($conn, 'mission_values', 'quality_item_2', $quality_item_2);
-            updateContent($conn, 'mission_values', 'quality_item_3', $quality_item_3);
-            
-            updateContent($conn, 'mission_values', 'satisfaction_title', $satisfaction_title);
-            updateContent($conn, 'mission_values', 'satisfaction_item_1', $satisfaction_item_1);
-            updateContent($conn, 'mission_values', 'satisfaction_item_2', $satisfaction_item_2);
-            updateContent($conn, 'mission_values', 'satisfaction_item_3', $satisfaction_item_3);
-            
-            updateContent($conn, 'mission_values', 'innovation_title', $innovation_title);
-            updateContent($conn, 'mission_values', 'innovation_item_1', $innovation_item_1);
-            updateContent($conn, 'mission_values', 'innovation_item_2', $innovation_item_2);
-            updateContent($conn, 'mission_values', 'innovation_item_3', $innovation_item_3);
-            
-            $message = "Mission & Values section updated successfully!";
+            $message = $aboutModel->updateMissionValues($_POST);
         }
         // Product Category Add
         else if ($section === 'product_category_add') {
             $title = $_POST['title'];
             $description = $_POST['description'];
-            $image = $_FILES['image'];
             $display_order = $_POST['display_order'];
             
-            // Get section_id for product_categories
-            $query = "SELECT id FROM page_sections WHERE name = 'product_categories'";
-            $result = $conn->query($query);
-            if ($result && $result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $section_id = $row['id'];
-                
-                // Upload image
-                $upload_dir = "public/uploads/about/";
-                if (!file_exists($upload_dir)) {
-                    mkdir($upload_dir, 0777, true);
-                }
-                $file_name = time() . '_' . basename($image['name']);
-                $target_file = $upload_dir . $file_name;
-                if (move_uploaded_file($image['tmp_name'], $target_file)) {
-                    $image_url = $target_file;
-                } else {
-                    $image_url = '';
-                }
-                
-                // Insert new category
-                $query = "INSERT INTO product_categories (section_id, title, description, image_url, display_order) 
-                          VALUES (?, ?, ?, ?, ?)";
-                $stmt = $conn->prepare($query);
-                $stmt->bind_param("isssi", $section_id, $title, $description, $image_url, $display_order);
-                $stmt->execute();
-                $stmt->close();
-                
-                $message = "Product Category added successfully!";
-            }
+            $message = $aboutModel->addProductCategory($title, $description, $_FILES['image'], $display_order);
         }
         // Product Category Update
         else if ($section === 'product_category_update') {
             $id = $_POST['id'];
             $title = $_POST['title'];
             $description = $_POST['description'];
-            $image = $_FILES['image'];
             $display_order = $_POST['display_order'];
+            $current_image_url = $_POST['current_image_url'];
             
-            // Upload image
-            $upload_dir = "public/uploads/about/";
-            if (!file_exists($upload_dir)) {
-                mkdir($upload_dir, 0777, true);
-            }
-            $file_name = time() . '_' . basename($image['name']);
-            $target_file = $upload_dir . $file_name;
-            if (move_uploaded_file($image['tmp_name'], $target_file)) {
-                $image_url = $target_file;
-            } else {
-                $image_url = $_POST['current_image_url'];
-            }
-            
-            // Update category
-            $query = "UPDATE product_categories 
-                      SET title = ?, description = ?, image_url = ?, display_order = ?
-                      WHERE id = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("sssii", $title, $description, $image_url, $display_order, $id);
-            $stmt->execute();
-            $stmt->close();
-            
-            $message = "Product Category updated successfully!";
+            $message = $aboutModel->updateProductCategory($id, $title, $description, $_FILES['image'], $current_image_url, $display_order);
         }
         // Stats Add
         else if ($section === 'stat_add') {
@@ -173,23 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $number = $_POST['number'];
             $display_order = $_POST['display_order'];
             
-            // Get section_id for stats
-            $query = "SELECT id FROM page_sections WHERE name = 'stats'";
-            $result = $conn->query($query);
-            if ($result && $result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $section_id = $row['id'];
-                
-                // Insert new stat
-                $query = "INSERT INTO stats (section_id, label, number, display_order) 
-                          VALUES (?, ?, ?, ?)";
-                $stmt = $conn->prepare($query);
-                $stmt->bind_param("isii", $section_id, $label, $number, $display_order);
-                $stmt->execute();
-                $stmt->close();
-                
-                $message = "Stat added successfully!";
-            }
+            $message = $aboutModel->addStat($label, $number, $display_order);
         }
         // Stat Update
         else if ($section === 'stat_update') {
@@ -198,16 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $number = $_POST['number'];
             $display_order = $_POST['display_order'];
             
-            // Update stat
-            $query = "UPDATE stats 
-                      SET label = ?, number = ?, display_order = ?
-                      WHERE id = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("siii", $label, $number, $display_order, $id);
-            $stmt->execute();
-            $stmt->close();
-            
-            $message = "Stat updated successfully!";
+            $message = $aboutModel->updateStat($id, $label, $number, $display_order);
         }
         // Journey Add
         else if ($section === 'journey_add') {
@@ -215,23 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $description = $_POST['description'];
             $display_order = $_POST['display_order'];
             
-            // Get section_id for journey
-            $query = "SELECT id FROM page_sections WHERE name = 'journey'";
-            $result = $conn->query($query);
-            if ($result && $result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $section_id = $row['id'];
-                
-                // Insert new journey item
-                $query = "INSERT INTO journey_items (section_id, year, description, display_order) 
-                          VALUES (?, ?, ?, ?)";
-                $stmt = $conn->prepare($query);
-                $stmt->bind_param("issi", $section_id, $year, $description, $display_order);
-                $stmt->execute();
-                $stmt->close();
-                
-                $message = "Journey item added successfully!";
-            }
+            $message = $aboutModel->addJourneyItem($year, $description, $display_order);
         }
         // Journey Update
         else if ($section === 'journey_update') {
@@ -240,55 +78,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $description = $_POST['description'];
             $display_order = $_POST['display_order'];
             
-            // Update journey item
-            $query = "UPDATE journey_items 
-                      SET year = ?, description = ?, display_order = ?
-                      WHERE id = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("ssii", $year, $description, $display_order, $id);
-            $stmt->execute();
-            $stmt->close();
-            
-            $message = "Journey item updated successfully!";
+            $message = $aboutModel->updateJourneyItem($id, $year, $description, $display_order);
         }
         // Team Member Add
         else if ($section === 'team_add') {
             $name = $_POST['name'];
             $role = $_POST['role'];
             $info = $_POST['info'];
-            $image = $_FILES['image'];
             $display_order = $_POST['display_order'];
             
-            // Get section_id for team
-            $query = "SELECT id FROM page_sections WHERE name = 'team'";
-            $result = $conn->query($query);
-            if ($result && $result->num_rows > 0) {
-                $row = $result->fetch_assoc();
-                $section_id = $row['id'];
-                
-                // Upload image
-                $upload_dir = "public/uploads/about/team/";
-                if (!file_exists($upload_dir)) {
-                    mkdir($upload_dir, 0777, true);
-                }
-                $file_name = time() . '_' . basename($image['name']);
-                $target_file = $upload_dir . $file_name;
-                if (move_uploaded_file($image['tmp_name'], $target_file)) {
-                    $image_url = $target_file;
-                } else {
-                    $image_url = '';
-                }
-                
-                // Insert new team member
-                $query = "INSERT INTO team_members (section_id, name, role, info, image_url, display_order) 
-                          VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = $conn->prepare($query);
-                $stmt->bind_param("issssi", $section_id, $name, $role, $info, $image_url, $display_order);
-                $stmt->execute();
-                $stmt->close();
-                
-                $message = "Team member added successfully!";
-            }
+            $message = $aboutModel->addTeamMember($name, $role, $info, $_FILES['image'], $display_order);
         }
         // Team Member Update
         else if ($section === 'team_update') {
@@ -296,185 +95,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $name = $_POST['name'];
             $role = $_POST['role'];
             $info = $_POST['info'];
-            $image = $_FILES['image'];
             $display_order = $_POST['display_order'];
+            $current_image_url = $_POST['current_team_image_url'];
             
-            // Upload image
-            $upload_dir = "public/uploads/about/team/";
-            if (!file_exists($upload_dir)) {
-                mkdir($upload_dir, 0777, true);
-            }
-            $file_name = time() . '_' . basename($image['name']);
-            $target_file = $upload_dir . $file_name;
-            if (move_uploaded_file($image['tmp_name'], $target_file)) {
-                $image_url = $target_file;
-            } else {
-                $image_url = $_POST['current_team_image_url'];
-            }
-            
-            // Update team member
-            $query = "UPDATE team_members 
-                      SET name = ?, role = ?, info = ?, image_url = ?, display_order = ?
-                      WHERE id = ?";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("ssssii", $name, $role, $info, $image_url, $display_order, $id);
-            $stmt->execute();
-            $stmt->close();
-            
-            $message = "Team member updated successfully!";
+            $message = $aboutModel->updateTeamMember($id, $name, $role, $info, $_FILES['image'], $current_image_url, $display_order);
         }
         // Delete operations
         else if ($section === 'delete') {
             $id = $_POST['id'];
             $item_type = $_POST['item_type'];
             
-            if ($item_type === 'product_category') {
-                $query = "DELETE FROM product_categories WHERE id = ?";
-                $success_message = "Product category deleted successfully!";
-            } else if ($item_type === 'stat') {
-                $query = "DELETE FROM stats WHERE id = ?";
-                $success_message = "Stat deleted successfully!";
-            } else if ($item_type === 'journey') {
-                $query = "DELETE FROM journey_items WHERE id = ?";
-                $success_message = "Journey item deleted successfully!";
-            } else if ($item_type === 'team') {
-                $query = "DELETE FROM team_members WHERE id = ?";
-                $success_message = "Team member deleted successfully!";
-            } else {
-                $query = "";
-            }
-            
-            if (!empty($query)) {
-                $stmt = $conn->prepare($query);
-                $stmt->bind_param("i", $id);
-                $stmt->execute();
-                $stmt->close();
-                
-                $message = $success_message;
-            }
+            $message = $aboutModel->deleteItem($id, $item_type);
         }
     }
 }
 
-// Function to update content in database
-function updateContent($conn, $section_name, $key, $content) {
-    $section_name = $conn->real_escape_string($section_name);
-    $key = $conn->real_escape_string($key);
-    $content = $conn->real_escape_string($content);
-    
-    $query = "
-        UPDATE page_content pc
-        JOIN page_sections ps ON pc.section_id = ps.id
-        SET pc.content = '$content'
-        WHERE ps.name = '$section_name' AND pc.`key` = '$key'
-    ";
-    
-    return $conn->query($query);
-}
-
-// Function to get content from database - same as in AboutView.php
-function getContent($conn, $section_name, $key) {
-    $section_name = $conn->real_escape_string($section_name);
-    $key = $conn->real_escape_string($key);
-    
-    $query = "
-        SELECT pc.content 
-        FROM page_content pc
-        JOIN page_sections ps ON pc.section_id = ps.id
-        WHERE ps.name = '$section_name' AND pc.`key` = '$key'
-    ";
-    
-    $result = $conn->query($query);
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        return $row['content'];
-    }
-    return '';
-}
-
 // Get data for each section to display in forms
+$aboutData = $aboutModel->getAllAboutData();
+
 // Our Story
-$our_story_paragraph_1 = getContent($conn, 'our_story', 'paragraph_1');
-$our_story_paragraph_2 = getContent($conn, 'our_story', 'paragraph_2');
-$banner_image = getContent($conn, 'our_story', 'banner_image');
+$our_story_paragraph_1 = $aboutData['our_story']['paragraph_1'];
+$our_story_paragraph_2 = $aboutData['our_story']['paragraph_2'];
+$banner_image = $aboutData['our_story']['banner_image'];
 
 // Mission & Values
-$mission_quality_title = getContent($conn, 'mission_values', 'quality_title');
-$mission_quality_item_1 = getContent($conn, 'mission_values', 'quality_item_1');
-$mission_quality_item_2 = getContent($conn, 'mission_values', 'quality_item_2');
-$mission_quality_item_3 = getContent($conn, 'mission_values', 'quality_item_3');
-$mission_satisfaction_title = getContent($conn, 'mission_values', 'satisfaction_title');
-$mission_satisfaction_item_1 = getContent($conn, 'mission_values', 'satisfaction_item_1');
-$mission_satisfaction_item_2 = getContent($conn, 'mission_values', 'satisfaction_item_2');
-$mission_satisfaction_item_3 = getContent($conn, 'mission_values', 'satisfaction_item_3');
-$mission_innovation_title = getContent($conn, 'mission_values', 'innovation_title');
-$mission_innovation_item_1 = getContent($conn, 'mission_values', 'innovation_item_1');
-$mission_innovation_item_2 = getContent($conn, 'mission_values', 'innovation_item_2');
-$mission_innovation_item_3 = getContent($conn, 'mission_values', 'innovation_item_3');
+$mission_quality_title = $aboutData['mission_values']['quality_title'];
+$mission_quality_item_1 = $aboutData['mission_values']['quality_item_1'];
+$mission_quality_item_2 = $aboutData['mission_values']['quality_item_2'];
+$mission_quality_item_3 = $aboutData['mission_values']['quality_item_3'];
+$mission_satisfaction_title = $aboutData['mission_values']['satisfaction_title'];
+$mission_satisfaction_item_1 = $aboutData['mission_values']['satisfaction_item_1'];
+$mission_satisfaction_item_2 = $aboutData['mission_values']['satisfaction_item_2'];
+$mission_satisfaction_item_3 = $aboutData['mission_values']['satisfaction_item_3'];
+$mission_innovation_title = $aboutData['mission_values']['innovation_title'];
+$mission_innovation_item_1 = $aboutData['mission_values']['innovation_item_1'];
+$mission_innovation_item_2 = $aboutData['mission_values']['innovation_item_2'];
+$mission_innovation_item_3 = $aboutData['mission_values']['innovation_item_3'];
 
-// Product Categories
-$query = "
-    SELECT pc.* 
-    FROM product_categories pc
-    JOIN page_sections ps ON pc.section_id = ps.id
-    WHERE ps.name = 'product_categories'
-    ORDER BY pc.display_order ASC
-";
-$result = $conn->query($query);
-$product_categories = [];
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $product_categories[] = $row;
-    }
-}
-
-// Stats
-$query = "
-    SELECT s.* 
-    FROM stats s
-    JOIN page_sections ps ON s.section_id = ps.id
-    WHERE ps.name = 'stats'
-    ORDER BY s.display_order ASC
-";
-$result = $conn->query($query);
-$stats = [];
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $stats[] = $row;
-    }
-}
-
-// Journey items
-$query = "
-    SELECT ji.* 
-    FROM journey_items ji
-    JOIN page_sections ps ON ji.section_id = ps.id
-    WHERE ps.name = 'journey'
-    ORDER BY ji.display_order ASC
-";
-$result = $conn->query($query);
-$journey_items = [];
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $journey_items[] = $row;
-    }
-}
-
-// Team Members
-$query = "
-    SELECT tm.* 
-    FROM team_members tm
-    JOIN page_sections ps ON tm.section_id = ps.id
-    WHERE ps.name = 'team'
-    ORDER BY tm.display_order ASC
-";
-$result = $conn->query($query);
-$team_members = [];
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $team_members[] = $row;
-    }
-}
+// Product Categories, Stats, Journey items, and Team Members
+$product_categories = $aboutData['product_categories'];
+$stats = $aboutData['stats'];
+$journey_items = $aboutData['journey_items'];
+$team_members = $aboutData['team_members'];
 ?>
 
 <!DOCTYPE html>

@@ -442,8 +442,8 @@ $searchPath = isset($data['search']) && $data['search'] !== ''
             <div class="qa-buttons animate__animated animate__fadeIn animate__delay-1s">
                 <?php if (isset($_COOKIE['access_token'])): ?>
                     <?php if (!isset($data['is_my_questions'])): ?>
-                        <a href="/Gear/QAController/myQuestions" class="qa-btn qa-btn-secondary mr-2">
-                            <i class="fas fa-list"></i> My Questions
+                        <a style="color: #dc3545;" href="/Gear/QAController/myQuestions" class="qa-btn qa-btn-secondary mr-2">
+                            <i style="color: #dc3545;" class="fas fa-list"></i> My Questions
                         </a>
                     <?php else: ?>
                         <a href="/Gear/QAController/list" class="qa-btn qa-btn-secondary mr-2">

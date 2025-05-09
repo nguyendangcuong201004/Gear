@@ -1,122 +1,40 @@
 <?php
-// Kết nối database với MySQLi
-$host = 'localhost';
-$dbname = 'gear';
-$username = 'root';
-$password = '';
-
-$conn = new mysqli($host, $username, $password, $dbname);
-
-// Kiểm tra kết nối
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Hàm lấy nội dung đơn lẻ từ page_content
-function getContent($conn, $section_name, $key) {
-    $section_name = $conn->real_escape_string($section_name);
-    $key = $conn->real_escape_string($key);
-    
-    $query = "
-        SELECT pc.content 
-        FROM page_content pc
-        JOIN page_sections ps ON pc.section_id = ps.id
-        WHERE ps.name = '$section_name' AND pc.`key` = '$key'
-    ";
-    
-    $result = $conn->query($query);
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        return $row['content'];
-    }
-    return '';
-}
+// Sử dụng AboutModel để lấy dữ liệu thay vì truy vấn trực tiếp
+require_once 'mvc/models/AboutModel.php';
+$aboutModel = new AboutModel();
 
 // Lấy dữ liệu cho Our Story
-$our_story_paragraph_1 = getContent($conn, 'our_story', 'paragraph_1');
-$our_story_paragraph_2 = getContent($conn, 'our_story', 'paragraph_2');
-$banner_image = getContent($conn, 'our_story', 'banner_image');
+$our_story = $aboutModel->getOurStory();
+$our_story_paragraph_1 = $our_story['paragraph_1'];
+$our_story_paragraph_2 = $our_story['paragraph_2'];
+$banner_image = $our_story['banner_image'];
 
 // Lấy dữ liệu cho Mission & Values
-$mission_quality_title = getContent($conn, 'mission_values', 'quality_title');
-$mission_quality_item_1 = getContent($conn, 'mission_values', 'quality_item_1');
-$mission_quality_item_2 = getContent($conn, 'mission_values', 'quality_item_2');
-$mission_quality_item_3 = getContent($conn, 'mission_values', 'quality_item_3');
-$mission_satisfaction_title = getContent($conn, 'mission_values', 'satisfaction_title');
-$mission_satisfaction_item_1 = getContent($conn, 'mission_values', 'satisfaction_item_1');
-$mission_satisfaction_item_2 = getContent($conn, 'mission_values', 'satisfaction_item_2');
-$mission_satisfaction_item_3 = getContent($conn, 'mission_values', 'satisfaction_item_3');
-$mission_innovation_title = getContent($conn, 'mission_values', 'innovation_title');
-$mission_innovation_item_1 = getContent($conn, 'mission_values', 'innovation_item_1');
-$mission_innovation_item_2 = getContent($conn, 'mission_values', 'innovation_item_2');
-$mission_innovation_item_3 = getContent($conn, 'mission_values', 'innovation_item_3');
+$mission_values = $aboutModel->getMissionValues();
+$mission_quality_title = $mission_values['quality_title'];
+$mission_quality_item_1 = $mission_values['quality_item_1'];
+$mission_quality_item_2 = $mission_values['quality_item_2'];
+$mission_quality_item_3 = $mission_values['quality_item_3'];
+$mission_satisfaction_title = $mission_values['satisfaction_title'];
+$mission_satisfaction_item_1 = $mission_values['satisfaction_item_1'];
+$mission_satisfaction_item_2 = $mission_values['satisfaction_item_2'];
+$mission_satisfaction_item_3 = $mission_values['satisfaction_item_3'];
+$mission_innovation_title = $mission_values['innovation_title'];
+$mission_innovation_item_1 = $mission_values['innovation_item_1'];
+$mission_innovation_item_2 = $mission_values['innovation_item_2'];
+$mission_innovation_item_3 = $mission_values['innovation_item_3'];
 
 // Lấy dữ liệu cho Our Product Categories
-$query = "
-    SELECT pc.* 
-    FROM product_categories pc
-    JOIN page_sections ps ON pc.section_id = ps.id
-    WHERE ps.name = 'product_categories'
-    ORDER BY pc.display_order ASC
-";
-$result = $conn->query($query);
-$product_categories = [];
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $product_categories[] = $row;
-    }
-}
+$product_categories = $aboutModel->getProductCategories();
 
 // Lấy dữ liệu cho Stats Section
-$query = "
-    SELECT s.* 
-    FROM stats s
-    JOIN page_sections ps ON s.section_id = ps.id
-    WHERE ps.name = 'stats'
-    ORDER BY s.display_order ASC
-";
-$result = $conn->query($query);
-$stats = [];
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $stats[] = $row;
-    }
-}
+$stats = $aboutModel->getStats();
 
 // Lấy dữ liệu cho Our Journey
-$query = "
-    SELECT ji.* 
-    FROM journey_items ji
-    JOIN page_sections ps ON ji.section_id = ps.id
-    WHERE ps.name = 'journey'
-    ORDER BY ji.display_order ASC
-";
-$result = $conn->query($query);
-$journey_items = [];
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $journey_items[] = $row;
-    }
-}
+$journey_items = $aboutModel->getJourneyItems();
 
 // Lấy dữ liệu cho Our Team
-$query = "
-    SELECT tm.* 
-    FROM team_members tm
-    JOIN page_sections ps ON tm.section_id = ps.id
-    WHERE ps.name = 'team'
-    ORDER BY tm.display_order ASC
-";
-$result = $conn->query($query);
-$team_members = [];
-if ($result && $result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $team_members[] = $row;
-    }
-}
-
-// Đóng kết nối
-$conn->close();
+$team_members = $aboutModel->getTeamMembers();
 ?>
 
 <!DOCTYPE html>

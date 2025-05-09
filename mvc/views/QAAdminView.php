@@ -12,9 +12,11 @@ $message_type = isset($data['message_type']) ? $data['message_type'] : 'success'
 // Lấy dữ liệu từ controller
 $questions = $data['questions'] ?? [];
 $answers = $data['answers'] ?? [];
-$page = $data['page'] ?? 1;
-$total_pages = $data['total_pages'] ?? 1;
 $active_tab = $data['active_tab'] ?? 'questions';
+
+// Không cần các biến này nữa vì chúng ta đã sử dụng truy cập mảng trực tiếp
+// $page = $data['page'] ?? 1;
+// $total_pages = $data['total_pages'] ?? 1;
 ?>
 
 <!DOCTYPE html>
@@ -199,6 +201,31 @@ $active_tab = $data['active_tab'] ?? 'questions';
                 transform: translateX(0);
             }
         }
+        
+        .pagination {
+            margin-top: 1.5rem;
+        }
+        
+        .page-item.active .page-link {
+            background-color: #6a1b9a;
+            border-color: #6a1b9a;
+        }
+        
+        .page-link {
+            color: #6a1b9a;
+        }
+        
+        .page-link:hover {
+            color: #9c27b0;
+            background-color: #f3e5f5;
+        }
+        
+        .pagination-info {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #666;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -349,21 +376,51 @@ $active_tab = $data['active_tab'] ?? 'questions';
                             </div>
                             
                             <!-- Pagination -->
-                            <?php if (isset($total_pages) && $total_pages > 1): ?>
+                            <?php if (isset($data['total_pages']) && $data['total_pages'] > 1): ?>
+                                <div class="pagination-info">
+                                    Showing page <?= $data['page'] ?> of <?= $data['total_pages'] ?> 
+                                    (Total questions: <?= $data['total_questions'] ?? 0 ?>)
+                                </div>
                                 <nav aria-label="Questions pagination">
-                                    <ul class="pagination justify-content-center mt-4">
-                                        <li class="page-item <?= $page <= 1 ? 'disabled' : '' ?>">
-                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?page=<?= $page - 1 ?>&tab=questions">Previous</a>
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item <?= $data['page'] <= 1 ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?page=1&tab=questions" aria-label="First">
+                                                <i class="fas fa-angle-double-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item <?= $data['page'] <= 1 ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?page=<?= $data['page'] - 1 ?>&tab=questions">
+                                                <i class="fas fa-angle-left"></i> Prev
+                                            </a>
                                         </li>
                                         
-                                        <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                                            <li class="page-item <?= $page == $i ? 'active' : '' ?>">
+                                        <?php 
+                                        $startPage = max(1, min($data['page'] - 2, $data['total_pages'] - 4));
+                                        $endPage = min($data['total_pages'], max(5, $data['page'] + 2));
+                                        
+                                        if ($startPage > 1): ?>
+                                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        <?php endif; 
+                                        
+                                        for ($i = $startPage; $i <= $endPage; $i++): ?>
+                                            <li class="page-item <?= $data['page'] == $i ? 'active' : '' ?>">
                                                 <a class="page-link" href="/Gear/QAAdminController/dashboard?page=<?= $i ?>&tab=questions"><?= $i ?></a>
                                             </li>
-                                        <?php endfor; ?>
+                                        <?php endfor; 
                                         
-                                        <li class="page-item <?= $page >= $total_pages ? 'disabled' : '' ?>">
-                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?page=<?= $page + 1 ?>&tab=questions">Next</a>
+                                        if ($endPage < $data['total_pages']): ?>
+                                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        <?php endif; ?>
+                                        
+                                        <li class="page-item <?= $data['page'] >= $data['total_pages'] ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?page=<?= $data['page'] + 1 ?>&tab=questions">
+                                                Next <i class="fas fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item <?= $data['page'] >= $data['total_pages'] ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?page=<?= $data['total_pages'] ?>&tab=questions" aria-label="Last">
+                                                <i class="fas fa-angle-double-right"></i>
+                                            </a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -422,20 +479,50 @@ $active_tab = $data['active_tab'] ?? 'questions';
                             
                             <!-- Pagination for Answers -->
                             <?php if (isset($data['answers_total_pages']) && $data['answers_total_pages'] > 1): ?>
+                                <div class="pagination-info">
+                                    Showing page <?= $data['answers_page'] ?> of <?= $data['answers_total_pages'] ?> 
+                                    (Total answers: <?= $data['total_answers'] ?? 0 ?>)
+                                </div>
                                 <nav aria-label="Answers pagination">
-                                    <ul class="pagination justify-content-center mt-4">
+                                    <ul class="pagination justify-content-center">
                                         <li class="page-item <?= $data['answers_page'] <= 1 ? 'disabled' : '' ?>">
-                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?answers_page=<?= $data['answers_page'] - 1 ?>&tab=answers">Previous</a>
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?answers_page=1&tab=answers" aria-label="First">
+                                                <i class="fas fa-angle-double-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item <?= $data['answers_page'] <= 1 ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?answers_page=<?= $data['answers_page'] - 1 ?>&tab=answers">
+                                                <i class="fas fa-angle-left"></i> Prev
+                                            </a>
                                         </li>
                                         
-                                        <?php for ($i = 1; $i <= $data['answers_total_pages']; $i++): ?>
+                                        <?php 
+                                        $startPage = max(1, min($data['answers_page'] - 2, $data['answers_total_pages'] - 4));
+                                        $endPage = min($data['answers_total_pages'], max(5, $data['answers_page'] + 2));
+                                        
+                                        if ($startPage > 1): ?>
+                                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        <?php endif; 
+                                        
+                                        for ($i = $startPage; $i <= $endPage; $i++): ?>
                                             <li class="page-item <?= $data['answers_page'] == $i ? 'active' : '' ?>">
                                                 <a class="page-link" href="/Gear/QAAdminController/dashboard?answers_page=<?= $i ?>&tab=answers"><?= $i ?></a>
                                             </li>
-                                        <?php endfor; ?>
+                                        <?php endfor; 
+                                        
+                                        if ($endPage < $data['answers_total_pages']): ?>
+                                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        <?php endif; ?>
                                         
                                         <li class="page-item <?= $data['answers_page'] >= $data['answers_total_pages'] ? 'disabled' : '' ?>">
-                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?answers_page=<?= $data['answers_page'] + 1 ?>&tab=answers">Next</a>
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?answers_page=<?= $data['answers_page'] + 1 ?>&tab=answers">
+                                                Next <i class="fas fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item <?= $data['answers_page'] >= $data['answers_total_pages'] ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?answers_page=<?= $data['answers_total_pages'] ?>&tab=answers" aria-label="Last">
+                                                <i class="fas fa-angle-double-right"></i>
+                                            </a>
                                         </li>
                                     </ul>
                                 </nav>
@@ -490,6 +577,57 @@ $active_tab = $data['active_tab'] ?? 'questions';
                                     </tbody>
                                 </table>
                             </div>
+                            
+                            <!-- Pagination for Tags -->
+                            <?php if (isset($data['tags_total_pages']) && $data['tags_total_pages'] > 1): ?>
+                                <div class="pagination-info">
+                                    Showing page <?= $data['tags_page'] ?> of <?= $data['tags_total_pages'] ?> 
+                                    (Total tags: <?= $data['total_tags'] ?? 0 ?>)
+                                </div>
+                                <nav aria-label="Tags pagination">
+                                    <ul class="pagination justify-content-center">
+                                        <li class="page-item <?= $data['tags_page'] <= 1 ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?tags_page=1&tab=tags" aria-label="First">
+                                                <i class="fas fa-angle-double-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item <?= $data['tags_page'] <= 1 ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?tags_page=<?= $data['tags_page'] - 1 ?>&tab=tags">
+                                                <i class="fas fa-angle-left"></i> Prev
+                                            </a>
+                                        </li>
+                                        
+                                        <?php 
+                                        $startPage = max(1, min($data['tags_page'] - 2, $data['tags_total_pages'] - 4));
+                                        $endPage = min($data['tags_total_pages'], max(5, $data['tags_page'] + 2));
+                                        
+                                        if ($startPage > 1): ?>
+                                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        <?php endif; 
+                                        
+                                        for ($i = $startPage; $i <= $endPage; $i++): ?>
+                                            <li class="page-item <?= $data['tags_page'] == $i ? 'active' : '' ?>">
+                                                <a class="page-link" href="/Gear/QAAdminController/dashboard?tags_page=<?= $i ?>&tab=tags"><?= $i ?></a>
+                                            </li>
+                                        <?php endfor; 
+                                        
+                                        if ($endPage < $data['tags_total_pages']): ?>
+                                            <li class="page-item disabled"><span class="page-link">...</span></li>
+                                        <?php endif; ?>
+                                        
+                                        <li class="page-item <?= $data['tags_page'] >= $data['tags_total_pages'] ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?tags_page=<?= $data['tags_page'] + 1 ?>&tab=tags">
+                                                Next <i class="fas fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item <?= $data['tags_page'] >= $data['tags_total_pages'] ? 'disabled' : '' ?>">
+                                            <a class="page-link" href="/Gear/QAAdminController/dashboard?tags_page=<?= $data['tags_total_pages'] ?>&tab=tags" aria-label="Last">
+                                                <i class="fas fa-angle-double-right"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

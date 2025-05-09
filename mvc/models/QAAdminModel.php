@@ -102,13 +102,19 @@ class QAAdminModel {
         return null;
     }
     
-    // Lấy tất cả tags với số lượng câu hỏi
-    public function getAllTagsWithCount() {
+    // Lấy tất cả tags với số lượng câu hỏi (có phân trang)
+    public function getAllTagsWithCount($page = 1, $limit = 10) {
+        // Đảm bảo page và limit luôn là số nguyên dương
+        $page = (int)$page > 0 ? (int)$page : 1;
+        $limit = (int)$limit > 0 ? (int)$limit : 10;
+        $offset = ($page - 1) * $limit;
+        
         $sql = "SELECT t.id, t.name, COUNT(qt.question_id) as question_count
                 FROM tags t
                 LEFT JOIN question_tags qt ON t.id = qt.tag_id
                 GROUP BY t.id
-                ORDER BY t.name ASC";
+                ORDER BY t.name ASC
+                LIMIT $offset, $limit";
                 
         $result = $this->conn->query($sql);
         
@@ -120,6 +126,15 @@ class QAAdminModel {
         }
         
         return $tags;
+    }
+    
+    // Lấy tổng số tags
+    public function getTotalTags() {
+        $sql = "SELECT COUNT(*) as total FROM tags";
+        $result = $this->conn->query($sql);
+        $row = $result->fetch_assoc();
+        
+        return $row['total'];
     }
     
     // Lấy tất cả tags
