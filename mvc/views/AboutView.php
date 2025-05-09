@@ -168,7 +168,41 @@ $conn->close();
       margin-bottom: 40px;
     }
     
-    
+    .slider-navigation-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 30px;
+}
+
+.custom-nav-btn {
+  position: static !important;
+  margin: 0 !important;
+  width: 50px !important;
+  height: 50px !important;
+  background-color: #dc3545;
+  border-radius: 50%;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+}
+
+.custom-nav-btn:hover {
+  background-color: #e35d6a;
+  transform: scale(1.1);
+}
+
+.custom-nav-btn::after {
+  font-size: 20px !important;
+  color: white !important;
+  font-weight: bold;
+}
+
+/* Hide default Swiper button border */
+.swiper-button-next:focus,
+.swiper-button-prev:focus {
+  outline: none;
+}
   </style>
 </head>
 <body class="bg-light">
