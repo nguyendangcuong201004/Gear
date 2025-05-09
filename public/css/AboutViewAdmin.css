@@ -1,0 +1,227 @@
+.section-card {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #dc3545;
+  }
+  
+  .section-card:hover {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .section-header {
+    background-color: #dc3545;
+    color: white;
+    padding: 15px;
+    margin: -20px -20px 20px -20px;
+    border-radius: 8px 8px 0 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .section-header i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+  }
+  
+  .form-control:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+  }
+  
+  .section-divider {
+    height: 1px;
+    background-color: rgba(220, 53, 69, 0.1);
+    margin: 25px 0;
+  }
+  
+  .btn-primary {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    padding: 8px 20px;
+  }
+  
+  .btn-primary:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+  
+  .btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* Improved Navigation Pills */
+  .nav-pills {
+    margin-bottom: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .nav-pills .nav-link {
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-pills .nav-link i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+  }
+  
+  .nav-pills .nav-link:hover {
+    background-color: #f8d7da;
+    transform: translateX(5px);
+  }
+  
+  .nav-pills .nav-link.active {
+    background-color: #dc3545;
+    color: white !important;
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+    border-color: #dc3545 !important;
+    transform: translateX(10px);
+  }
+  
+  .alert-success {
+    background-color: #e8f5e9;
+    border-color: #c8e6c9;
+    color: #2e7d32;
+    margin-bottom: 25px;
+  }
+  
+  pre {
+    background-color: #f5f5f5;
+  }
+  
+  .admin-menu-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 90px;
+  }
+  
+  .admin-menu-item.active {
+    font-weight: bold;
+    color: white;
+    background-color: #dc3545;
+  }
+  
+  /* Improved Table styling */
+  .table-responsive {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  }
+  
+  table {
+    margin-bottom: 0 !important;
+  }
+  
+  table th {
+    background-color: #f8d7da;
+    padding: 12px !important;
+    font-weight: 600;
+  }
+  
+  table td {
+    padding: 12px !important;
+    vertical-align: middle !important;
+  }
+  
+  /* Action buttons in tables */
+  table .btn-sm {
+    margin: 0 3px;
+    padding: 5px 10px;
+  }
+  
+  /* Buttons styling */
+  .btn-sm.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .btn-sm.btn-primary {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }
+  
+  .btn-sm.btn-light {
+    border: 1px solid #dc3545;
+    color: #dc3545;
+    background-color: white;
+  }
+  
+  .btn-sm.btn-light:hover {
+    background-color: #f8d7da;
+  }
+  
+  /* Nice icon styling */
+  .btn i {
+    margin-right: 5px;
+  }
+  
+  /* Make sure any color references to text-primary use the red color instead */
+  .text-primary {
+    color: #dc3545 !important;
+  }
+  
+  /* Modal improvements */
+  .modal-content {
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .modal-header.bg-primary {
+    background-color: #dc3545 !important;
+  }
+  
+  .modal-body {
+    padding: 20px;
+  }
+  
+  /* Admin badge styling */
+  .admin-badge {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background-color: #dc3545;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    z-index: 999;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  
+  /* Improved copyright footer */
+  .copyright-footer {
+    background-color: #dc3545;
+    padding: 15px 0;
+    color: white;
+    margin-top: 40px;
+  }

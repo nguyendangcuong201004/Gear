@@ -62,9 +62,10 @@ class BlogController extends Controller {
             $category = $_POST['category'];
             $content  = $_POST['content'];
             $image    = "";
-            
+
             // Xử lý upload ảnh nếu có
             if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+
                 $allowed_types = ['image/jpeg', 'image/png', 'image/webp'];
 if (!in_array($_FILES['image']['type'], $allowed_types)) {
     die("File không đúng định dạng ảnh!");
